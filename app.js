@@ -1,4 +1,14 @@
+/*-------------------------------- Constants --------------------------------*/
+
+const lineColor = "grey"
+
+/*-------------------------------- Cached Elements --------------------------------*/
+
 const cubesEl = document.querySelectorAll('.cube')
+const canvasEl = document.getElementById('canvas')
+const canvasDiv = document.getElementById('canvases')
+
+/*-------------------------------- Functions --------------------------------*/
 
 cubesEl.forEach(cube => {
     cube.style.backgroundColor = "thistle"
@@ -6,19 +16,25 @@ cubesEl.forEach(cube => {
 
 // try canvas
 
-const canvasEl = document.getElementById('canvas')
 const context = canvasEl.getContext('2d')
 
-console.log("context ", context)
-
-const drawLine = (x1, y1, x2, y2, color="black", lineWidth=1) => {
-    context.beginPath();
-    context.moveTo(x1, y1);
-    context.lineTo(x2, y2);
-    context.strokeStyle = color;
-    context.lineWidth = lineWidth;
-    context.stroke();
-    context.closePath();
+const drawLine = (ctx, x1, y1, x2, y2, color="black", lineWidth=1) => {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
+    ctx.stroke();
+    ctx.closePath();
 }
 
-drawLine(5, 5, 300, 300)
+/*-------------------------------- Function calls --------------------------------*/
+
+drawLine(context, 5, 5, 500, 300)
+
+const canvas2 = document.createElement('canvas');
+canvas2.style.backgroundColor = lineColor;
+canvasDiv.appendChild(canvas2);
+const context2 = canvas2.getContext('2d')
+
+drawLine(context2, 5, 5, 500, 300)

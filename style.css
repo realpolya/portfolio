@@ -7,8 +7,8 @@ body {
 
 .cube-table {
     border: 2px solid black;
-    width: 300px;
-    height: 300px;
+    width: 100px;
+    height: 100px;
 }
 
 .cube-row {
@@ -19,4 +19,9 @@ body {
     width: 300px;
     height: 300px;
     background-color: azure;
+}
+
+#canvases {
+    height: 300px;
+    width: 300px;
 }
