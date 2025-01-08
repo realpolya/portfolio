@@ -12,7 +12,12 @@ body {
 }
 
 #canvases {
-    height: 300px;
-    width: 300px;
-    border: 1px solid black;
+    height: 100px;
+    width: 350px;
+}
+
+#secondRow {
+    /* margin-left: 50px; */
+    height: 100px;
+    width: 350px;
 }
