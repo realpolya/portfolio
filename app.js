@@ -4,14 +4,12 @@ const lineColor = "grey"
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
-const canvasEl = document.getElementById('canvas')
 const canvasDiv = document.getElementById('canvases')
 
 /*-------------------------------- Functions --------------------------------*/
 
-const context = canvasEl.getContext('2d')
-
 const drawLine = (ctx, x1, y1, x2, y2, color="black", lineWidth=1) => {
+
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
@@ -19,21 +17,55 @@ const drawLine = (ctx, x1, y1, x2, y2, color="black", lineWidth=1) => {
     ctx.lineWidth = lineWidth;
     ctx.stroke();
     ctx.closePath();
+
 }
 
-const singleTile = (ctx) => {
-    drawLine(ctx, 5, 5, 500, 300)
+const fillTop = (ctx, size, mid, start=0) => {
+
+    const end = start + size
+
+    ctx.beginPath();
+    ctx.moveTo(start, mid);
+    ctx.lineTo(mid, end);
+    ctx.lineTo(end, mid);
+    ctx.lineTo(mid, start);
+    ctx.closePath();
+
+    ctx.fillStyle = "hotpink";
+    ctx.fill();
+
 }
+
+const singleTile = (ctx, size, start=0) => {
+
+    const mid = start + Math.floor(size / 2)
+    const end = start + size
+
+    drawLine(ctx, start, mid, mid, end)
+    drawLine(ctx, start, mid, mid, start)
+    drawLine(ctx, mid, start, end, mid)
+    drawLine(ctx, mid, end, end, mid)
+
+    drawLine(ctx, start, start, start, end)
+    drawLine(ctx, end, start, end, end)
+
+    fillTop(ctx, size, mid)
+
+}
+
 
 /*-------------------------------- Function calls --------------------------------*/
 
-drawLine(context, 5, 5, 500, 300)
+const canvas = document.createElement('canvas');
 
-const canvas2 = document.createElement('canvas');
-canvas2.style.backgroundColor = lineColor;
-canvas2.style.height = '100px';
-canvas2.style.width = '100px';
-canvasDiv.appendChild(canvas2);
-const context2 = canvas2.getContext('2d')
+canvas.style.backgroundColor = 'thistle';
+canvas.width = 100;
+canvas.height = 100;
+canvas.style.height = '100px';
+canvas.style.width = '100px';
 
-singleTile(context2)
+canvasDiv.appendChild(canvas);
+
+const context = canvas.getContext('2d')
+
+singleTile(context, 100)
