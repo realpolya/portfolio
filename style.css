@@ -4,3 +4,13 @@ body {
     font-weight: 400;
     font-style: normal;
 }
+
+.cube-table {
+    border: 2px solid black;
+    width: 300px;
+    height: 300px;
+}
+
+.cube-row {
+    border: 2px solid black;
+}
