@@ -1,3 +1,6 @@
+/* contain cube geometry */
+import { textInCube } from "./interact.js";
+
 const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
 
     ctx.beginPath();
@@ -11,7 +14,7 @@ const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
 }
 
 const drawFillTop = (ctx, size, mid, start=0, colors, 
-    lineWidth=1) => {
+    lineWidth=1, text=false) => {
 
     const end = start + size;
 
@@ -28,6 +31,16 @@ const drawFillTop = (ctx, size, mid, start=0, colors,
 
     ctx.fillStyle = colors.top;
     ctx.fill();
+    
+    ctx.fillStyle = colors.line;
+    ctx.font = "Montserrat";
+    ctx.textAlign = mid;
+    ctx.textBaseLine = "middle";
+    ctx.fillText(text, mid, mid)
+
+    // if (text) {
+    //     textInCube(ctx, colors, font="Montserrat", text, mid, mid)
+    // }
 
 }
 
@@ -101,12 +114,16 @@ const fillRight = (ctx, size, mid, start=0, colors) => {
 
 }
 
-const singleTile = (ctx, size, colors, start=0) => {
+const singleTile = (ctx, size, colors, start=0, text=false) => {
 
     const mid = start + Math.floor(size / 2)
     const end = start + size
 
-    drawFillTop(ctx, size, mid, 0, colors)
+    drawFillTop(ctx, size, mid, 0, colors, 1, text)
+
+    // if (text) {
+    //     textInCube(ctx, colors, font="Montserrat", "Click me", mid, mid)
+    // }
 
     drawLine(ctx, start, start, start, end, colors)
     drawLine(ctx, end, start, end, end, colors)

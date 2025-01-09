@@ -19,7 +19,7 @@ const colors = {
     right: "#415A77",
 }
 
-const tileSize = 200;
+const tileSize = 200; // must correspond with css file
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
@@ -60,7 +60,7 @@ const createCanvas = (parentEl, tileSize) => {
 
     const context = canvas.getContext('2d')
 
-    singleTile(context, tileSize, colors)
+    singleTile(context, tileSize, colors, 0, "love me")
 
 }
 
