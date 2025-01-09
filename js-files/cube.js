@@ -117,7 +117,7 @@ const singleTile = (ctx, size, colors, start=0) => {
 }
 
 
-const leftHalfTile = (ctx, size, colors, alternate=false, start=0) => {
+const halfTile = (ctx, size, colors, alternate=false, start=0) => {
     const xSize = Math.floor(size / 2)
     const xEnd = start + xSize
     const yMid = Math.floor(size / 2)
@@ -154,11 +154,51 @@ const leftHalfTile = (ctx, size, colors, alternate=false, start=0) => {
     ctx.lineTo(start, yEnd);
     ctx.closePath();
 
-    ctx.fill();
+    ctx.fill(); 
+
+    // right half tile 
+    if (alternate) {
+
+        // top
+        ctx.fillStyle = colors.left;
+
+        ctx.beginPath();
+        ctx.moveTo(start, start);
+        ctx.lineTo(xEnd, start);
+        ctx.lineTo(start, yMid);
+        ctx.closePath();
+
+        ctx.fill();
+
+        // middle
+        ctx.fillStyle = colors.top;
+
+        ctx.beginPath();
+        ctx.moveTo(start, yMid);
+        ctx.lineTo(xEnd, start);
+        ctx.lineTo(xEnd, yEnd);
+        ctx.closePath();
+
+        ctx.fill();
+
+        // bottom
+        ctx.fillStyle = colors.right;
+
+        ctx.beginPath();
+        ctx.moveTo(start, yMid);
+        ctx.lineTo(xEnd, yEnd);
+        ctx.lineTo(start, yEnd);
+        ctx.closePath();
+
+        ctx.fill(); 
+
+    }
 
 }
 
+/*-------------------------------- Exports --------------------------------*/
+
 export { drawLine, drawFillTop, fillBottomLeft,
     fillTopRight, fillLeft, fillBottomRight, 
-    fillTopLeft, fillRight, singleTile, leftHalfTile
+    fillTopLeft, fillRight, singleTile, halfTile
 }

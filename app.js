@@ -2,7 +2,7 @@
 
 import { drawLine, drawFillTop, fillBottomLeft,
     fillTopRight, fillLeft, fillBottomRight, 
-    fillTopLeft, fillRight, singleTile, leftHalfTile
+    fillTopLeft, fillRight, singleTile, halfTile
 } from './js-files/cube.js'
 
 /*-------------------------------- Constants --------------------------------*/
@@ -19,6 +19,8 @@ const colors = {
     right: "#415A77",
 }
 
+const tileSize = 200;
+
 /*-------------------------------- Cached Elements --------------------------------*/
 
 const canvasDiv = document.getElementById('canvases')
@@ -26,56 +28,60 @@ const secondCanvasDiv = document.getElementById('secondRow')
 
 /*-------------------------------- Functions --------------------------------*/
 
-const createHalfCanvas = (parentEl) => {
+const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
     const canvas = document.createElement('canvas');
 
     canvas.style.backgroundColor = 'thistle';
-    canvas.width = 50;
-    canvas.height = 100;
-    canvas.style.width = '50px';
-    canvas.style.height = '100px';
+    canvas.width = tileSize / 2;
+    canvas.height = tileSize;
+    // canvas.style.width = '50px';
+    // canvas.style.height = '100px';
 
     parentEl.appendChild(canvas);
 
     const context = canvas.getContext('2d')
 
-    leftHalfTile(context, 100, colors)
+    halfTile(context, tileSize, colors, alternate)
 
 }
 
-const createCanvas = (parentEl) => {
+const createCanvas = (parentEl, tileSize) => {
 
     const canvas = document.createElement('canvas');
 
     canvas.style.backgroundColor = 'thistle';
-    canvas.width = 100;
-    canvas.height = 100;
-    canvas.style.width = '100px';
-    canvas.style.height = '100px';
+    canvas.width = tileSize;
+    canvas.height = tileSize;
+    // canvas.style.width = '100px';
+    // canvas.style.height = '100px';
 
     parentEl.appendChild(canvas);
 
     const context = canvas.getContext('2d')
 
-    singleTile(context, 100, colors)
+    singleTile(context, tileSize, colors)
 
 }
 
 
-const createRow = (parentEl, alternate=false) => {
+const createRow = (parentEl, alternate=false, tileSize) => {
 
-    createCanvas(parentEl)
-    createCanvas(parentEl)
-    createCanvas(parentEl)
+    if (alternate) {
+        createHalfCanvas(secondCanvasDiv, false, tileSize)
+        createCanvas(secondCanvasDiv, tileSize)
+        createCanvas(secondCanvasDiv, tileSize)
+        createCanvas(secondCanvasDiv, tileSize)
+    } else {
+        createCanvas(parentEl, tileSize)
+        createCanvas(parentEl, tileSize)
+        createCanvas(parentEl, tileSize)
+        createHalfCanvas(parentEl, true, tileSize)
+    }
 
 }
 
 /*-------------------------------- Function calls --------------------------------*/
 
-createRow(canvasDiv)
-
-createHalfCanvas(secondCanvasDiv)
-createCanvas(secondCanvasDiv)
-createCanvas(secondCanvasDiv)
-createCanvas(secondCanvasDiv)
+createRow(canvasDiv, false, tileSize)
+createRow(canvasDiv, true, tileSize)
