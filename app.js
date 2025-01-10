@@ -12,7 +12,7 @@ const colors = {
     top: "#E0E1DD",
     left: "#778DA9",
     right: "#415A77",
-}
+} 
 
 /*-------------------------------- Variables --------------------------------*/
 
@@ -20,6 +20,8 @@ let tileSize = 200; // must correspond with css file
 
 let viewWidth = window.innerWidth;
 let viewHeight = window.innerHeight;
+
+let tileCount = 5.5;
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
@@ -82,31 +84,42 @@ const createRow = (parentEl, alternate=false, tileSize) => {
 
 }
 
-const updateTile = (width, height) => {
+const updateTile = (width, tileCount) => {
 
-    let size;
+    console.log("width is ", width, "tileCount is ", tileCount, "result is ", 
+        Math.floor(width / tileCount)
+    )
+    return Math.floor(width / tileCount)
+
+}
+
+const numberOfTiles = (width) => {
+    let count;
     if (width > 1000) {
-        size = width / 5
+        count = 6.5
     } else if (width > 700) {
-        size = width / 4
+        count = 5.5
     } else {
-        size = width / 3
+        count = 4.5
     }
-    return Math.floor(size)
-
+    return count
 }
 
 const renderCubes = () => {
 
-    tileSize = updateTile(viewWidth, viewHeight)
+    tileCount = numberOfTiles(viewWidth)
+    tileSize = updateTile(viewWidth, tileCount)
+
     canvasDiv.style.width = `${viewWidth}px`
     secondCanvasDiv.style.width = `${viewWidth}px`
     canvasDiv.style.height = `${tileSize}px`
     secondCanvasDiv.style.height = `${tileSize}px`
+
     console.log("tile size is ", tileSize)
     console.log("canvas div ", canvasDiv.style.width)
     console.log("canvas div height ", canvasDiv.style.height)
     // tileSize = 200
+
     createRow(canvasDiv, false, tileSize)
     createRow(canvasDiv, true, tileSize)
 
