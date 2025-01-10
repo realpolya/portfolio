@@ -66,19 +66,17 @@ const createCanvas = (parentEl, tileSize) => {
 
 }
 
-const createRow = (parentEl, alternate=false, tileSize) => {
+const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
 
     if (alternate) {
-        createHalfCanvas(secondCanvasDiv, false, tileSize)
-        // introduce loop
-        createCanvas(secondCanvasDiv, tileSize)
-        createCanvas(secondCanvasDiv, tileSize)
-        createCanvas(secondCanvasDiv, tileSize)
-    } else {
-        // introduce loop
+        createHalfCanvas(parentEl, false, tileSize)
+    }
+    
+    for (let i = 0; i < Math.floor(tileCount); i++) {
         createCanvas(parentEl, tileSize)
-        createCanvas(parentEl, tileSize)
-        createCanvas(parentEl, tileSize)
+    }
+    
+    if (!alternate) {
         createHalfCanvas(parentEl, true, tileSize)
     }
 
@@ -99,8 +97,10 @@ const numberOfTiles = (width) => {
         count = 6.5
     } else if (width > 700) {
         count = 5.5
-    } else {
+    } else if (width > 500) {
         count = 4.5
+    } else {
+        count = 3.5
     }
     return count
 }
@@ -120,8 +120,8 @@ const renderCubes = () => {
     console.log("canvas div height ", canvasDiv.style.height)
     // tileSize = 200
 
-    createRow(canvasDiv, false, tileSize)
-    createRow(canvasDiv, true, tileSize)
+    createRow(canvasDiv, false, tileSize, tileCount)
+    createRow(secondCanvasDiv, true, tileSize, tileCount)
 
 }
 
