@@ -14,7 +14,6 @@ const colors = {
     right: "#415A77",
 }
 
-
 /*-------------------------------- Variables --------------------------------*/
 
 let tileSize = 200; // must correspond with css file
@@ -65,15 +64,16 @@ const createCanvas = (parentEl, tileSize) => {
 
 }
 
-
 const createRow = (parentEl, alternate=false, tileSize) => {
 
     if (alternate) {
         createHalfCanvas(secondCanvasDiv, false, tileSize)
+        // introduce loop
         createCanvas(secondCanvasDiv, tileSize)
         createCanvas(secondCanvasDiv, tileSize)
         createCanvas(secondCanvasDiv, tileSize)
     } else {
+        // introduce loop
         createCanvas(parentEl, tileSize)
         createCanvas(parentEl, tileSize)
         createCanvas(parentEl, tileSize)
@@ -82,15 +82,53 @@ const createRow = (parentEl, alternate=false, tileSize) => {
 
 }
 
+const updateTile = (width, height) => {
+
+    let size;
+    if (width > 1000) {
+        size = width / 5
+    } else if (width > 700) {
+        size = width / 4
+    } else {
+        size = width / 3
+    }
+    return Math.floor(size)
+
+}
+
+const renderCubes = () => {
+
+    tileSize = updateTile(viewWidth, viewHeight)
+    canvasDiv.style.width = `${viewWidth}px`
+    secondCanvasDiv.style.width = `${viewWidth}px`
+    canvasDiv.style.height = `${tileSize}px`
+    secondCanvasDiv.style.height = `${tileSize}px`
+    console.log("tile size is ", tileSize)
+    console.log("canvas div ", canvasDiv.style.width)
+    console.log("canvas div height ", canvasDiv.style.height)
+    // tileSize = 200
+    createRow(canvasDiv, false, tileSize)
+    createRow(canvasDiv, true, tileSize)
+
+}
+
 /*-------------------------------- Function calls --------------------------------*/
 
-createRow(canvasDiv, false, tileSize)
-createRow(canvasDiv, true, tileSize)
 
 /*-------------------------------- Event Listeners --------------------------------*/
+
+window.addEventListener("load", () => {
+
+    renderCubes();
+    
+})
 
 window.addEventListener("resize", () => {
     console.log("window resized ", window.innerWidth, window.innerHeight)
     viewWidth = window.innerWidth;
     viewHeight = window.innerHeight;
+
+    canvasDiv.innerHTML = ""
+    secondCanvasDiv.innerHTML = ""
+    renderCubes();
 })

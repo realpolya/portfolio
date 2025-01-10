@@ -4,10 +4,16 @@ body {
     font-weight: 400;
     font-style: normal;
     width: 100vw;
+    /* height: 100vh; */
     margin: 0;
 }
 
 #canvases, #secondRow {
+    /* height: 100%;
+    width: 100%; */ /* percentages do not work 
+    for tiles, creates a gap*/
     height: 200px;
     width: 700px;
+    margin: 0;
+    padding: 0;
 }
