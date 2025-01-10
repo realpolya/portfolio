@@ -7,11 +7,6 @@ import { drawLine, drawFillTop, fillBottomLeft,
 
 /*-------------------------------- Constants --------------------------------*/
 
-const lineColor = "grey"
-const topColor = "#E0E1DD"
-const leftColor = "#778DA9"
-const rightColor = "#415A77"
-
 const colors = {
     line: "grey",
     top: "#E0E1DD",
@@ -19,7 +14,13 @@ const colors = {
     right: "#415A77",
 }
 
-const tileSize = 200; // must correspond with css file
+
+/*-------------------------------- Variables --------------------------------*/
+
+let tileSize = 200; // must correspond with css file
+
+let viewWidth = window.innerWidth;
+let viewHeight = window.innerHeight;
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
@@ -85,3 +86,11 @@ const createRow = (parentEl, alternate=false, tileSize) => {
 
 createRow(canvasDiv, false, tileSize)
 createRow(canvasDiv, true, tileSize)
+
+/*-------------------------------- Event Listeners --------------------------------*/
+
+window.addEventListener("resize", () => {
+    console.log("window resized ", window.innerWidth, window.innerHeight)
+    viewWidth = window.innerWidth;
+    viewHeight = window.innerHeight;
+})
