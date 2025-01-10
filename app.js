@@ -14,12 +14,14 @@ const colors = {
     right: "#415A77",
 } 
 
+const CUBES = 60
+
 /*-------------------------------- Variables --------------------------------*/
 
 let tileSize = 200; // must correspond with css file
 
 let viewWidth = window.innerWidth;
-let viewHeight = window.innerHeight;
+let viewHeight = window.innerHeight; // defines number of rows TODO: scrollable site?
 
 let tileCount = 5.5;
 
@@ -27,6 +29,7 @@ let tileCount = 5.5;
 
 const canvasDiv = document.getElementById('canvases')
 const secondCanvasDiv = document.getElementById('secondRow')
+const newCanvases = document.getElementById('newCanvases')
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -48,6 +51,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
 }
 
+
 const createCanvas = (parentEl, tileSize) => {
 
     const canvas = document.createElement('canvas');
@@ -55,8 +59,6 @@ const createCanvas = (parentEl, tileSize) => {
     canvas.style.backgroundColor = 'thistle';
     canvas.width = tileSize;
     canvas.height = tileSize;
-    // canvas.style.width = '100px';
-    // canvas.style.height = '100px';
 
     parentEl.appendChild(canvas);
 
@@ -65,6 +67,7 @@ const createCanvas = (parentEl, tileSize) => {
     singleTile(context, tileSize, colors, 0, "love me")
 
 }
+
 
 const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
 
@@ -80,6 +83,16 @@ const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
         createHalfCanvas(parentEl, true, tileSize)
     }
 
+}
+
+const rowDiv = (parentEl) => {
+    const rowDivvy = document.createElement('div');
+
+    rowDivvy.width = viewWidth;
+    rowDivvy.height = tileSize;
+
+    parentEl.appendChild(rowDivvy);
+    return rowDivvy;
 }
 
 const updateTile = (width, tileCount) => {
@@ -120,8 +133,37 @@ const renderCubes = () => {
     console.log("canvas div height ", canvasDiv.style.height)
     // tileSize = 200
 
-    createRow(canvasDiv, false, tileSize, tileCount)
-    createRow(secondCanvasDiv, true, tileSize, tileCount)
+    const rows = CUBES / Math.floor(tileCount)
+    console.log("rows are ", rows)
+
+    const totalHeight = rows * viewHeight
+
+    let alter = false
+    for (let i = 0; i < rows; i++) {
+
+        const newRowDiv = rowDiv(newCanvases)
+
+        newRowDiv.style.height = `${tileSize}px`
+        createRow(newRowDiv, alter, tileSize, tileCount)
+
+        alter = !alter
+        console.log("alter is ", alter)
+
+    }
+
+    // for (let i = 0; i < rows; i++) {
+    //     if (!alter) {
+    //         createRow(canvasDiv, false, tileSize, tileCount)
+    //     } else if (alter) {
+    //         createRow(secondCanvasDiv, true, tileSize, tileCount)
+    //     }
+    //     alter = !alter
+    //     console.log("alter is ", alter)
+    // }
+
+    // createRow(canvasDiv, false, tileSize, tileCount)
+    // createRow(secondCanvasDiv, true, tileSize, tileCount)
+
 
 }
 
@@ -143,5 +185,6 @@ window.addEventListener("resize", () => {
 
     canvasDiv.innerHTML = ""
     secondCanvasDiv.innerHTML = ""
+    newCanvases.innerHTML = ""
     renderCubes();
 })
