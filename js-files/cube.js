@@ -32,15 +32,10 @@ const drawFillTop = (ctx, size, mid, start=0, colors,
     ctx.fillStyle = colors.top;
     ctx.fill();
     
-    ctx.fillStyle = colors.line;
-    ctx.font = "Montserrat";
-    ctx.textAlign = mid;
-    ctx.textBaseLine = "middle";
-    ctx.fillText(text, mid, mid)
-
-    // if (text) {
-    //     textInCube(ctx, colors, font="Montserrat", text, mid, mid)
-    // }
+    
+    if (text) {
+        textInCube(ctx, colors, "Montserrat", mid, text, mid, mid)
+    }
 
 }
 
