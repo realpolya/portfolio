@@ -153,44 +153,12 @@ const singleTile = (ctx, size, colors, special, specialBelow, count, start=0) =>
 }
 
 
-const halfTile = (ctx, size, colors, alternate=false, start=0) => {
+const halfTile = (ctx, size, colors, alternate=false, count, start=0) => {
     const xSize = Math.floor(size / 2)
     const xEnd = start + xSize
     const yMid = Math.floor(size / 2)
+    const xMid = Math.floor(xSize / 2)
     const yEnd = start + size
-
-    // top
-    ctx.fillStyle = colors.right;
-
-    ctx.beginPath();
-    ctx.moveTo(start, start);
-    ctx.lineTo(xEnd, yMid);
-    ctx.lineTo(xEnd, start);
-    ctx.closePath();
-
-    ctx.fill();
-
-    // middle
-    ctx.fillStyle = colors.top;
-
-    ctx.beginPath();
-    ctx.moveTo(start, start);
-    ctx.lineTo(xEnd, yMid);
-    ctx.lineTo(start, yEnd);
-    ctx.closePath();
-
-    ctx.fill();
-
-    // bottom
-    ctx.fillStyle = colors.left;
-
-    ctx.beginPath();
-    ctx.moveTo(xEnd, yMid);
-    ctx.lineTo(xEnd, yEnd);
-    ctx.lineTo(start, yEnd);
-    ctx.closePath();
-
-    ctx.fill(); 
 
     // right half tile 
     if (alternate) {
@@ -206,28 +174,71 @@ const halfTile = (ctx, size, colors, alternate=false, start=0) => {
 
         ctx.fill();
 
+        
         // middle
         ctx.fillStyle = colors.top;
-
+        
         ctx.beginPath();
         ctx.moveTo(start, yMid);
         ctx.lineTo(xEnd, start);
         ctx.lineTo(xEnd, yEnd);
         ctx.closePath();
-
+        
         ctx.fill();
-
+        
         // bottom
         ctx.fillStyle = colors.right;
-
+        
         ctx.beginPath();
         ctx.moveTo(start, yMid);
         ctx.lineTo(xEnd, yEnd);
         ctx.lineTo(start, yEnd);
         ctx.closePath();
-
+        
         ctx.fill(); 
 
+        if (count) {
+            textInCube(ctx, colors, 0, Math.ceil(count), "Montserrat", xMid, yMid)
+        }
+
+    } else {
+        // top
+        ctx.fillStyle = colors.right;
+
+        ctx.beginPath();
+        ctx.moveTo(start, start);
+        ctx.lineTo(xEnd, yMid);
+        ctx.lineTo(xEnd, start);
+        ctx.closePath();
+
+        ctx.fill();
+
+        
+        // middle
+        ctx.fillStyle = colors.top;
+        
+        ctx.beginPath();
+        ctx.moveTo(start, start);
+        ctx.lineTo(xEnd, yMid);
+        ctx.lineTo(start, yEnd);
+        ctx.closePath();
+        
+        ctx.fill();
+        
+        // bottom
+        ctx.fillStyle = colors.left;
+        
+        ctx.beginPath();
+        ctx.moveTo(xEnd, yMid);
+        ctx.lineTo(xEnd, yEnd);
+        ctx.lineTo(start, yEnd);
+        ctx.closePath();
+        
+        ctx.fill(); 
+
+        if (count) {
+            textInCube(ctx, colors, 0, count, "Montserrat", xMid, yMid)
+        }
     }
 
 }

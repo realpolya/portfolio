@@ -7,13 +7,30 @@ import colors from './js-files/colors.js'
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
-const colorCubes = [5, 15, 48] // order of colored cubes
+const colorCubes = [1, 5, 12, 33] // order of colored cubes
 // TODO: figure out the formula that works for all the cubes
 const linkOrders = ["hom",]
 
 // extra arrays for coloring cubes
 const belowLeft = [];
 const belowRight = [];
+
+/* 
+
+cubes:
+- homi
+- savor
+- gourds
+- battleship
+- points unknown ?
+
+- portfolio (realpolya) - 1 cube
+- linked in
+
+- fun fact cube
+- photo cube
+
+*/
 
 /*-------------------------------- Variables --------------------------------*/
 
@@ -42,7 +59,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
     const context = canvas.getContext('2d')
 
-    halfTile(context, tileSize, colors, alternate)
+    halfTile(context, tileSize, colors, alternate, cubeCount)
 
 }
 
@@ -103,6 +120,7 @@ const createCanvas = (parentEl, tileSize) => {
 const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
 
     if (alternate) {
+        cubeCount += 0.5
         createHalfCanvas(parentEl, false, tileSize)
     }
     
@@ -113,6 +131,7 @@ const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
     }
     
     if (!alternate) {
+        cubeCount += 0.5
         createHalfCanvas(parentEl, true, tileSize)
     }
 
