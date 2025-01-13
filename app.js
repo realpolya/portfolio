@@ -15,6 +15,9 @@ const linkOrders = ["hom",]
 const belowLeft = [];
 const belowRight = [];
 
+// keep track of half cubes
+const halves = []
+
 /* 
 
 cubes:
@@ -85,8 +88,7 @@ const createCanvas = (parentEl, tileSize) => {
                 text: "wonderful"
             } // TODO: increment later
 
-            console.log(`num is ${num}, tileCount is ${Math.floor(tileCount)}, below left is ${num + Math.floor(tileCount)}, below right is ${num + Math.ceil(tileCount)}`)
-
+            // TODO: create single formula
             if (tileCount >= 5.5) {
                 belowLeft.push(num + Math.ceil(tileCount) - 1)
                 belowRight.push(num + Math.floor(tileCount) - 1)
@@ -163,12 +165,21 @@ const numberOfTiles = (width) => {
     return count
 }
 
+const calculateHalves = (tileCount, halfCubes) => {
+    let first = Math.floor(tileCount) + 1
+    for (let i = first; i < CUBES + halfCubes; i += ((tileCount * 2))) {
+        halves.push(i)
+    }
+    console.log("halves are ", halves)
+}
+
 const renderCubes = () => {
 
     tileCount = numberOfTiles(viewWidth)
     tileSize = updateTile(viewWidth, tileCount)
 
     const rows = CUBES / Math.floor(tileCount)
+    const halfCubes = Math.floor(0.5 * rows)
 
     let alter = false
     for (let i = 0; i < rows; i++) {
@@ -180,6 +191,8 @@ const renderCubes = () => {
 
         alter = !alter
     }
+
+    calculateHalves(tileCount, halfCubes)
 
 
 }
@@ -204,6 +217,7 @@ window.addEventListener("resize", () => {
     belowLeft.length = 0
     belowRight.length = 0
     newCanvases.innerHTML = ""
+    halves.length = 0
 
     // re-render
     renderCubes();
