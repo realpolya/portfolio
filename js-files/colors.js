@@ -5,7 +5,7 @@ export default {
     right: "#415A77",
 
     lineHomi: "grey",
-    topHomi: "hotpink",
-    leftHomi: "pink",
+    topHomi: "pink",
+    leftHomi: "hotpink",
     rightHomi: "purple",
 }

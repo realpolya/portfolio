@@ -70,7 +70,7 @@ const createCanvas = (parentEl, tileSize) => {
     if (special) {
         singleTile(context, tileSize, colors, 0, "love me", true)
     } else {
-        singleTile(context, tileSize, colors, 0, "love me")
+        singleTile(context, tileSize, colors, 0)
     }
 
 }
