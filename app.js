@@ -1,9 +1,6 @@
 /*-------------------------------- Imports --------------------------------*/
 
-import { drawLine, drawFillTop, fillBottomLeft,
-    fillTopRight, fillLeft, fillBottomRight, 
-    fillTopLeft, fillRight, singleTile, halfTile
-} from './js-files/cube.js'
+import { singleTile, halfTile } from './js-files/cube.js'
 
 import colors from './js-files/colors.js'
 
@@ -13,6 +10,10 @@ const CUBES = 60
 const colorCubes = [5,] // order of colored cubes
 const linkOrders = ["hom",]
 
+// extra arrays for coloring cubes
+const belowLeft = [];
+const belowRight = [];
+
 /*-------------------------------- Variables --------------------------------*/
 
 let tileSize = 200; // must correspond with css file
@@ -20,7 +21,6 @@ let tileSize = 200; // must correspond with css file
 let viewWidth = window.innerWidth;
 
 let tileCount = 5.5; // beginner count
-
 let cubeCount = 0
 
 /*-------------------------------- Cached Elements --------------------------------*/
@@ -36,8 +36,6 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     canvas.style.backgroundColor = 'thistle';
     canvas.width = tileSize / 2;
     canvas.height = tileSize;
-    // canvas.style.width = '50px';
-    // canvas.style.height = '100px';
 
     parentEl.appendChild(canvas);
 
@@ -51,6 +49,9 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
+    let specialLeft = false;
+    let specialRight = false;
+
     const canvas = document.createElement('canvas');
 
     canvas.style.backgroundColor = 'thistle';
@@ -59,16 +60,30 @@ const createCanvas = (parentEl, tileSize) => {
 
     colorCubes.forEach(num => {
         if (num === cubeCount) {
-            canvas.id = "homi-link"
-            special = linkOrders[0] // increment later
+            canvas.id = "homi-link" // create id to add event listener later
+
+            special = {
+                link: linkOrders[0],
+                order: num,
+                text: "wonderful"
+            } // TODO: increment later
+
+            belowLeft.push(num + Math.floor(tileCount))
+            belowRight.push(num + Math.ceil(tileCount))
         }
     })
+
+    if (belowLeft.includes(cubeCount)) {
+        specialLeft = true
+    } else if (belowRight.includes(cubeCount)) {
+        specialRight = true
+    }
 
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')
 
     if (special) {
-        singleTile(context, tileSize, colors, 0, "love me", true)
+        singleTile(context, tileSize, colors, special)
     } else {
         singleTile(context, tileSize, colors, 0)
     }
@@ -158,8 +173,11 @@ window.addEventListener("resize", () => {
 
     // reset
     cubeCount = 0
+    belowLeft.length = 0
+    belowRight.length = 0
     newCanvases.innerHTML = ""
 
+    // re-render
     renderCubes();
 
 })

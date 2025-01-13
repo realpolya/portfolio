@@ -13,8 +13,10 @@ const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
 
 }
 
-const drawFillTop = (ctx, size, mid, start=0, colors, 
-    lineWidth=1, text=false, special) => {
+const drawFillTop = (ctx, size, mid, colors, 
+    special, start=0, lineWidth=1) => {
+
+    console.log("special is ", special)
 
     const end = start + size;
 
@@ -37,8 +39,8 @@ const drawFillTop = (ctx, size, mid, start=0, colors,
     ctx.fill();
     
     
-    if (text) {
-        textInCube(ctx, colors, "Montserrat", mid, text, mid, mid)
+    if (special) {
+        textInCube(ctx, colors, mid, special.text, "Montserrat")
     }
 
 }
@@ -124,12 +126,12 @@ const fillRight = (ctx, size, mid, colors, special, start=0) => {
 
 }
 
-const singleTile = (ctx, size, colors, start=0, text=false, special) => {
+const singleTile = (ctx, size, colors, special, start=0) => {
 
     const mid = start + Math.floor(size / 2)
     const end = start + size
 
-    drawFillTop(ctx, size, mid, 0, colors, 1, text, special)
+    drawFillTop(ctx, size, mid, colors, special)
 
     drawLine(ctx, start, start, start, end, colors)
     drawLine(ctx, end, start, end, end, colors)
