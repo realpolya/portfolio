@@ -7,7 +7,7 @@ import colors from './js-files/colors.js'
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
-const colorCubes = [1, 5, 12, 33] // order of colored cubes
+const startCubes = [1, 5, 13, 21, 33]
 // TODO: figure out the formula that works for all the cubes
 const linkOrders = ["hom",]
 
@@ -43,6 +43,7 @@ let viewWidth = window.innerWidth;
 
 let tileCount = 5.5; // beginner count
 let cubeCount = 0
+let colorCubes = [] // order of colored cubes
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
@@ -173,6 +174,15 @@ const calculateHalves = (tileCount, halfCubes) => {
     console.log("halves are ", halves)
 }
 
+const pickColorCubes = () => {
+    return startCubes.map(num => {
+        if (!halves.includes(num)) {
+            return num
+        }
+        return num + 1
+    })
+}
+
 const renderCubes = () => {
 
     tileCount = numberOfTiles(viewWidth)
@@ -180,6 +190,8 @@ const renderCubes = () => {
 
     const rows = CUBES / Math.floor(tileCount)
     const halfCubes = Math.floor(0.5 * rows)
+    calculateHalves(tileCount, halfCubes)
+    colorCubes = pickColorCubes()
 
     let alter = false
     for (let i = 0; i < rows; i++) {
@@ -192,7 +204,6 @@ const renderCubes = () => {
         alter = !alter
     }
 
-    calculateHalves(tileCount, halfCubes)
 
 
 }
