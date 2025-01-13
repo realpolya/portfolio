@@ -143,8 +143,8 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", () => {
 
     viewWidth = window.innerWidth;
-    viewHeight = window.innerHeight;
     
     newCanvases.innerHTML = ""
     renderCubes();
+
 })
