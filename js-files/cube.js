@@ -14,9 +14,7 @@ const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
 }
 
 const drawFillTop = (ctx, size, mid, colors, 
-    special, start=0, lineWidth=1) => {
-
-    console.log("special is ", special)
+    special, count, start=0, lineWidth=1) => {
 
     const end = start + size;
 
@@ -39,13 +37,17 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.fill();
     
     
-    if (special) {
-        textInCube(ctx, colors, mid, special.text, "Montserrat")
+    // if (special) {
+    //     textInCube(ctx, colors, mid, special.text, "Montserrat")
+    // }
+    
+    if (count) {
+        textInCube(ctx, colors, mid, count, "Montserrat")
     }
 
 }
 
-const fillBottomLeft = (ctx, mid, end, colors, special, start=0) => {
+const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) => {
 
     if (special) {
         ctx.fillStyle = colors.rightHomi;
@@ -63,8 +65,13 @@ const fillBottomLeft = (ctx, mid, end, colors, special, start=0) => {
 
 }
 
-const fillTopRight = (ctx, mid, end, colors, special, start=0) => {
-    ctx.fillStyle = colors.right;
+const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => {
+    
+    if (specialBelow === "right") {
+        ctx.fillStyle = colors.rightHomi;
+    } else {
+        ctx.fillStyle = colors.right;
+    }
 
     ctx.beginPath();
     ctx.moveTo(end, start);
@@ -76,7 +83,7 @@ const fillTopRight = (ctx, mid, end, colors, special, start=0) => {
 }
 
 
-const fillBottomRight = (ctx, mid, end, colors, special) => {
+const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
 
     if (special) {
         ctx.fillStyle = colors.leftHomi;
@@ -94,9 +101,13 @@ const fillBottomRight = (ctx, mid, end, colors, special) => {
 }
 
 
-const fillTopLeft = (ctx, mid, colors, special, start=0) => {
+const fillTopLeft = (ctx, mid, colors, special, specialBelow, start=0) => {
 
-    ctx.fillStyle = colors.left;
+    if (specialBelow === "left") {
+        ctx.fillStyle = colors.leftHomi;
+    } else {
+        ctx.fillStyle = colors.left;
+    }
     
     ctx.beginPath();
     ctx.moveTo(start, start);
@@ -108,36 +119,36 @@ const fillTopLeft = (ctx, mid, colors, special, start=0) => {
 
 }
 
-const fillLeft = (ctx, size, mid, colors, special, start=0) => {
+const fillLeft = (ctx, size, mid, colors, special, specialBelow, start=0) => {
 
     const end = start + size;
 
-    fillBottomLeft(ctx, mid, end, colors, special);
-    fillTopRight(ctx, mid, end, colors, special);
+    fillBottomLeft(ctx, mid, end, colors, special, specialBelow);
+    fillTopRight(ctx, mid, end, colors, special, specialBelow);
 
 }
 
-const fillRight = (ctx, size, mid, colors, special, start=0) => {
+const fillRight = (ctx, size, mid, colors, special, specialBelow, start=0) => {
 
     const end = start + size;
 
-    fillTopLeft(ctx, mid, colors, special)
-    fillBottomRight(ctx, mid, end, colors, special)
+    fillTopLeft(ctx, mid, colors, special, specialBelow)
+    fillBottomRight(ctx, mid, end, colors, special, specialBelow)
 
 }
 
-const singleTile = (ctx, size, colors, special, start=0) => {
+const singleTile = (ctx, size, colors, special, specialBelow, count, start=0) => {
 
     const mid = start + Math.floor(size / 2)
     const end = start + size
 
-    drawFillTop(ctx, size, mid, colors, special)
+    drawFillTop(ctx, size, mid, colors, special, count)
 
     drawLine(ctx, start, start, start, end, colors)
     drawLine(ctx, end, start, end, end, colors)
 
-    fillLeft(ctx, size, mid, colors, special)
-    fillRight(ctx, size, mid, colors, special)
+    fillLeft(ctx, size, mid, colors, special, specialBelow)
+    fillRight(ctx, size, mid, colors, special, specialBelow)
 
 }
 

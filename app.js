@@ -7,7 +7,8 @@ import colors from './js-files/colors.js'
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
-const colorCubes = [5,] // order of colored cubes
+const colorCubes = [5, 15, 48] // order of colored cubes
+// TODO: figure out the formula that works for all the cubes
 const linkOrders = ["hom",]
 
 // extra arrays for coloring cubes
@@ -49,8 +50,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
-    let specialLeft = false;
-    let specialRight = false;
+    let specialBelow = false;
 
     const canvas = document.createElement('canvas');
 
@@ -68,24 +68,33 @@ const createCanvas = (parentEl, tileSize) => {
                 text: "wonderful"
             } // TODO: increment later
 
-            belowLeft.push(num + Math.floor(tileCount))
-            belowRight.push(num + Math.ceil(tileCount))
+            console.log(`num is ${num}, tileCount is ${Math.floor(tileCount)}, below left is ${num + Math.floor(tileCount)}, below right is ${num + Math.ceil(tileCount)}`)
+
+            if (tileCount >= 5.5) {
+                belowLeft.push(num + Math.ceil(tileCount) - 1)
+                belowRight.push(num + Math.floor(tileCount) - 1)
+            } else {
+                belowLeft.push(num + Math.ceil(tileCount))
+                belowRight.push(num + Math.floor(tileCount))
+            }
         }
     })
 
     if (belowLeft.includes(cubeCount)) {
-        specialLeft = true
+        specialBelow = "left"
     } else if (belowRight.includes(cubeCount)) {
-        specialRight = true
+        specialBelow = "right"
     }
 
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')
 
     if (special) {
-        singleTile(context, tileSize, colors, special)
+        singleTile(context, tileSize, colors, special, false, cubeCount)
+    } else if (specialBelow) {
+        singleTile(context, tileSize, colors, false, specialBelow, cubeCount)
     } else {
-        singleTile(context, tileSize, colors, 0)
+        singleTile(context, tileSize, colors, false, false, cubeCount)
     }
 
 }

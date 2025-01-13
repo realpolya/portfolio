@@ -8,12 +8,20 @@ body {
     margin: 0;
 }
 
-#canvases, #secondRow {
-    /* height: 100%;
-    width: 100%; */ /* percentages do not work 
-    for tiles, creates a gap*/
-    height: 200px;
-    width: 700px;
-    margin: 0;
-    padding: 0;
+#centered {
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    width: 300px;
+    height: 500px;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 2rem;
+    opacity: 80%;
+}
+
+@media screen and (max-width: 500px) {
+    #centered {
+        left: 5%;
+    }
 }
