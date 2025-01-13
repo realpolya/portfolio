@@ -153,7 +153,7 @@ const singleTile = (ctx, size, colors, special, specialBelow, count, start=0) =>
 }
 
 
-const halfTile = (ctx, size, colors, alternate=false, count, start=0) => {
+const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start=0) => {
     const xSize = Math.floor(size / 2)
     const xEnd = start + xSize
     const yMid = Math.floor(size / 2)
@@ -164,7 +164,11 @@ const halfTile = (ctx, size, colors, alternate=false, count, start=0) => {
     if (alternate) {
 
         // top
-        ctx.fillStyle = colors.left;
+        if (specialBelow === "left") {
+            ctx.fillStyle = colors.leftHomi;
+        } else {
+            ctx.fillStyle = colors.left;
+        }
 
         ctx.beginPath();
         ctx.moveTo(start, start);
@@ -197,13 +201,13 @@ const halfTile = (ctx, size, colors, alternate=false, count, start=0) => {
         
         ctx.fill(); 
 
-        if (count) {
-            textInCube(ctx, colors, 0, Math.ceil(count), "Montserrat", xMid, yMid)
-        }
-
     } else {
         // top
-        ctx.fillStyle = colors.right;
+        if (specialBelow === "right") {
+            ctx.fillStyle = colors.rightHomi;
+        } else {
+            ctx.fillStyle = colors.right;
+        }
 
         ctx.beginPath();
         ctx.moveTo(start, start);
@@ -236,9 +240,10 @@ const halfTile = (ctx, size, colors, alternate=false, count, start=0) => {
         
         ctx.fill(); 
 
-        if (count) {
-            textInCube(ctx, colors, 0, count, "Montserrat", xMid, yMid)
-        }
+    }
+    
+    if (count) {
+        textInCube(ctx, colors, 0, count, "Montserrat", xMid, yMid)
     }
 
 }
