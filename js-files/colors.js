@@ -8,4 +8,9 @@ export default {
     topHomi: "pink",
     leftHomi: "hotpink",
     rightHomi: "purple",
+
+    lineSavo: "red",
+    topSavo: "green",
+    leftSavo: "yellow",
+    rightSavo: "blue"
 }

@@ -8,8 +8,7 @@ import colors from './js-files/colors.js'
 
 const CUBES = 60
 const startCubes = [1, 5, 13, 21, 33, 40, 56]
-// TODO: figure out the formula that works for all the cubes
-const linkOrders = ["hom",]
+const linkOrders = ["homi", " savo"]
 
 // extra arrays for coloring cubes
 const belowLeft = [];
@@ -45,6 +44,8 @@ let tileCount = 5.5; // beginner count
 let cubeCount = 0
 let colorCubes = [] // order of colored cubes
 
+let linkCounter = 0;
+
 /*-------------------------------- Cached Elements --------------------------------*/
 
 const newCanvases = document.getElementById('newCanvases')
@@ -75,15 +76,17 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
 }
 
+// TODO: create a separate function for determining colors to pass colors from this
+// file and simplify cube.js
 
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
     let specialBelow = false;
+    let copyColors = {...colors}
 
     const canvas = document.createElement('canvas');
 
-    canvas.style.backgroundColor = 'thistle';
     canvas.width = tileSize;
     canvas.height = tileSize;
 
@@ -92,8 +95,10 @@ const createCanvas = (parentEl, tileSize) => {
 
             // canvas.id = "homi-link" // TODO: create id to add event listener later
 
+            // TODO: create a separate colors - alter copyColors if special
+
             special = {
-                link: linkOrders[0],
+                project: linkOrders[linkCounter],
                 order: num,
                 text: "wonderful"
             } // TODO: increment later
@@ -113,7 +118,7 @@ const createCanvas = (parentEl, tileSize) => {
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')
 
-    singleTile(context, tileSize, colors, special, specialBelow, cubeCount)
+    singleTile(context, tileSize, copyColors, special, specialBelow, cubeCount)
 
 
 }
