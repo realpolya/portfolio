@@ -14,7 +14,7 @@ const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
 }
 
 const drawFillTop = (ctx, size, mid, start=0, colors, 
-    lineWidth=1, text=false) => {
+    lineWidth=1, text=false, special) => {
 
     const end = start + size;
 
@@ -29,7 +29,12 @@ const drawFillTop = (ctx, size, mid, start=0, colors,
     ctx.stroke();
     ctx.closePath();
 
-    ctx.fillStyle = colors.top;
+    if (special) {
+        console.log("this is special")
+        ctx.fillStyle = colors.topHomi;
+    } else {
+        ctx.fillStyle = colors.top;
+    }
     ctx.fill();
     
     
@@ -109,16 +114,16 @@ const fillRight = (ctx, size, mid, start=0, colors) => {
 
 }
 
-const singleTile = (ctx, size, colors, start=0, text=false) => {
+const singleTile = (ctx, size, colors, start=0, text=false, special) => {
 
     const mid = start + Math.floor(size / 2)
     const end = start + size
 
-    drawFillTop(ctx, size, mid, 0, colors, 1, text)
-
-    // if (text) {
-    //     textInCube(ctx, colors, font="Montserrat", "Click me", mid, mid)
-    // }
+    if (special) {
+        console.log("this is special")
+    }
+    
+    drawFillTop(ctx, size, mid, 0, colors, 1, text, special)
 
     drawLine(ctx, start, start, start, end, colors)
     drawLine(ctx, end, start, end, end, colors)

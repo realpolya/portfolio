@@ -10,7 +10,8 @@ import colors from './js-files/colors.js'
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
-const colorCubes = [5] // order of colored cubes
+const colorCubes = [5,] // order of colored cubes
+const linkOrders = ["hom",]
 
 /*-------------------------------- Variables --------------------------------*/
 
@@ -18,7 +19,9 @@ let tileSize = 200; // must correspond with css file
 
 let viewWidth = window.innerWidth;
 
-let tileCount = 5.5;
+let tileCount = 5.5; // beginner count
+
+let cubeCount = 0
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
@@ -47,17 +50,28 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
 const createCanvas = (parentEl, tileSize) => {
 
+    let special = false;
     const canvas = document.createElement('canvas');
 
     canvas.style.backgroundColor = 'thistle';
     canvas.width = tileSize;
     canvas.height = tileSize;
 
-    parentEl.appendChild(canvas);
+    colorCubes.forEach(num => {
+        if (num === cubeCount) {
+            canvas.id = "homi-link"
+            special = linkOrders[0] // increment later
+        }
+    })
 
+    parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')
 
-    singleTile(context, tileSize, colors, 0, "love me")
+    if (special) {
+        singleTile(context, tileSize, colors, 0, "love me", true)
+    } else {
+        singleTile(context, tileSize, colors, 0, "love me")
+    }
 
 }
 
@@ -69,6 +83,8 @@ const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
     }
     
     for (let i = 0; i < Math.floor(tileCount); i++) {
+        // increment cube count
+        cubeCount += 1
         createCanvas(parentEl, tileSize)
     }
     
@@ -139,8 +155,11 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", () => {
 
     viewWidth = window.innerWidth;
-    
+
+    // reset
+    cubeCount = 0
     newCanvases.innerHTML = ""
+
     renderCubes();
 
 })
