@@ -5,16 +5,12 @@ import { drawLine, drawFillTop, fillBottomLeft,
     fillTopLeft, fillRight, singleTile, halfTile
 } from './js-files/cube.js'
 
+import colors from './js-files/colors.js'
+
 /*-------------------------------- Constants --------------------------------*/
 
-const colors = {
-    line: "grey",
-    top: "#E0E1DD",
-    left: "#778DA9",
-    right: "#415A77",
-} 
-
 const CUBES = 60
+const colorCubes = [5] // order of colored cubes
 
 /*-------------------------------- Variables --------------------------------*/
 
