@@ -167,8 +167,9 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
     if (alternate) {
 
         // top
-        if (specialBelow === "left") {
-            ctx.fillStyle = colors.leftHomi;
+        if (specialBelow[0] === "left") {
+            let concat = `left${specialBelow[1]}`
+            ctx.fillStyle = colors[concat];
         } else {
             ctx.fillStyle = colors.left;
         }
@@ -206,8 +207,9 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
 
     } else {
         // top
-        if (specialBelow === "right") {
-            ctx.fillStyle = colors.rightHomi;
+        if (specialBelow[0] === "right") {
+            let concat = `right${specialBelow[1]}`
+            ctx.fillStyle = colors[concat];
         } else {
             ctx.fillStyle = colors.right;
         }

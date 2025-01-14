@@ -58,7 +58,7 @@ const getBelow = () => {
     let specialBelow = false;
 
     belowLeft.forEach(pair => {
-        if (pair.includes(cubeCount)) {
+        if (pair.includes(Math.ceil(cubeCount))) {
             specialBelow = ["left", pair[1]]
         }
     })
@@ -66,7 +66,7 @@ const getBelow = () => {
     if (specialBelow) return specialBelow
 
     belowRight.forEach(pair => {
-        if (pair.includes(cubeCount)) {
+        if (pair.includes(Math.ceil(cubeCount))) {
             specialBelow = ["right", pair[1]]
         }
     })
@@ -76,7 +76,6 @@ const getBelow = () => {
 
 
 const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
-
     
     let count = Math.ceil(cubeCount)
     const canvas = document.createElement('canvas');
@@ -88,12 +87,12 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     parentEl.appendChild(canvas);
 
     const context = canvas.getContext('2d')
-
     let specialBelow = getBelow();
 
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
 }
+
 
 // one canvas at a time
 const createCanvas = (parentEl, tileSize) => {
@@ -151,6 +150,7 @@ const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
 
 }
 
+
 const rowDiv = (parentEl) => {
     const rowDivvy = document.createElement('div');
 
@@ -161,7 +161,9 @@ const rowDiv = (parentEl) => {
     return rowDivvy;
 }
 
+
 const updateTile = (width, tileCount) => Math.floor(width / tileCount);
+
 
 const numberOfTiles = (width) => {
     let count;
@@ -177,12 +179,14 @@ const numberOfTiles = (width) => {
     return count
 }
 
+
 const calculateHalves = (tileCount, halfCubes) => {
     let first = Math.floor(tileCount) + 1
     for (let i = first; i < CUBES + halfCubes; i += ((tileCount * 2))) {
         halves.push(i)
     }
 }
+
 
 const pickColorCubes = () => {
     return startCubes.map(num => {
@@ -192,6 +196,7 @@ const pickColorCubes = () => {
         return num + 1
     })
 }
+
 
 const renderCubes = () => {
 
@@ -216,8 +221,6 @@ const renderCubes = () => {
 
 }
 
-/*-------------------------------- Function calls --------------------------------*/
-
 
 /*-------------------------------- Event Listeners --------------------------------*/
 
@@ -226,6 +229,7 @@ window.addEventListener("load", () => {
     renderCubes();
     
 })
+
 
 window.addEventListener("resize", () => {
 
@@ -242,6 +246,6 @@ window.addEventListener("resize", () => {
     renderCubes();
 
     console.log("below left ", belowLeft)
-    console.log("below right ", belowRight)
+    // console.log("below right ", belowRight)
 
 })
