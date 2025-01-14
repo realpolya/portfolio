@@ -1,8 +1,13 @@
 /* cube interactions */
 
-const textInCube = (ctx, colors, mid, text, font, x=0, y=0) => {
+const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="Montserrat") => {
 
-    ctx.fillStyle = colors.line;
+    if (special) {
+        let concat = `line${special.project}`
+        ctx.fillStyle = colors[concat];
+    } else {
+        ctx.fillStyle = colors.line;
+    }
     ctx.font = font;
 
     if (x && y) {

@@ -39,8 +39,12 @@ const drawFillTop = (ctx, size, mid, colors,
 
     ctx.fill();
     
-    if (count) {
-        textInCube(ctx, colors, mid, count, "Montserrat")
+    if (special) {
+        // TODO: center text and rotate text?
+        textInCube(ctx, colors, mid, special.text, special)
+    }
+    else if (count) {
+        textInCube(ctx, colors, mid, count)
     }
 
 }
@@ -84,7 +88,9 @@ const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => 
 const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
 
     if (special) {
+        console.log("special project is ", special.project)
         let concat = `left${special.project}`
+        console.log("concat is ", concat)
         ctx.fillStyle = colors[concat];
     } else {
         ctx.fillStyle = colors.left;
@@ -248,7 +254,7 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
     }
     
     if (count) {
-        textInCube(ctx, colors, 0, count, "Montserrat", xMid, yMid)
+        textInCube(ctx, colors, 0, count, false, xMid, yMid)
     }
 
 }

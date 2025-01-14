@@ -7,8 +7,10 @@ import colors from './js-files/colors.js'
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
-const startCubes = [1, 5, 13, 21, 33, 40, 56]
-const linkOrders = ["homi", " savo"]
+const startCubes = [1, 5, 13, 21]
+const linkOrders = ["homi", "savo", "gour", "batt"]
+const textOrders = ["homi", "savor the seasons", 
+    "gourds and grocers", "battleship"]
 
 // extra arrays for coloring cubes
 const belowLeft = [];
@@ -107,15 +109,17 @@ const createCanvas = (parentEl, tileSize) => {
         if (num === cubeCount) {
 
             // canvas.id = "homi-link" // TODO: create id to add event listener later
-
+            console.log("project is ", linkOrders[linkCounter])
             special = {
                 project: linkOrders[linkCounter],
                 order: num,
-                text: "wonderful"
+                text: textOrders[linkCounter]
             }
         
             belowLeft.push([num + Math.ceil(tileCount), special.project])
             belowRight.push([num + Math.floor(tileCount), special.project])
+
+            linkCounter += 1
 
         }
     })
@@ -241,6 +245,7 @@ window.addEventListener("resize", () => {
     belowRight.length = 0
     newCanvases.innerHTML = ""
     halves.length = 0
+    linkCounter = 0
 
     // re-render
     renderCubes();
