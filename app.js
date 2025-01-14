@@ -1,6 +1,7 @@
 /*-------------------------------- Imports --------------------------------*/
 
 import { singleTile, halfTile } from './js-files/cube.js'
+import { assignColors } from './js-files/interact.js'
 
 import colors from './js-files/colors.js'
 
@@ -95,13 +96,15 @@ const createCanvas = (parentEl, tileSize) => {
 
             // canvas.id = "homi-link" // TODO: create id to add event listener later
 
-            // TODO: create a separate colors - alter copyColors if special
-
+            
             special = {
                 project: linkOrders[linkCounter],
                 order: num,
                 text: "wonderful"
             } // TODO: increment later
+            
+            // TODO: create a separate colors - alter copyColors if special
+            // copyColors = assignColors(special.project, colors)
 
             belowLeft.push(num + Math.ceil(tileCount))
             belowRight.push(num + Math.floor(tileCount))

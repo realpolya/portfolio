@@ -34,6 +34,7 @@ const drawFillTop = (ctx, size, mid, colors,
     } else {
         ctx.fillStyle = colors.top;
     }
+    // ctx.fillStyle = colors.top;
     ctx.fill();
     
     
@@ -54,7 +55,7 @@ const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) =
     } else {
         ctx.fillStyle = colors.right;
     }
-
+    // ctx.fillStyle = colors.right;
     ctx.beginPath();
     ctx.moveTo(start, mid);
     ctx.lineTo(mid, end);
@@ -72,7 +73,6 @@ const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => 
     } else {
         ctx.fillStyle = colors.right;
     }
-
     ctx.beginPath();
     ctx.moveTo(end, start);
     ctx.lineTo(mid, start);
@@ -90,7 +90,7 @@ const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
     } else {
         ctx.fillStyle = colors.left;
     }
-    
+    // ctx.fillStyle = colors.left;
     ctx.beginPath();
     ctx.moveTo(end, end);
     ctx.lineTo(end, mid);
@@ -141,6 +141,8 @@ const singleTile = (ctx, size, colors, special, specialBelow, count, start=0) =>
 
     const mid = start + Math.floor(size / 2)
     const end = start + size
+
+    console.log("colors are ", colors)
 
     drawFillTop(ctx, size, mid, colors, special, count)
 
