@@ -1,7 +1,6 @@
 /*-------------------------------- Imports --------------------------------*/
 
 import { singleTile, halfTile } from './js-files/cube.js'
-import { assignColors } from './js-files/interact.js'
 
 import colors from './js-files/colors.js'
 
@@ -77,14 +76,10 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
 }
 
-// TODO: create a separate function for determining colors to pass colors from this
-// file and simplify cube.js
-
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
     let specialBelow = false;
-    let copyColors = {...colors}
 
     const canvas = document.createElement('canvas');
 
@@ -96,22 +91,19 @@ const createCanvas = (parentEl, tileSize) => {
 
             // canvas.id = "homi-link" // TODO: create id to add event listener later
 
-            
             special = {
                 project: linkOrders[linkCounter],
                 order: num,
                 text: "wonderful"
-            } // TODO: increment later
-            
-            // TODO: create a separate colors - alter copyColors if special
-            // copyColors = assignColors(special.project, colors)
-
+            }
+        
             belowLeft.push(num + Math.ceil(tileCount))
             belowRight.push(num + Math.floor(tileCount))
 
         }
     })
 
+    // FIXME: include information about which project corresponds to below
     if (belowLeft.includes(cubeCount)) {
         specialBelow = "left"
     } else if (belowRight.includes(cubeCount)) {
@@ -121,8 +113,7 @@ const createCanvas = (parentEl, tileSize) => {
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')
 
-    singleTile(context, tileSize, copyColors, special, specialBelow, cubeCount)
-
+    singleTile(context, tileSize, colors, special, specialBelow, cubeCount)
 
 }
 

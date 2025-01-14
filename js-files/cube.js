@@ -30,17 +30,13 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.closePath();
 
     if (special) {
-        ctx.fillStyle = colors.topHomi;
+        let concat = `top${special.project}`
+        ctx.fillStyle = colors[concat];
     } else {
         ctx.fillStyle = colors.top;
     }
-    // ctx.fillStyle = colors.top;
+
     ctx.fill();
-    
-    
-    // if (special) {
-    //     textInCube(ctx, colors, mid, special.text, "Montserrat")
-    // }
     
     if (count) {
         textInCube(ctx, colors, mid, count, "Montserrat")
@@ -51,11 +47,11 @@ const drawFillTop = (ctx, size, mid, colors,
 const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) => {
 
     if (special) {
-        ctx.fillStyle = colors.rightHomi;
+        let concat = `right${special.project}`
+        ctx.fillStyle = colors[concat];
     } else {
         ctx.fillStyle = colors.right;
     }
-    // ctx.fillStyle = colors.right;
     ctx.beginPath();
     ctx.moveTo(start, mid);
     ctx.lineTo(mid, end);
@@ -69,7 +65,8 @@ const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) =
 const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => {
     
     if (specialBelow === "right") {
-        ctx.fillStyle = colors.rightHomi;
+        let concat = `right${special.project}`
+        ctx.fillStyle = colors[concat];
     } else {
         ctx.fillStyle = colors.right;
     }
@@ -86,7 +83,8 @@ const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => 
 const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
 
     if (special) {
-        ctx.fillStyle = colors.leftHomi;
+        let concat = `left${special.project}`
+        ctx.fillStyle = colors[concat];
     } else {
         ctx.fillStyle = colors.left;
     }
@@ -103,8 +101,13 @@ const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
 
 const fillTopLeft = (ctx, mid, colors, special, specialBelow, start=0) => {
 
+    console.log("special is ", special)
+    // special is not being passed because the tile itself is normal
+
     if (specialBelow === "left") {
-        ctx.fillStyle = colors.leftHomi;
+        let concat = `left${special.project}`
+        console.log("concat is ", concat)
+        ctx.fillStyle = colors[concat];
     } else {
         ctx.fillStyle = colors.left;
     }
@@ -142,7 +145,6 @@ const singleTile = (ctx, size, colors, special, specialBelow, count, start=0) =>
     const mid = start + Math.floor(size / 2)
     const end = start + size
 
-    console.log("colors are ", colors)
 
     drawFillTop(ctx, size, mid, colors, special, count)
 
