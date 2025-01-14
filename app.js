@@ -52,6 +52,9 @@ const newCanvases = document.getElementById('newCanvases')
 
 /*-------------------------------- Functions --------------------------------*/
 
+
+
+
 const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
     let specialBelow = false;
@@ -66,6 +69,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
     const context = canvas.getContext('2d')
 
+    // FIXME: special below half tiles
     if (belowLeft.includes(count)) {
         specialBelow = "left"
     } else if (belowRight.includes(count)) {
@@ -76,6 +80,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
 }
 
+// one canvas at a time
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
@@ -97,18 +102,32 @@ const createCanvas = (parentEl, tileSize) => {
                 text: "wonderful"
             }
         
-            belowLeft.push(num + Math.ceil(tileCount))
-            belowRight.push(num + Math.floor(tileCount))
+            belowLeft.push([num + Math.ceil(tileCount), special.project])
+            belowRight.push([num + Math.floor(tileCount), special.project])
+            // belowLeft.push(num + Math.ceil(tileCount))
+            // belowRight.push(num + Math.floor(tileCount))
 
         }
     })
 
+    belowLeft.forEach(pair => {
+        if (pair.includes(cubeCount)) {
+            specialBelow = ["left", pair[1]]
+        }
+    })
+
+    belowRight.forEach(pair => {
+        if (pair.includes(cubeCount)) {
+            specialBelow = ["right", pair[1]]
+        }
+    })
+
     // FIXME: include information about which project corresponds to below
-    if (belowLeft.includes(cubeCount)) {
-        specialBelow = "left"
-    } else if (belowRight.includes(cubeCount)) {
-        specialBelow = "right"
-    }
+    // if (belowLeft.includes(cubeCount)) {
+    //     specialBelow = "left"
+    // } else if (belowRight.includes(cubeCount)) {
+    //     specialBelow = "right"
+    // }
 
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')

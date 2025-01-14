@@ -1,6 +1,7 @@
 /* contain cube geometry */
 import { textInCube } from "./interact.js";
 
+
 const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
 
     ctx.beginPath();
@@ -64,8 +65,8 @@ const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) =
 
 const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => {
     
-    if (specialBelow === "right") {
-        let concat = `right${special.project}`
+    if (specialBelow[0] === "right") {
+        let concat = `right${specialBelow[1]}`
         ctx.fillStyle = colors[concat];
     } else {
         ctx.fillStyle = colors.right;
@@ -104,9 +105,8 @@ const fillTopLeft = (ctx, mid, colors, special, specialBelow, start=0) => {
     console.log("special is ", special)
     // special is not being passed because the tile itself is normal
 
-    if (specialBelow === "left") {
-        let concat = `left${special.project}`
-        console.log("concat is ", concat)
+    if (specialBelow[0] === "left") {
+        let concat = `left${specialBelow[1]}`
         ctx.fillStyle = colors[concat];
     } else {
         ctx.fillStyle = colors.left;
@@ -122,6 +122,7 @@ const fillTopLeft = (ctx, mid, colors, special, specialBelow, start=0) => {
 
 }
 
+
 const fillLeft = (ctx, size, mid, colors, special, specialBelow, start=0) => {
 
     const end = start + size;
@@ -131,6 +132,7 @@ const fillLeft = (ctx, size, mid, colors, special, specialBelow, start=0) => {
 
 }
 
+
 const fillRight = (ctx, size, mid, colors, special, specialBelow, start=0) => {
 
     const end = start + size;
@@ -139,6 +141,7 @@ const fillRight = (ctx, size, mid, colors, special, specialBelow, start=0) => {
     fillBottomRight(ctx, mid, end, colors, special, specialBelow)
 
 }
+
 
 const singleTile = (ctx, size, colors, special, specialBelow, count, start=0) => {
 
