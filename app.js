@@ -53,11 +53,31 @@ const newCanvases = document.getElementById('newCanvases')
 /*-------------------------------- Functions --------------------------------*/
 
 
+const getBelow = () => {
+
+    let specialBelow = false;
+
+    belowLeft.forEach(pair => {
+        if (pair.includes(cubeCount)) {
+            specialBelow = ["left", pair[1]]
+        }
+    })
+
+    if (specialBelow) return specialBelow
+
+    belowRight.forEach(pair => {
+        if (pair.includes(cubeCount)) {
+            specialBelow = ["right", pair[1]]
+        }
+    })
+
+    return specialBelow;
+}
 
 
 const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
-    let specialBelow = false;
+    
     let count = Math.ceil(cubeCount)
     const canvas = document.createElement('canvas');
 
@@ -69,12 +89,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
     const context = canvas.getContext('2d')
 
-    // FIXME: special below half tiles
-    if (belowLeft.includes(count)) {
-        specialBelow = "left"
-    } else if (belowRight.includes(count)) {
-        specialBelow = "right"
-    }
+    let specialBelow = getBelow();
 
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
@@ -84,8 +99,6 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
-    let specialBelow = false;
-
     const canvas = document.createElement('canvas');
 
     canvas.width = tileSize;
@@ -104,30 +117,11 @@ const createCanvas = (parentEl, tileSize) => {
         
             belowLeft.push([num + Math.ceil(tileCount), special.project])
             belowRight.push([num + Math.floor(tileCount), special.project])
-            // belowLeft.push(num + Math.ceil(tileCount))
-            // belowRight.push(num + Math.floor(tileCount))
 
         }
     })
 
-    belowLeft.forEach(pair => {
-        if (pair.includes(cubeCount)) {
-            specialBelow = ["left", pair[1]]
-        }
-    })
-
-    belowRight.forEach(pair => {
-        if (pair.includes(cubeCount)) {
-            specialBelow = ["right", pair[1]]
-        }
-    })
-
-    // FIXME: include information about which project corresponds to below
-    // if (belowLeft.includes(cubeCount)) {
-    //     specialBelow = "left"
-    // } else if (belowRight.includes(cubeCount)) {
-    //     specialBelow = "right"
-    // }
+    let specialBelow = getBelow()
 
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')

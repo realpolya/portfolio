@@ -89,7 +89,6 @@ const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
     } else {
         ctx.fillStyle = colors.left;
     }
-    // ctx.fillStyle = colors.left;
     ctx.beginPath();
     ctx.moveTo(end, end);
     ctx.lineTo(end, mid);
@@ -101,9 +100,6 @@ const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
 
 
 const fillTopLeft = (ctx, mid, colors, special, specialBelow, start=0) => {
-
-    console.log("special is ", special)
-    // special is not being passed because the tile itself is normal
 
     if (specialBelow[0] === "left") {
         let concat = `left${specialBelow[1]}`
