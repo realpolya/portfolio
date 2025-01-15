@@ -18,21 +18,26 @@ const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="Montserrat"
 
 }
 
-// // some of the cubes have multiple right and left colors
-// const assignColors = (value, colors) => {
+const renderIcon = (ctx, source, size) => {
 
-//     console.log("value is ", value)
+    const img = new Image();
+    img.src = source
 
-//     if (value === "homi") {
-//         console.log("firing homi colors")
-//         return {
-//             line: colors.lineHomi,
-//             top: colors.topHomi,
-//             left: colors.leftHomi,
-//             right: colors.rightHomi
-//         }
-//     }
+    img.onload = () => {
 
-// }
+        img.width = size / 3
+        img.height = size / 3
 
-export { textInCube }
+        const imgWidth = img.width
+        const imgHeight = img.height
+
+        const x = (size - img.width) / 2
+        const y = (size - img.height) / 2
+        
+        ctx.drawImage(img, x, y)
+
+    }
+
+}
+
+export { textInCube, renderIcon }

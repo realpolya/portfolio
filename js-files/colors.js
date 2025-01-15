@@ -1,9 +1,9 @@
 export default {
 
-    line: "grey",
-    top: "#FCD7AD",
-    left: "#F6C28B",
-    right: "#A57548",
+    line: "#AF9A8F",
+    top: "#FBFEFB",
+    left: "#EFE5DC",
+    right: "#D0B8AC",
 
     linehomi: "#042C23",
     tophomi: "#E1EBE0",
@@ -41,8 +41,13 @@ export default {
     rightfunf: "#652A35",
 
     linephot: "#AF9A8F",
-    topphot: "#FBFEFB",
-    leftphot: "#EFE5DC",
-    rightphot: "#D0B8AC",
+    topphot: "#FCD7AD",
+    leftphot: "#F6C28B",
+    rightphot: "#A57548",
 
 }
+
+// line: "grey",
+// top: "#FCD7AD",
+// left: "#F6C28B",
+// right: "#A57548",
