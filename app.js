@@ -7,10 +7,10 @@ import colors from './js-files/colors.js'
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
-const startCubes = [1, 5, 13, 21]
-const linkOrders = ["homi", "savo", "gour", "batt"]
+const startCubes = [1, 7, 13, 16, 20, 23]
+const linkOrders = ["homi", "savo", "gour", "batt", "port", "liin"]
 const textOrders = ["homi", "savor the seasons", 
-    "gourds and grocers", "battleship"]
+    "gourds and grocers", "battleship", "Real Polya website", "Linked In"]
 
 // extra arrays for coloring cubes
 const belowLeft = [];
