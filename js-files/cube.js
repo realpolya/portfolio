@@ -1,5 +1,5 @@
 /* contain cube geometry */
-import { textInCube, renderIcon } from "./interact.js";
+import { textInCube, renderIcon, redirectCube } from "./interact.js";
 
 
 const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
@@ -45,10 +45,11 @@ const drawFillTop = (ctx, size, mid, colors,
             renderIcon(ctx, special.icon, size)
         }
         textInCube(ctx, colors, mid, special.text, special)
+        redirectCube(special.el, special.link)
     }
-    // else if (count) {
-    //     textInCube(ctx, colors, mid, count)
-    // }
+    else if (count) {
+        textInCube(ctx, colors, mid, count)
+    }
 
 }
 

@@ -1,18 +1,21 @@
 /*-------------------------------- Imports --------------------------------*/
 
 import { singleTile, halfTile } from './js-files/cube.js'
+import { redirectCube } from './js-files/interact.js'
 
 import colors from './js-files/colors.js'
 
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
-const startCubes = [1, 7, 13, 16, 20, 23, 30, 33]
+const startCubes = [1, 4, 11, 14, 18, 22, 30, 32]
 const linkOrders = ["homi", "savo", "gour", "batt", "port", "liin", "funf", "phot"]
 const textOrders = ["homi", "savor the seasons", 
     "gourds and grocers", "battleship", "Real Polya website", "Linked In", 
     "fun fact!", "photo here"]
-const iconSrcs = ["./assets/homi.png"]
+const iconSrcs = ["./assets/homi.png", "./assets/savor.png",
+    "./assets/gourds.png", "./assets/battleship.png"]
+const linksToSites = ["https://homi-realpolya.netlify.app/"]
 
 // extra arrays for coloring cubes
 const belowLeft = [];
@@ -115,10 +118,10 @@ const createCanvas = (parentEl, tileSize) => {
                 project: linkOrders[linkCounter],
                 order: num,
                 text: textOrders[linkCounter],
-                icon: iconSrcs[linkCounter]
+                icon: iconSrcs[linkCounter],
+                link: linksToSites[linkCounter],
+                el: canvas
             }
-
-            console.log("special icon is ", special.icon)
         
             belowLeft.push([num + Math.ceil(tileCount), special.project])
             belowRight.push([num + Math.floor(tileCount), special.project])

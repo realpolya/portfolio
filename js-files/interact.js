@@ -85,4 +85,13 @@ const renderIcon = (ctx, source, size) => {
 
 }
 
-export { textInCube, renderIcon }
+const redirectCube = (el, link) => {
+    el.addEventListener('mouseenter', () => {
+        el.style.cursor = 'pointer';
+    })
+    el.addEventListener('click', () => {
+        window.location.href = link;
+    })
+}
+
+export { textInCube, renderIcon, redirectCube }
