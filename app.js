@@ -74,8 +74,6 @@ const getBelow = () => {
         }
     })
 
-    // if (specialBelow) return specialBelow
-
     belowRight.forEach(pair => {
         if (pair.includes(Math.ceil(cubeCount))) {
             if (specialBelow) {
@@ -86,12 +84,8 @@ const getBelow = () => {
         }
     })
 
-    if (specialBelow) {
-
-        console.log("special below is ", specialBelow)
-    }
-
     return specialBelow;
+
 }
 
 
@@ -274,8 +268,5 @@ window.addEventListener("resize", () => {
 
     // re-render
     renderCubes();
-
-    console.log("below left ", belowLeft)
-    // console.log("below right ", belowRight)
 
 })

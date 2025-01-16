@@ -18,7 +18,6 @@ const drawFillTop = (ctx, size, mid, colors,
     special, count, start=0, lineWidth=1) => {
 
     const end = start + size;
-
     ctx.beginPath();
     ctx.moveTo(start, mid);
     ctx.lineTo(mid, end);
@@ -40,11 +39,11 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.fill();
     
     if (special) {
+        redirectCube(special.el, special.link, ctx, start, mid, end)
         if (special.icon) {
             renderIcon(ctx, special.icon, size)
         }
         textInCube(ctx, colors, mid, special.text, special)
-        redirectCube(special.el, special.link)
     }
     else if (count) {
         textInCube(ctx, colors, mid, count)

@@ -85,12 +85,46 @@ const renderIcon = (ctx, source, size) => {
 
 }
 
-const redirectCube = (el, link) => {
-    el.addEventListener('mouseenter', () => {
-        el.style.cursor = 'pointer';
+const redirectCube = (el, link, ctx, start, mid, end) => {
+
+    const definePath = (ctx, start, mid, end) => {
+        ctx.beginPath();
+        ctx.moveTo(start, mid);
+        ctx.lineTo(mid, end);
+        ctx.lineTo(end, mid);
+        ctx.lineTo(mid, start);
+        ctx.lineTo(start, mid);
+        ctx.closePath();
+    }
+    
+    el.addEventListener('mousemove', (e) => {
+
+        const rect = el.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+
+        definePath(ctx, start, mid, end)
+
+        if (ctx.isPointInPath(x, y)) {
+            el.style.cursor = 'pointer';
+        } else {
+            el.style.cursor = 'default';
+        }
+
     })
-    el.addEventListener('click', () => {
-        window.location.href = link;
+
+    el.addEventListener('click', (e) => {
+
+        const rect = el.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+
+        definePath(ctx, start, mid, end)
+
+        if (ctx.isPointInPath(x, y)) {
+            window.location.href = link;
+        }
+
     })
 }
 
