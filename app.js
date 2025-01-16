@@ -12,6 +12,7 @@ const linkOrders = ["homi", "savo", "gour", "batt", "port", "liin", "funf", "pho
 const textOrders = ["homi", "savor the seasons", 
     "gourds and grocers", "battleship", "Real Polya website", "Linked In", 
     "fun fact!", "photo here"]
+const iconSrcs = ["./assets/homi.png"]
 
 // extra arrays for coloring cubes
 const belowLeft = [];
@@ -110,12 +111,14 @@ const createCanvas = (parentEl, tileSize) => {
         if (num === cubeCount) {
 
             // canvas.id = "homi-link" // TODO: create id to add event listener later
-            console.log("project is ", linkOrders[linkCounter])
             special = {
                 project: linkOrders[linkCounter],
                 order: num,
-                text: textOrders[linkCounter]
+                text: textOrders[linkCounter],
+                icon: iconSrcs[linkCounter]
             }
+
+            console.log("special icon is ", special.icon)
         
             belowLeft.push([num + Math.ceil(tileCount), special.project])
             belowRight.push([num + Math.floor(tileCount), special.project])
@@ -178,8 +181,10 @@ const numberOfTiles = (width) => {
         count = 5.5
     } else if (width > 500) {
         count = 4.5
-    } else {
+    } else if (width > 400) {
         count = 3.5
+    } else {
+        count = 2.5
     }
     return count
 }
