@@ -14,8 +14,10 @@ const textOrders = ["homi", "savor the seasons",
     "gourds and grocers", "battleship", "Real Polya website", "Linked In", 
     "fun fact!", "photo here"]
 const iconSrcs = ["./assets/homi.png", "./assets/savor.png",
-    "./assets/gourds.png", "./assets/battleship.png"]
-const linksToSites = ["https://homi-realpolya.netlify.app/"]
+    "./assets/gourds.png", "./assets/battleship.png", "./assets/rp.png"]
+const linksToSites = ["https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
+    "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html"
+]
 
 // extra arrays for coloring cubes
 const belowLeft = [];
@@ -40,6 +42,9 @@ cubes:
 - photo cube
 
 */
+
+// TODO: introduce a game Color a Cube!
+// FIXME: if yes, then fix the glitch of adjacent cubes below not coloring both cubes
 
 /*-------------------------------- Variables --------------------------------*/
 
