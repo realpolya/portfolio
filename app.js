@@ -44,7 +44,6 @@ cubes:
 */
 
 // TODO: introduce a game Color a Cube!
-// FIXME: if yes, then fix the glitch of adjacent cubes below not coloring both cubes
 
 /*-------------------------------- Variables --------------------------------*/
 
@@ -216,10 +215,13 @@ const calculateHalves = (tileCount, halfCubes) => {
 
 
 const pickColorCubes = () => {
+    const occupied = []
     return startCubes.map(num => {
-        if (!halves.includes(num)) {
+        if (!halves.includes(num) && !occupied.includes(num)) {
+            occupied.push(num)
             return num
         }
+        occupied.push(num + 1)
         return num + 1
     })
 }
