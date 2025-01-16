@@ -40,7 +40,6 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.fill();
     
     if (special) {
-        // TODO: center text and rotate text?
         if (special.icon) {
             renderIcon(ctx, special.icon, size)
         }
@@ -75,6 +74,9 @@ const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => 
     
     if (specialBelow[0] === "right") {
         let concat = `right${specialBelow[1]}`
+        ctx.fillStyle = colors[concat];
+    } else if (specialBelow[2] === "right") {
+        let concat = `right${specialBelow[3]}`
         ctx.fillStyle = colors[concat];
     } else {
         ctx.fillStyle = colors.right;

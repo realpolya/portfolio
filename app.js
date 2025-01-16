@@ -1,14 +1,14 @@
 /*-------------------------------- Imports --------------------------------*/
 
 import { singleTile, halfTile } from './js-files/cube.js'
-import { redirectCube } from './js-files/interact.js'
 
 import colors from './js-files/colors.js'
 
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
-const startCubes = [1, 4, 11, 14, 18, 22, 30, 32]
+
+const startCubes = [1, 2, 3, 4, 18, 22, 30, 32]
 const linkOrders = ["homi", "savo", "gour", "batt", "port", "liin", "funf", "phot"]
 const textOrders = ["homi", "savor the seasons", 
     "gourds and grocers", "battleship", "Real Polya website", "Linked In", 
@@ -75,13 +75,22 @@ const getBelow = () => {
         }
     })
 
-    if (specialBelow) return specialBelow
+    // if (specialBelow) return specialBelow
 
     belowRight.forEach(pair => {
         if (pair.includes(Math.ceil(cubeCount))) {
-            specialBelow = ["right", pair[1]]
+            if (specialBelow) {
+                specialBelow.push("right", pair[1])
+            } else {
+                specialBelow = ["right", pair[1]]
+            }
         }
     })
+
+    if (specialBelow) {
+
+        console.log("special below is ", specialBelow)
+    }
 
     return specialBelow;
 }
