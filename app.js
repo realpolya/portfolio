@@ -9,19 +9,20 @@ import funfcolors from './js-files/animcolors.js'
 
 const CUBES = 60
 
-const startCubes = [1, 5, 8, 15, 18, 22, 30, 32, 40]
-const linkOrders = ["homi", "savo", "gour", "batt", "port", "liin", "funf", "phot", "yout"]
+const startCubes = [1, 5, 8, 15, 18, 22, 30, 32, 40, 48]
+const linkOrders = ["homi", "savo", "gour", "batt", "resu", "liin", "funf", "phot", "yout", "port"]
 const textOrders = ["homi", "savor the seasons", 
-    "gourds and grocers", "battleship", "Real Polya website", "Linked In", 
-    "fun fact!", "", "RP channel"]
+    "gourds and grocers", "battleship", "resume", "Linked In", 
+    "fun fact!", "", "RP channel", "Real Polya website"]
 const iconSrcs = ["./assets/homi.png", "./assets/savor.png",
     "./assets/gourds.png", "./assets/battleship.png", "./assets/rp.png",
     "./assets/linked.png", "./assets/funfact.png", "./assets/photo1.png",
-    "./assets/yt.png"
+    "./assets/yt.png", "./assets/rp.png"
 ]
 const linksToSites = ["https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
     "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
-    "https://realpolya.com/", "https://www.linkedin.com/in/realpolya/"
+    "https://realpolya.com/", "https://www.linkedin.com/in/realpolya/", "", "", 
+    "https://www.youtube.com/realpolya", "https://realpolya.com/"
 ]
 
 // extra arrays for coloring cubes
@@ -285,12 +286,3 @@ window.addEventListener("resize", () => {
     renderCubes();
 
 })
-
-// Check if the document's fonts have loaded
-document.fonts.ready.then(() => {
-    // Reload the page once fonts are fully loaded
-    if (!sessionStorage.getItem("fontLoaded")) {
-        sessionStorage.setItem("fontLoaded", "true"); // Prevent infinite reload loop
-        location.reload(); // Reload the page
-    }
-});

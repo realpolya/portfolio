@@ -25,10 +25,10 @@ export default {
     leftbatt: "#778DA9",
     rightbatt: "#004d4d",
 
-    lineport: "#0D1B2A",
-    topport: "#ABDAE1",
-    leftport: "#A3B9C9",
-    rightport: "#87819D",
+    lineresu: "#0D1B2A",
+    topresu: "#EBF5EE",
+    leftresu: "#BFD1E5",
+    rightresu: "#AEA69F",
 
     lineliin: "#581908",
     topliin: "#EEE5E5",
@@ -49,6 +49,11 @@ export default {
     topyout: "#F0F7F4",
     leftyout: "#A2E3C4",
     rightyout: "#7E8D85",
+
+    lineport: "#0D1B2A",
+    topport: "#ABDAE1",
+    leftport: "#A3B9C9",
+    rightport: "#87819D",
 
 }
 
