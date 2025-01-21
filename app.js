@@ -66,6 +66,7 @@ let linkCounter = 0;
 /*-------------------------------- Cached Elements --------------------------------*/
 
 const newCanvases = document.getElementById('newCanvases')
+const bodyEl = document.getElementById('bodyEl')
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -269,6 +270,10 @@ window.addEventListener("load", () => {
     let currentTheme = sessionStorage.getItem("theme")
     if (!currentTheme) {
         sessionStorage.setItem("theme", "light")
+    }
+
+    if (currentTheme === "dark") {
+        bodyEl.style.backgroundColor = "#1A1F16"
     }
     
     renderCubes();
