@@ -18,6 +18,8 @@ const drawFillTop = (ctx, size, mid, colors,
     special, count, photo=false, start=0, lineWidth=1) => {
 
     const end = start + size;
+    let mode = sessionStorage.getItem("theme");
+
     ctx.beginPath();
     ctx.moveTo(start, mid);
     ctx.lineTo(mid, end);
@@ -68,7 +70,7 @@ const drawFillTop = (ctx, size, mid, colors,
         // }
 
     } else {
-        let mode = sessionStorage.getItem("theme")
+        
         if (mode === "dark") {
             ctx.fillStyle = colors.topmode;
         } else {
@@ -92,7 +94,9 @@ const drawFillTop = (ctx, size, mid, colors,
                 renderIcon(ctx, special.icon, size)
             }
         }
+
         textInCube(ctx, colors, mid, special.text, special)
+
 
     }
     else if (count) {
@@ -103,11 +107,21 @@ const drawFillTop = (ctx, size, mid, colors,
 
 const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) => {
 
+    let mode = sessionStorage.getItem("theme")
+
     if (special) {
-        let concat = `right${special.project}`
-        ctx.fillStyle = colors[concat];
+        if (special.project === "mode" && mode === "dark") {
+            ctx.fillStyle = colors.right;
+        } else {
+            let concat = `right${special.project}`
+            ctx.fillStyle = colors[concat];
+        }
     } else {
-        ctx.fillStyle = colors.right;
+        if (mode === "dark") {
+            ctx.fillStyle = colors.rightmode;
+        } else {
+            ctx.fillStyle = colors.right;
+        }
     }
     ctx.beginPath();
     ctx.moveTo(start, mid);
@@ -121,6 +135,8 @@ const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) =
 
 const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => {
     
+    let mode = sessionStorage.getItem("theme")
+
     if (specialBelow[0] === "right") {
         let concat = `right${specialBelow[1]}`
         ctx.fillStyle = colors[concat];
@@ -128,7 +144,11 @@ const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => 
         let concat = `right${specialBelow[3]}`
         ctx.fillStyle = colors[concat];
     } else {
-        ctx.fillStyle = colors.right;
+        if (mode === "dark") {
+            ctx.fillStyle = colors.rightmode;
+        } else {
+            ctx.fillStyle = colors.right;
+        }
     }
     ctx.beginPath();
     ctx.moveTo(end, start);
@@ -141,12 +161,22 @@ const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => 
 
 
 const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
+    
+    let mode = sessionStorage.getItem("theme")
 
     if (special) {
-        let concat = `left${special.project}`
-        ctx.fillStyle = colors[concat];
+        if (special.project === "mode" && mode === "dark") {
+            ctx.fillStyle = colors.left;
+        } else {
+            let concat = `left${special.project}`
+            ctx.fillStyle = colors[concat];
+        }
     } else {
-        ctx.fillStyle = colors.left;
+        if (mode === "dark") {
+            ctx.fillStyle = colors.leftmode;
+        } else {
+            ctx.fillStyle = colors.left;
+        }
     }
     ctx.beginPath();
     ctx.moveTo(end, end);
@@ -159,12 +189,25 @@ const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
 
 
 const fillTopLeft = (ctx, mid, colors, special, specialBelow, start=0) => {
+    
+    let mode = sessionStorage.getItem("theme")
 
     if (specialBelow[0] === "left") {
-        let concat = `left${specialBelow[1]}`
-        ctx.fillStyle = colors[concat];
+        console.log(specialBelow)
+
+        if (mode === "dark" && specialBelow[1] === "mode") {
+            ctx.fillStyle = colors.left;
+        } else {
+            let concat = `left${specialBelow[1]}`
+            ctx.fillStyle = colors[concat];
+        }
+
     } else {
-        ctx.fillStyle = colors.left;
+        if (mode === "dark") {
+            ctx.fillStyle = colors.leftmode;
+        } else {
+            ctx.fillStyle = colors.left;
+        }
     }
     
     ctx.beginPath();
@@ -276,11 +319,15 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
         ctx.fill(); 
 
     } else {
-        
+
         // top
         if (specialBelow[0] === "right") {
-            let concat = `right${specialBelow[1]}`
-            ctx.fillStyle = colors[concat];
+            if (mode === "dark" && specialBelow[1] === "mode") {
+                ctx.fillStyle = colors.right;
+            } else {
+                let concat = `right${specialBelow[1]}`
+                ctx.fillStyle = colors[concat];
+            }   
         } else {
             if (mode === "dark") {
                 ctx.fillStyle = colors.rightmode;

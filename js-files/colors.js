@@ -7,7 +7,7 @@ export default {
 
     linemode: "#94ECBE",
     topmode: "#1A1F16",
-    leftmode: "#1E3F20",
+    leftmode: "#162F17",
     rightmode: "#345830",
 
     linehomi: "#042C23",

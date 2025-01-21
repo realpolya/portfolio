@@ -11,7 +11,7 @@ const CUBES = 60
 
 const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 48, 55]
 const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port"]
-const textOrders = ["change mode", "homi", "savor the seasons", 
+const textOrders = ["dark/light", "homi", "savor the seasons", 
     "gourds and grocers", "battleship", "resume", "github", "Linked In", 
     "fun fact!", "", "RP channel", "Real Polya website"]
 const iconSrcs = ["./assets/cube.ico", "./assets/homi.png", "./assets/savor.png",

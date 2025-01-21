@@ -2,6 +2,7 @@
 
 const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montserrat") => {
 
+    let mode = sessionStorage.getItem("theme");
     let extraXConst = 2.8
 
     if (mid < 80) {
@@ -10,7 +11,6 @@ const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montse
         font = "13px Montserrat"
         extraXConst = 3.5
     }
-
 
     let textLength;
     let extraX = 0
@@ -42,10 +42,13 @@ const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montse
 
     }
 
-
     if (special) {
-        let concat = `line${special.project}`
-        ctx.fillStyle = colors[concat];
+        if (special.project === "mode" && mode === "dark") {
+            ctx.fillStyle = colors.line;
+        } else {
+            let concat = `line${special.project}`
+            ctx.fillStyle = colors[concat];
+        }
     } else {
         ctx.fillStyle = colors.line;
     }
