@@ -35,15 +35,20 @@ export default {
     leftliin: "#DAADAA",
     rightliin: "#983628",
 
-    linefunf: "#1F9D00",
-    topfunf: "#C2FBEF",
-    leftfunf: "#FABC3C",
-    rightfunf: "#652A35",
+    linefunf: "#BE5C99",
+    topfunf: "#FFDDE2",
+    leftfunf: "#ECA1C6",
+    rightfunf: "#BE5C99",
 
     linephot: "#AF9A8F",
     topphot: "#FCD7AD",
     leftphot: "#F6C28B",
     rightphot: "#A57548",
+
+    lineyout: "#3C493F",
+    topyout: "#F0F7F4",
+    leftyout: "#A2E3C4",
+    rightyout: "#7E8D85",
 
 }
 

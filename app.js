@@ -3,19 +3,21 @@
 import { singleTile, halfTile } from './js-files/cube.js'
 
 import colors from './js-files/colors.js'
+import funfcolors from './js-files/animcolors.js'
 
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
 
-const startCubes = [1, 2, 3, 4, 18, 22, 30, 32]
-const linkOrders = ["homi", "savo", "gour", "batt", "port", "liin", "funf", "phot"]
+const startCubes = [1, 5, 8, 15, 18, 22, 30, 32, 40]
+const linkOrders = ["homi", "savo", "gour", "batt", "port", "liin", "funf", "phot", "yout"]
 const textOrders = ["homi", "savor the seasons", 
     "gourds and grocers", "battleship", "Real Polya website", "Linked In", 
-    "fun fact!", ""]
+    "fun fact!", "", "RP channel"]
 const iconSrcs = ["./assets/homi.png", "./assets/savor.png",
     "./assets/gourds.png", "./assets/battleship.png", "./assets/rp.png",
-    "./assets/linked.png", "./assets/funfact.png", "./assets/photo.png"
+    "./assets/linked.png", "./assets/funfact.png", "./assets/photo1.png",
+    "./assets/yt.png"
 ]
 const linksToSites = ["https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
     "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
@@ -136,6 +138,11 @@ const createCanvas = (parentEl, tileSize) => {
 
             if (special.project === "phot") {
                 photo = true
+            }
+
+            if (special.project === "funf") {
+                special.funf = funfcolors
+                special.funforder = ["funf", "funfa"]
             }
         
             belowLeft.push([num + Math.ceil(tileCount), special.project])

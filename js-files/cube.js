@@ -48,6 +48,21 @@ const drawFillTop = (ctx, size, mid, colors,
             }
         }
         textInCube(ctx, colors, mid, special.text, special)
+
+        if (special.funf) {
+            let i = 0
+
+            function changeColors() {
+                special.funforder[i]
+                let concat = `top${special.funforder[i]}`
+                ctx.fillStyle = colors[concat];
+                ctx.fill()
+                i = (i + 1) % special.funforder.length
+            }
+
+            setInterval(changeColors, 3000)
+        }
+
     }
     else if (count) {
         textInCube(ctx, colors, mid, count)

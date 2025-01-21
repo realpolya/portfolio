@@ -137,4 +137,13 @@ const redirectCube = (el, link, ctx, start, mid, end) => {
     })
 }
 
+const changeColors = (ctx, part, colors) => {
+    
+    (i + 1) % colors.length
+
+    let concat = `${part}${proj}`
+    ctx.fillStyle = colors[concat];
+
+}
+
 export { textInCube, renderIcon, redirectCube }
