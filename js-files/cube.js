@@ -220,6 +220,7 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
     const yMid = Math.floor(size / 2)
     const xMid = Math.floor(xSize / 2)
     const yEnd = start + size
+    const mode = sessionStorage.getItem("theme")
 
     // right half tile 
     if (alternate) {
@@ -229,7 +230,11 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
             let concat = `left${specialBelow[1]}`
             ctx.fillStyle = colors[concat];
         } else {
-            ctx.fillStyle = colors.left;
+            if (mode === "dark") {
+                ctx.fillStyle = colors.leftmode;
+            } else {
+                ctx.fillStyle = colors.left;
+            }
         }
 
         ctx.beginPath();
@@ -239,10 +244,13 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
         ctx.closePath();
 
         ctx.fill();
-
         
         // middle
-        ctx.fillStyle = colors.top;
+        if (mode === "dark") {
+            ctx.fillStyle = colors.topmode;
+        } else {
+            ctx.fillStyle = colors.top;
+        }
         
         ctx.beginPath();
         ctx.moveTo(start, yMid);
@@ -253,7 +261,11 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
         ctx.fill();
         
         // bottom
-        ctx.fillStyle = colors.right;
+        if (mode === "dark") {
+            ctx.fillStyle = colors.rightmode;
+        } else {
+            ctx.fillStyle = colors.right;
+        }
         
         ctx.beginPath();
         ctx.moveTo(start, yMid);
@@ -264,12 +276,17 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
         ctx.fill(); 
 
     } else {
+        
         // top
         if (specialBelow[0] === "right") {
             let concat = `right${specialBelow[1]}`
             ctx.fillStyle = colors[concat];
         } else {
-            ctx.fillStyle = colors.right;
+            if (mode === "dark") {
+                ctx.fillStyle = colors.rightmode;
+            } else {
+                ctx.fillStyle = colors.right;
+            }
         }
 
         ctx.beginPath();
@@ -280,9 +297,12 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
 
         ctx.fill();
 
-        
         // middle
-        ctx.fillStyle = colors.top;
+        if (mode === "dark") {
+            ctx.fillStyle = colors.topmode;
+        } else {
+            ctx.fillStyle = colors.top;
+        }
         
         ctx.beginPath();
         ctx.moveTo(start, start);
@@ -293,7 +313,11 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
         ctx.fill();
         
         // bottom
-        ctx.fillStyle = colors.left;
+        if (mode === "dark") {
+            ctx.fillStyle = colors.leftmode;
+        } else {
+            ctx.fillStyle = colors.left;
+        }
         
         ctx.beginPath();
         ctx.moveTo(xEnd, yMid);
