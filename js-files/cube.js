@@ -32,6 +32,34 @@ const drawFillTop = (ctx, size, mid, colors,
     if (special) {
         let concat = `top${special.project}`
         ctx.fillStyle = colors[concat];
+
+        if (special.funf) {
+            let i = 0
+
+            function changeColors() {
+
+                let concat = `top${special.funforder[i]}`
+                console.log("change colors, fill style is ", special.funf[i][concat])
+                ctx.fillStyle = special.funf[i][concat];
+
+                ctx.beginPath();
+                ctx.moveTo(start, mid);
+                ctx.lineTo(mid, end);
+                ctx.lineTo(end, mid);
+                ctx.lineTo(mid, start);
+                ctx.lineTo(start, mid);
+                ctx.strokeStyle = colors.line;
+                ctx.lineWidth = lineWidth;
+                ctx.stroke();
+                ctx.closePath();
+
+                ctx.fill();
+                i = (i + 1) % special.funforder.length
+            }
+
+            // setInterval(changeColors, 1000)
+        }
+
     } else {
         ctx.fillStyle = colors.top;
     }
@@ -48,20 +76,6 @@ const drawFillTop = (ctx, size, mid, colors,
             }
         }
         textInCube(ctx, colors, mid, special.text, special)
-
-        if (special.funf) {
-            let i = 0
-
-            function changeColors() {
-                special.funforder[i]
-                let concat = `top${special.funforder[i]}`
-                ctx.fillStyle = colors[concat];
-                ctx.fill()
-                i = (i + 1) % special.funforder.length
-            }
-
-            setInterval(changeColors, 3000)
-        }
 
     }
     else if (count) {
