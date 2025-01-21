@@ -15,10 +15,20 @@ export default {
     lefthomi: "#65B6A3",
     righthomi: "#176E5A",
 
+    linehomid: "#E1EBE0",
+    tophomid: "#042C23",
+    lefthomid: "#176E5A",
+    righthomid: "#176E5A",
+
     linesavo: "#31135A",
     topsavo: "#F9FFCA",
     leftsavo: "#CEBBC9",
     rightsavo: "#31135A",
+
+    linesavod: "#31135A",
+    topsavod: "#31135A",
+    leftsavod: "#CEBBC9",
+    rightsavod: "#31135A",
 
     linegour: "#FF5F3B",
     topgour: "#FFECE6",

@@ -32,42 +32,13 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.closePath();
 
     if (special) {
-        let mode = sessionStorage.getItem("theme")
         if (special.project === "mode" && mode === "dark") {
             ctx.fillStyle = colors.top;
+        } else if (mode === "dark") {
+            ctx.fillStyle = colors[`top${special.project}d`];
         } else {
-            let concat = `top${special.project}`
-            ctx.fillStyle = colors[concat];
+            ctx.fillStyle = colors[`top${special.project}`];
         }
-        // if (special.funf) {
-        //     let i = 0
-
-        //     function changeColors() {
-
-        //         let concat = `top${special.funforder[i]}`
-        //         console.log("change colors, fill style is ", special.funf[i][concat])
-        //         ctx.fillStyle = special.funf[i][concat];
-
-        //         ctx.beginPath();
-        //         ctx.moveTo(start, mid);
-        //         ctx.lineTo(mid, end);
-        //         ctx.lineTo(end, mid);
-        //         ctx.lineTo(mid, start);
-        //         ctx.lineTo(start, mid);
-        //         ctx.strokeStyle = colors.line;
-        //         ctx.lineWidth = lineWidth;
-        //         ctx.stroke();
-        //         ctx.closePath();
-
-        //         ctx.fill();
-        //         i = (i + 1) % special.funforder.length
-
-        //         renderIcon(ctx, special.icon, size)
-        //         textInCube(ctx, colors, mid, special.text, special)
-        //     }
-
-        //     setInterval(changeColors, 1500)
-        // }
 
     } else {
         
