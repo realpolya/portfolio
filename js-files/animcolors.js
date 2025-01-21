@@ -8,7 +8,7 @@ export default [
     },
     {
         linefunfa: "#BE5C99",
-        topfunfa: "black",
+        topfunfa: "#FEF6FF",
         leftfunfa: "#B3BFB8",
         rightfunfa: "#7E8D85",
     },

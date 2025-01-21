@@ -33,32 +33,35 @@ const drawFillTop = (ctx, size, mid, colors,
         let concat = `top${special.project}`
         ctx.fillStyle = colors[concat];
 
-        if (special.funf) {
-            let i = 0
+        // if (special.funf) {
+        //     let i = 0
 
-            function changeColors() {
+        //     function changeColors() {
 
-                let concat = `top${special.funforder[i]}`
-                console.log("change colors, fill style is ", special.funf[i][concat])
-                ctx.fillStyle = special.funf[i][concat];
+        //         let concat = `top${special.funforder[i]}`
+        //         console.log("change colors, fill style is ", special.funf[i][concat])
+        //         ctx.fillStyle = special.funf[i][concat];
 
-                ctx.beginPath();
-                ctx.moveTo(start, mid);
-                ctx.lineTo(mid, end);
-                ctx.lineTo(end, mid);
-                ctx.lineTo(mid, start);
-                ctx.lineTo(start, mid);
-                ctx.strokeStyle = colors.line;
-                ctx.lineWidth = lineWidth;
-                ctx.stroke();
-                ctx.closePath();
+        //         ctx.beginPath();
+        //         ctx.moveTo(start, mid);
+        //         ctx.lineTo(mid, end);
+        //         ctx.lineTo(end, mid);
+        //         ctx.lineTo(mid, start);
+        //         ctx.lineTo(start, mid);
+        //         ctx.strokeStyle = colors.line;
+        //         ctx.lineWidth = lineWidth;
+        //         ctx.stroke();
+        //         ctx.closePath();
 
-                ctx.fill();
-                i = (i + 1) % special.funforder.length
-            }
+        //         ctx.fill();
+        //         i = (i + 1) % special.funforder.length
 
-            // setInterval(changeColors, 1000)
-        }
+        //         renderIcon(ctx, special.icon, size)
+        //         textInCube(ctx, colors, mid, special.text, special)
+        //     }
+
+        //     setInterval(changeColors, 1500)
+        // }
 
     } else {
         ctx.fillStyle = colors.top;

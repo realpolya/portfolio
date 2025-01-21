@@ -285,3 +285,12 @@ window.addEventListener("resize", () => {
     renderCubes();
 
 })
+
+// Check if the document's fonts have loaded
+document.fonts.ready.then(() => {
+    // Reload the page once fonts are fully loaded
+    if (!sessionStorage.getItem("fontLoaded")) {
+        sessionStorage.setItem("fontLoaded", "true"); // Prevent infinite reload loop
+        location.reload(); // Reload the page
+    }
+});
