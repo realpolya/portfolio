@@ -12,11 +12,14 @@ const startCubes = [1, 2, 3, 4, 18, 22, 30, 32]
 const linkOrders = ["homi", "savo", "gour", "batt", "port", "liin", "funf", "phot"]
 const textOrders = ["homi", "savor the seasons", 
     "gourds and grocers", "battleship", "Real Polya website", "Linked In", 
-    "fun fact!", "photo here"]
+    "fun fact!", ""]
 const iconSrcs = ["./assets/homi.png", "./assets/savor.png",
-    "./assets/gourds.png", "./assets/battleship.png", "./assets/rp.png"]
+    "./assets/gourds.png", "./assets/battleship.png", "./assets/rp.png",
+    "./assets/linked.png", "./assets/funfact.png", "./assets/photo.png"
+]
 const linksToSites = ["https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
-    "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html"
+    "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
+    "https://realpolya.com/", "https://www.linkedin.com/in/realpolya/"
 ]
 
 // extra arrays for coloring cubes
@@ -112,6 +115,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
+    let photo = false;
     const canvas = document.createElement('canvas');
 
     canvas.width = tileSize;
@@ -129,6 +133,10 @@ const createCanvas = (parentEl, tileSize) => {
                 link: linksToSites[linkCounter],
                 el: canvas
             }
+
+            if (special.project === "phot") {
+                photo = true
+            }
         
             belowLeft.push([num + Math.ceil(tileCount), special.project])
             belowRight.push([num + Math.floor(tileCount), special.project])
@@ -143,7 +151,7 @@ const createCanvas = (parentEl, tileSize) => {
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')
 
-    singleTile(context, tileSize, colors, special, specialBelow, cubeCount)
+    singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo)
 
 }
 

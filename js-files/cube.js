@@ -15,7 +15,7 @@ const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
 }
 
 const drawFillTop = (ctx, size, mid, colors, 
-    special, count, start=0, lineWidth=1) => {
+    special, count, photo=false, start=0, lineWidth=1) => {
 
     const end = start + size;
     ctx.beginPath();
@@ -41,7 +41,11 @@ const drawFillTop = (ctx, size, mid, colors,
     if (special) {
         redirectCube(special.el, special.link, ctx, start, mid, end)
         if (special.icon) {
-            renderIcon(ctx, special.icon, size)
+            if (photo) {
+                renderIcon(ctx, special.icon, size, photo)
+            } else {
+                renderIcon(ctx, special.icon, size)
+            }
         }
         textInCube(ctx, colors, mid, special.text, special)
     }
@@ -148,12 +152,12 @@ const fillRight = (ctx, size, mid, colors, special, specialBelow, start=0) => {
 }
 
 
-const singleTile = (ctx, size, colors, special, specialBelow, count, start=0) => {
+const singleTile = (ctx, size, colors, special, specialBelow, count, photo=false, start=0) => {
 
     const mid = start + Math.floor(size / 2)
     const end = start + size
 
-    drawFillTop(ctx, size, mid, colors, special, count)
+    drawFillTop(ctx, size, mid, colors, special, count, photo)
 
     drawLine(ctx, start, start, start, end, colors)
     drawLine(ctx, end, start, end, end, colors)

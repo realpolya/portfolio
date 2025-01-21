@@ -66,18 +66,27 @@ const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montse
 }
 
 
-const renderIcon = (ctx, source, size) => {
+const renderIcon = (ctx, source, size, photo=false) => {
 
     const img = new Image();
     img.src = source
 
     img.onload = () => {
+        
+        let yDivider = 1.4
 
-        img.width = size / 4
-        img.height = size / 4
+        if (photo) {
+            img.width = size / 1.5
+            img.height = size / 1.5
+            yDivider = 2
+        } else {
+            img.width = size / 4
+            img.height = size / 4
+        }
 
         const x = (size - img.width) / 2
-        const y = (size - img.height) / 1.4 // TODO: should this be an argument as well
+        const y = (size - img.height) / yDivider // TODO: should this be an argument as well
+
         
         ctx.drawImage(img, x, y, img.width, img.height)
 
