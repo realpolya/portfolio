@@ -65,7 +65,6 @@ const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montse
 
 }
 
-
 const renderIcon = (ctx, source, size, photo=false) => {
 
     const img = new Image();

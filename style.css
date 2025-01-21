@@ -8,6 +8,15 @@ body {
     margin: 0;
 }
 
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0%;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    color: #baa398;
+}
+
 #centered {
     position: fixed;
     top: 25%;
@@ -20,13 +29,24 @@ body {
     opacity: 80%;
 }
 
-footer {
-    width: 100%;
+#button-main {
     position: fixed;
-    bottom: 0%;
+    top: 0%;
+    right: 0%;
+    margin: 0.5rem;
+    white-space: pre;
+    width: 7rem;
+    height: 7rem;
+    font-size: 1.2rem;
     text-align: center;
-    padding-bottom: 0.5rem;
-    color: #baa398;
+    padding: 1rem;
+    border-radius: 50%;
+    font-family: "Montserrat", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #BFD1E5;
+    border: solid 2px #508991;
+    color: #004346;
 }
 
 @media screen and (max-width: 500px) {
