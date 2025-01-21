@@ -45,9 +45,10 @@ const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montse
     if (special) {
         if (special.project === "mode" && mode === "dark") {
             ctx.fillStyle = colors.line;
+        } else if (mode === "dark") {
+            ctx.fillStyle = colors[`line${special.project}d`];
         } else {
-            let concat = `line${special.project}`
-            ctx.fillStyle = colors[concat];
+            ctx.fillStyle = colors[`line${special.project}`];
         }
     } else {
         ctx.fillStyle = colors.line;
@@ -115,12 +116,17 @@ const redirectCube = (el, link, ctx, start, mid, end) => {
         const y = e.clientY - rect.top
 
         definePath(ctx, start, mid, end)
+        ctx.strokeStyle = 'red'; // Visualize the path
+    ctx.lineWidth = 2;
+    ctx.stroke();
 
         if (ctx.isPointInPath(x, y)) {
+            console.log("inside", x, y)
             el.style.cursor = 'pointer';
         } else {
-            el.style.cursor = 'default';
+            el.style.cursor = 'pointer';
         }
+        console.log(el.style)
 
     })
 

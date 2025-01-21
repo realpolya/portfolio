@@ -8,6 +8,11 @@ body {
     margin: 0;
 }
 
+canvas {
+    pointer-events: auto;
+    cursor: pointer; /* TODO: fix */
+}
+
 footer {
     width: 100%;
     position: fixed;

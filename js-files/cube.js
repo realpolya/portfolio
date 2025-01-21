@@ -83,9 +83,10 @@ const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) =
     if (special) {
         if (special.project === "mode" && mode === "dark") {
             ctx.fillStyle = colors.right;
+        } else if (mode === "dark") {
+            ctx.fillStyle = colors[`right${special.project}d`];
         } else {
-            let concat = `right${special.project}`
-            ctx.fillStyle = colors[concat];
+            ctx.fillStyle = colors[`right${special.project}`];
         }
     } else {
         if (mode === "dark") {
@@ -109,11 +110,17 @@ const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => 
     let mode = sessionStorage.getItem("theme")
 
     if (specialBelow[0] === "right") {
-        let concat = `right${specialBelow[1]}`
-        ctx.fillStyle = colors[concat];
+        if (mode === "dark") {
+            ctx.fillStyle = colors[`right${specialBelow[1]}d`];
+        } else {
+            ctx.fillStyle = colors[`right${specialBelow[1]}`];
+        }
     } else if (specialBelow[2] === "right") {
-        let concat = `right${specialBelow[3]}`
-        ctx.fillStyle = colors[concat];
+        if (mode === "dark") {
+            ctx.fillStyle = colors[`right${specialBelow[3]}d`];
+        } else {
+            ctx.fillStyle = colors[`right${specialBelow[3]}`];
+        }
     } else {
         if (mode === "dark") {
             ctx.fillStyle = colors.rightmode;
@@ -138,9 +145,10 @@ const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
     if (special) {
         if (special.project === "mode" && mode === "dark") {
             ctx.fillStyle = colors.left;
+        } else if (mode === "dark") {
+            ctx.fillStyle = colors[`left${special.project}d`];
         } else {
-            let concat = `left${special.project}`
-            ctx.fillStyle = colors[concat];
+            ctx.fillStyle = colors[`left${special.project}`];
         }
     } else {
         if (mode === "dark") {
@@ -164,10 +172,10 @@ const fillTopLeft = (ctx, mid, colors, special, specialBelow, start=0) => {
     let mode = sessionStorage.getItem("theme")
 
     if (specialBelow[0] === "left") {
-        console.log(specialBelow)
-
         if (mode === "dark" && specialBelow[1] === "mode") {
             ctx.fillStyle = colors.left;
+        } else if (mode === "dark") {
+            ctx.fillStyle = colors[`left${specialBelow[1]}d`]
         } else {
             let concat = `left${specialBelow[1]}`
             ctx.fillStyle = colors[concat];

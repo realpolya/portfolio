@@ -21,7 +21,7 @@ export default {
     linehomid: "#E1EBE0",
     tophomid: "#042C23",
     lefthomid: "#176E5A",
-    righthomid: "#176E5A",
+    righthomid: "#20876F",
 
     /* savor the seasons */
     linesavo: "#31135A",
@@ -29,16 +29,21 @@ export default {
     leftsavo: "#CEBBC9",
     rightsavo: "#31135A",
 
-    linesavod: "#31135A",
+    linesavod: "#F9FFCA",
     topsavod: "#31135A",
-    leftsavod: "#CEBBC9",
-    rightsavod: "#31135A",
+    leftsavod: "#49237F",
+    rightsavod: "#5D3695",
 
     /* gourds and grocers */
     linegour: "#FF5F3B",
     topgour: "#FFECE6",
     leftgour: "#FFDECF",
     rightgour: "#E79069",
+
+    linegourd: "#FF5F3B",
+    topgourd: "#542607",
+    leftgourd: "#753810",
+    rightgourd: "#894D25",
 
     /* battleship */
     linebatt: "#0D1B2A",
