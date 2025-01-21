@@ -5,6 +5,11 @@ export default {
     left: "#EFE5DC",
     right: "#D0B8AC",
 
+    linemode: "#94ECBE",
+    topmode: "#1A1F16",
+    leftmode: "#1E3F20",
+    rightmode: "#345830",
+
     linehomi: "#042C23",
     tophomi: "#E1EBE0",
     lefthomi: "#65B6A3",
@@ -29,6 +34,11 @@ export default {
     topresu: "#EBF5EE",
     leftresu: "#BFD1E5",
     rightresu: "#AEA69F",
+
+    linegith: "#0D1B2A",
+    topgith: "#D4E4BC",
+    leftgith: "#96ACB7",
+    rightgith: "#48233C",
 
     lineliin: "#581908",
     topliin: "#EEE5E5",

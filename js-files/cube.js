@@ -1,5 +1,5 @@
 /* contain cube geometry */
-import { textInCube, renderIcon, redirectCube } from "./interact.js";
+import { textInCube, renderIcon, redirectCube, colorMode } from "./interact.js";
 
 
 const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
@@ -70,7 +70,11 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.fill();
     
     if (special) {
+        if (special.link != "mode") {
         redirectCube(special.el, special.link, ctx, start, mid, end)
+        } else {
+            colorMode(special.el, ctx, start, mid, end)
+        }
         if (special.icon) {
             if (photo) {
                 renderIcon(ctx, special.icon, size, photo)

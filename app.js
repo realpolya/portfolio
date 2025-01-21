@@ -9,19 +9,19 @@ import funfcolors from './js-files/animcolors.js'
 
 const CUBES = 60
 
-const startCubes = [1, 5, 8, 15, 18, 22, 30, 32, 40, 48]
-const linkOrders = ["homi", "savo", "gour", "batt", "resu", "liin", "funf", "phot", "yout", "port"]
-const textOrders = ["homi", "savor the seasons", 
-    "gourds and grocers", "battleship", "resume", "Linked In", 
+const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 48, 55]
+const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port"]
+const textOrders = ["change mode", "homi", "savor the seasons", 
+    "gourds and grocers", "battleship", "resume", "github", "Linked In", 
     "fun fact!", "", "RP channel", "Real Polya website"]
-const iconSrcs = ["./assets/homi.png", "./assets/savor.png",
-    "./assets/gourds.png", "./assets/battleship.png", "./assets/rp.png",
+const iconSrcs = ["./assets/cube.ico", "./assets/homi.png", "./assets/savor.png",
+    "./assets/gourds.png", "./assets/battleship.png", "./assets/rp.png", "./assets/git.png",
     "./assets/linked.png", "./assets/funfact.png", "./assets/photo1.png",
     "./assets/yt.png", "./assets/rp.png"
 ]
-const linksToSites = ["https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
+const linksToSites = ["mode", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
     "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
-    "https://realpolya.com/", "https://www.linkedin.com/in/realpolya/", "", "", 
+    "https://realpolya.com/", "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
     "https://www.youtube.com/realpolya", "https://realpolya.com/"
 ]
 
@@ -266,6 +266,7 @@ const renderCubes = () => {
 window.addEventListener("load", () => {
 
     renderCubes();
+    sessionStorage.setItem("theme", "light")
     
 })
 

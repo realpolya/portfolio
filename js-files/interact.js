@@ -136,4 +136,50 @@ const redirectCube = (el, link, ctx, start, mid, end) => {
     })
 }
 
-export { textInCube, renderIcon, redirectCube }
+const colorMode = (el, ctx, start, mid, end) => {
+
+    const definePath = (ctx, start, mid, end) => {
+        ctx.beginPath();
+        ctx.moveTo(start, mid);
+        ctx.lineTo(mid, end);
+        ctx.lineTo(end, mid);
+        ctx.lineTo(mid, start);
+        ctx.lineTo(start, mid);
+        ctx.closePath();
+    }
+    
+    el.addEventListener('mousemove', (e) => {
+
+        const rect = el.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+
+        definePath(ctx, start, mid, end)
+
+        if (ctx.isPointInPath(x, y)) {
+            el.style.cursor = 'pointer';
+        } 
+
+    })
+
+    el.addEventListener('click', (e) => {
+
+        const rect = el.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+
+        definePath(ctx, start, mid, end)
+
+        if (ctx.isPointInPath(x, y)) {
+            if (sessionStorage.getItem("theme") === "light") {
+                sessionStorage.setItem("theme", "dark");
+            } else {
+                sessionStorage.setItem("theme", "light");
+            }
+        }
+
+    })
+
+}
+
+export { textInCube, renderIcon, redirectCube, colorMode }
