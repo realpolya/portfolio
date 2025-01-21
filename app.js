@@ -265,9 +265,14 @@ const renderCubes = () => {
 
 window.addEventListener("load", () => {
 
-    renderCubes();
-    sessionStorage.setItem("theme", "light")
     
+    let currentTheme = sessionStorage.getItem("theme")
+    if (!currentTheme) {
+        sessionStorage.setItem("theme", "light")
+    }
+    
+    renderCubes();
+
 })
 
 
@@ -286,4 +291,11 @@ window.addEventListener("resize", () => {
     // re-render
     renderCubes();
 
+})
+
+
+window.addEventListener("storage", (e) => {
+    if (e.storageArea === sessionStorage) {
+        console.log("change made")
+    }
 })

@@ -176,6 +176,7 @@ const colorMode = (el, ctx, start, mid, end) => {
             } else {
                 sessionStorage.setItem("theme", "light");
             }
+            window.location.reload()
         }
 
     })

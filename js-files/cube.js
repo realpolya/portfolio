@@ -30,9 +30,13 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.closePath();
 
     if (special) {
-        let concat = `top${special.project}`
-        ctx.fillStyle = colors[concat];
-
+        let mode = sessionStorage.getItem("theme")
+        if (special.project === "mode" && mode === "dark") {
+            ctx.fillStyle = colors.top;
+        } else {
+            let concat = `top${special.project}`
+            ctx.fillStyle = colors[concat];
+        }
         // if (special.funf) {
         //     let i = 0
 
@@ -64,14 +68,20 @@ const drawFillTop = (ctx, size, mid, colors,
         // }
 
     } else {
-        ctx.fillStyle = colors.top;
+        let mode = sessionStorage.getItem("theme")
+        if (mode === "dark") {
+            ctx.fillStyle = colors.topmode;
+        } else {
+            ctx.fillStyle = colors.top;
+        }
     }
 
     ctx.fill();
     
     if (special) {
+
         if (special.link != "mode") {
-        redirectCube(special.el, special.link, ctx, start, mid, end)
+            redirectCube(special.el, special.link, ctx, start, mid, end)
         } else {
             colorMode(special.el, ctx, start, mid, end)
         }
