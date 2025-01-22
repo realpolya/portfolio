@@ -99,6 +99,8 @@ const renderIcon = (ctx, source, size, photo=false) => {
 
 const redirectCube = (el, link, ctx, start, mid, end) => {
 
+    const mode = sessionStorage.getItem("theme")
+
     const definePath = (ctx, start, mid, end) => {
         ctx.beginPath();
         ctx.moveTo(start, mid);

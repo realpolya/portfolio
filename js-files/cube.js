@@ -70,9 +70,9 @@ const drawFillTop = (ctx, size, mid, colors,
 
 
     }
-    else if (count) {
-        textInCube(ctx, colors, mid, count)
-    }
+    // else if (count) {
+    //     textInCube(ctx, colors, mid, count)
+    // }
 
 }
 

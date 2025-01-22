@@ -1,7 +1,7 @@
 /*-------------------------------- Imports --------------------------------*/
 
 import { singleTile, halfTile } from './js-files/cube.js'
-import { closeEl } from './js-files/popup.js'
+import { closeEl, openEl } from './js-files/popup.js'
 
 import colors from './js-files/colors.js'
 import funfcolors from './js-files/animcolors.js'
@@ -73,6 +73,7 @@ const bodyEl = document.getElementById('bodyEl')
 
 const centeredEl = document.getElementById('centered')
 const closeButton = document.getElementById('button-close')
+const aboutButton = document.getElementById('button-main')
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -271,8 +272,7 @@ const renderCubes = () => {
 /*-------------------------------- Function Calls --------------------------------*/
 
 closeEl(closeButton, centeredEl)
-
-
+openEl(aboutButton, centeredEl)
 
 /*-------------------------------- Event Listeners --------------------------------*/
 
