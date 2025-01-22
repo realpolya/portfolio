@@ -54,7 +54,7 @@ const drawFillTop = (ctx, size, mid, colors,
     if (special) {
 
         if (special.link != "mode") {
-            redirectCube(special.el, special.link, ctx, start, mid, end)
+            redirectCube(special, ctx, start, mid, end)
         } else {
             colorMode(special.el, ctx, start, mid, end)
         }
@@ -70,9 +70,9 @@ const drawFillTop = (ctx, size, mid, colors,
 
 
     }
-    // else if (count) {
-    //     textInCube(ctx, colors, mid, count)
-    // }
+    else if (count) {
+        textInCube(ctx, colors, mid, count)
+    }
 
 }
 

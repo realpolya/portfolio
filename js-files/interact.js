@@ -1,5 +1,25 @@
 /* cube interactions */
 
+const openCube = (ctx, start, mid, end, colors, special) => {
+
+    let quarter = Math.floor(mid / 2)
+
+    // cavity
+    ctx.fillStyle = 'black'
+
+    ctx.beginPath();
+    ctx.moveTo(start, mid);
+    ctx.lineTo(mid, end);
+    ctx.lineTo(mid, mid);
+    ctx.lineTo(mid + quarter, mid - quarter);
+    ctx.lineTo(mid, start);
+    ctx.lineTo(start, mid);
+    ctx.closePath();
+    ctx.fill();
+    
+}
+
+
 const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montserrat") => {
 
     let mode = sessionStorage.getItem("theme");
@@ -97,7 +117,7 @@ const renderIcon = (ctx, source, size, photo=false) => {
 
 }
 
-const redirectCube = (el, link, ctx, start, mid, end) => {
+const redirectCube = (special, ctx, start, mid, end) => {
 
     const mode = sessionStorage.getItem("theme")
 
@@ -111,42 +131,46 @@ const redirectCube = (el, link, ctx, start, mid, end) => {
         ctx.closePath();
     }
     
-    // el.addEventListener('mousemove', (e) => {
+    special.el.addEventListener('mousemove', (e) => {
 
-    //     // const rect = el.getBoundingClientRect()
-    //     // const x = e.clientX - rect.left
-    //     // const y = e.clientY - rect.top
+        const rect = special.el.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
 
-    //     // definePath(ctx, start, mid, end)
-    //     // // ctx.strokeStyle = 'red'; // Visualize the path
-    //     // // ctx.lineWidth = 2;
-    //     // // ctx.stroke();
+        // definePath(ctx, start, mid, end)
+        // ctx.strokeStyle = 'green'; // Visualize the path
+        // ctx.lineWidth = 2;
+        // ctx.stroke();
+        definePath(ctx, start, mid, end)
 
-    //     // if (ctx.isPointInPath(x, y)) {
-    //     //     // console.log(`Cursor (${x}, ${y}) inside path: ${ctx.isPointInPath(x, y)}`)
-    //     //     el.style.cursor = 'pointer';
-    //     //     el.classList.add('pointer-cursor');
-    //     //     el.classList.remove('default-cursor');
-    //     // } else {
-    //     //     el.classList.add('default-cursor');
-    //     //     el.classList.remove('pointer-cursor');
-    //     //     el.style.cursor = 'default';
-    //     // }
+        if (ctx.isPointInPath(x, y)) {
+            // ctx.fillStyle = "red"
+            // ctx.fill()
+            // console.log(`Cursor (${x}, ${y}) inside path: ${ctx.isPointInPath(x, y)}`)
+            special.el.style.cursor = 'pointer';
+            openCube(ctx, start, mid, end)
+            // el.classList.add('pointer-cursor');
+            // el.classList.remove('default-cursor');
+        } else {
+            // el.classList.add('default-cursor');
+            // el.classList.remove('pointer-cursor');
+            special.el.style.cursor = 'default';
+        }
 
-    //     el.style.cursor = 'pointer';
+        // el.style.cursor = 'pointer';
 
-    // })
+    })
 
-    el.addEventListener('click', (e) => {
+    special.el.addEventListener('click', (e) => {
 
-        const rect = el.getBoundingClientRect()
+        const rect = special.el.getBoundingClientRect()
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
         definePath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
-            window.location.href = link;
+            window.location.href = special.link;
         }
 
     })
