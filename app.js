@@ -1,6 +1,7 @@
 /*-------------------------------- Imports --------------------------------*/
 
 import { singleTile, halfTile } from './js-files/cube.js'
+import { closeEl } from './js-files/popup.js'
 
 import colors from './js-files/colors.js'
 import funfcolors from './js-files/animcolors.js'
@@ -51,6 +52,8 @@ cubes:
 
 // TODO: introduce a game Color a Cube!
 
+const currentTheme = sessionStorage.getItem("theme")
+
 /*-------------------------------- Variables --------------------------------*/
 
 let tileSize = 200; // must correspond with css file
@@ -67,6 +70,9 @@ let linkCounter = 0;
 
 const newCanvases = document.getElementById('newCanvases')
 const bodyEl = document.getElementById('bodyEl')
+
+const centeredEl = document.getElementById('centered')
+const closeButton = document.getElementById('button-close')
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -262,18 +268,26 @@ const renderCubes = () => {
 }
 
 
+/*-------------------------------- Function Calls --------------------------------*/
+
+closeEl(closeButton, centeredEl)
+
+
+
 /*-------------------------------- Event Listeners --------------------------------*/
 
 window.addEventListener("load", () => {
-
     
-    let currentTheme = sessionStorage.getItem("theme")
     if (!currentTheme) {
         sessionStorage.setItem("theme", "light")
     }
 
     if (currentTheme === "dark") {
         bodyEl.style.backgroundColor = "#1A1F16"
+        centeredEl.style.backgroundColor = "#12170E"
+        closeButton.style.backgroundColor = "#12170E"
+        centeredEl.style.color = "#92A086"
+        closeButton.style.color = "#92A086"
     }
     
     renderCubes();
