@@ -2,10 +2,15 @@
 
 const openCube = (ctx, start, mid, end, colors, special) => {
 
-    let quarter = Math.floor(mid / 2)
+    const quarter = Math.floor(mid / 2)
+    const mode = sessionStorage.getItem("theme")
 
     // cavity
-    ctx.fillStyle = 'black'
+    if (mode === "dark") {
+        ctx.fillStyle = "black"
+    } else {
+        ctx.fillStyle = "#AB988E"
+    }
 
     ctx.beginPath();
     ctx.moveTo(start, mid);
@@ -14,6 +19,19 @@ const openCube = (ctx, start, mid, end, colors, special) => {
     ctx.lineTo(mid + quarter, mid - quarter);
     ctx.lineTo(mid, start);
     ctx.lineTo(start, mid);
+    ctx.closePath();
+    ctx.fill();
+
+    // bottom half open
+
+    ctx.fillStyle = colors[`left${special.project}`];
+
+    ctx.beginPath();
+    ctx.moveTo(mid, end);
+    ctx.lineTo(end, mid);
+    ctx.lineTo(end, start);
+    ctx.lineTo(mid, mid);
+    ctx.lineTo(mid, end);
     ctx.closePath();
     ctx.fill();
     
@@ -117,7 +135,7 @@ const renderIcon = (ctx, source, size, photo=false) => {
 
 }
 
-const redirectCube = (special, ctx, start, mid, end) => {
+const redirectCube = (special, ctx, start, mid, end, colors) => {
 
     const mode = sessionStorage.getItem("theme")
 
@@ -148,7 +166,7 @@ const redirectCube = (special, ctx, start, mid, end) => {
             // ctx.fill()
             // console.log(`Cursor (${x}, ${y}) inside path: ${ctx.isPointInPath(x, y)}`)
             special.el.style.cursor = 'pointer';
-            openCube(ctx, start, mid, end)
+            // openCube(ctx, start, mid, end, colors, special) // FIXME: open cube
             // el.classList.add('pointer-cursor');
             // el.classList.remove('default-cursor');
         } else {

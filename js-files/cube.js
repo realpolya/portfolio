@@ -54,7 +54,7 @@ const drawFillTop = (ctx, size, mid, colors,
     if (special) {
 
         if (special.link != "mode") {
-            redirectCube(special, ctx, start, mid, end)
+            redirectCube(special, ctx, start, mid, end, colors)
         } else {
             colorMode(special.el, ctx, start, mid, end)
         }
