@@ -135,7 +135,7 @@ const renderIcon = (ctx, source, size, photo=false) => {
 
 }
 
-const redirectCube = (special, ctx, start, mid, end, colors) => {
+const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
     const mode = sessionStorage.getItem("theme")
 
@@ -148,6 +148,34 @@ const redirectCube = (special, ctx, start, mid, end, colors) => {
         ctx.lineTo(start, mid);
         ctx.closePath();
     }
+
+    // special.el.addEventListener('mouseleave', (e) => {
+
+    //     const rect = special.el.getBoundingClientRect()
+    //     const x = e.clientX - rect.left
+    //     const y = e.clientY - rect.top
+
+    //     definePath(ctx, start, mid, end)
+
+    //     if (ctx.isPointInPath(x, y)) {
+            
+    //         special.el.style.cursor = 'pointer';
+    //         // openCube(ctx, start, mid, end, colors, special) // FIXME: open cube
+
+    //         ctx.fillStyle = "#AB988E"
+    //         ctx.fill()
+    //         if (special.icon) {
+    //             if (photo) {
+    //                 renderIcon(ctx, special.icon, size, photo)
+    //             } else {
+    //                 renderIcon(ctx, special.icon, size)
+    //             }
+    //         }
+    //         textInCube(ctx, colors, mid, special.text, special)
+            
+    //     }
+
+    // })
     
     special.el.addEventListener('mousemove', (e) => {
 
@@ -155,23 +183,49 @@ const redirectCube = (special, ctx, start, mid, end, colors) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        // definePath(ctx, start, mid, end)
-        // ctx.strokeStyle = 'green'; // Visualize the path
-        // ctx.lineWidth = 2;
-        // ctx.stroke();
         definePath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
-            // ctx.fillStyle = "red"
-            // ctx.fill()
-            // console.log(`Cursor (${x}, ${y}) inside path: ${ctx.isPointInPath(x, y)}`)
+            
             special.el.style.cursor = 'pointer';
             // openCube(ctx, start, mid, end, colors, special) // FIXME: open cube
-            // el.classList.add('pointer-cursor');
-            // el.classList.remove('default-cursor');
+
+            if (mode === "dark") {
+                ctx.fillStyle = "black"
+            } else {
+                ctx.fillStyle = "#AB988E"
+            }
+
+            ctx.fill()
+            
+            if (special.icon) {
+                if (photo) {
+                    renderIcon(ctx, special.icon, size, photo)
+                } else {
+                    renderIcon(ctx, special.icon, size)
+                }
+            }
+            textInCube(ctx, colors, mid, special.text, special)
+
         } else {
-            // el.classList.add('default-cursor');
-            // el.classList.remove('pointer-cursor');
+
+            if (mode === "dark") {
+                ctx.fillStyle = colors[`top${special.project}d`]
+            } else {
+                ctx.fillStyle = colors[`top${special.project}`]
+            }
+
+            ctx.fill()
+
+            if (special.icon) {
+                if (photo) {
+                    renderIcon(ctx, special.icon, size, photo)
+                } else {
+                    renderIcon(ctx, special.icon, size)
+                }
+            }
+            textInCube(ctx, colors, mid, special.text, special)
+
             special.el.style.cursor = 'default';
         }
 
