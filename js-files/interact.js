@@ -99,15 +99,15 @@ const renderIcon = (ctx, source, size, photo=false) => {
 
 const redirectCube = (el, link, ctx, start, mid, end) => {
 
-    // const definePath = (ctx, start, mid, end) => {
-    //     ctx.beginPath();
-    //     ctx.moveTo(start, mid);
-    //     ctx.lineTo(mid, end);
-    //     ctx.lineTo(end, mid);
-    //     ctx.lineTo(mid, start);
-    //     ctx.lineTo(start, mid);
-    //     ctx.closePath();
-    // }
+    const definePath = (ctx, start, mid, end) => {
+        ctx.beginPath();
+        ctx.moveTo(start, mid);
+        ctx.lineTo(mid, end);
+        ctx.lineTo(end, mid);
+        ctx.lineTo(mid, start);
+        ctx.lineTo(start, mid);
+        ctx.closePath();
+    }
     
     // el.addEventListener('mousemove', (e) => {
 

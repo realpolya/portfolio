@@ -53,8 +53,6 @@ const drawFillTop = (ctx, size, mid, colors,
     
     if (special) {
 
-        console.log("special is ", special)
-
         if (special.link != "mode") {
             redirectCube(special.el, special.link, ctx, start, mid, end)
         } else {
@@ -251,8 +249,11 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
 
         // top
         if (specialBelow[0] === "left") {
-            let concat = `left${specialBelow[1]}`
-            ctx.fillStyle = colors[concat];
+            if (mode === "dark") {
+                ctx.fillStyle = colors[`left${specialBelow[1]}d`];
+            } else {
+                ctx.fillStyle = colors[`left${specialBelow[1]}`];
+            }
         } else {
             if (mode === "dark") {
                 ctx.fillStyle = colors.leftmode;
@@ -305,7 +306,12 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
         if (specialBelow[0] === "right") {
             if (mode === "dark" && specialBelow[1] === "mode") {
                 ctx.fillStyle = colors.right;
-            } else {
+            } else if (mode === "dark") {
+                console.log(`right${specialBelow[1]}d`)
+                console.log(colors[`right${specialBelow[1]}d`])
+                ctx.fillStyle = colors[`right${specialBelow[1]}d`];
+            } 
+            else {
                 let concat = `right${specialBelow[1]}`
                 ctx.fillStyle = colors[concat];
             }   

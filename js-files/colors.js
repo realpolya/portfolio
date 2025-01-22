@@ -84,17 +84,32 @@ export default {
     leftliin: "#DAADAA",
     rightliin: "#983628",
 
+    lineliind: "#EEE5E5",
+    topliind: "#49150D",
+    leftliind: "#692217",
+    rightliind: "#983628",
+
     /* fun fact */
     linefunf: "#BE5C99",
     topfunf: "#FFDDE2",
     leftfunf: "#ECA1C6",
     rightfunf: "#BE5C99",
 
+    linefunfd: "#FFDDE2",
+    topfunfd: "#5D1E45",
+    leftfunfd: "#6E3D5B",
+    rightfunfd: "#8E5C7B",
+
     /* photo */
     linephot: "#AF9A8F",
     topphot: "#FCD7AD",
     leftphot: "#F6C28B",
     rightphot: "#A57548",
+
+    linephotd: "#AF9A8F",
+    topphotd: "#FCD7AD",
+    leftphotd: "#F6C28B",
+    rightphotd: "#A57548",
 
     /* youtube */
     lineyout: "#3C493F",
