@@ -99,36 +99,41 @@ const renderIcon = (ctx, source, size, photo=false) => {
 
 const redirectCube = (el, link, ctx, start, mid, end) => {
 
-    const definePath = (ctx, start, mid, end) => {
-        ctx.beginPath();
-        ctx.moveTo(start, mid);
-        ctx.lineTo(mid, end);
-        ctx.lineTo(end, mid);
-        ctx.lineTo(mid, start);
-        ctx.lineTo(start, mid);
-        ctx.closePath();
-    }
+    // const definePath = (ctx, start, mid, end) => {
+    //     ctx.beginPath();
+    //     ctx.moveTo(start, mid);
+    //     ctx.lineTo(mid, end);
+    //     ctx.lineTo(end, mid);
+    //     ctx.lineTo(mid, start);
+    //     ctx.lineTo(start, mid);
+    //     ctx.closePath();
+    // }
     
-    el.addEventListener('mousemove', (e) => {
+    // el.addEventListener('mousemove', (e) => {
 
-        const rect = el.getBoundingClientRect()
-        const x = e.clientX - rect.left
-        const y = e.clientY - rect.top
+    //     // const rect = el.getBoundingClientRect()
+    //     // const x = e.clientX - rect.left
+    //     // const y = e.clientY - rect.top
 
-        definePath(ctx, start, mid, end)
-        ctx.strokeStyle = 'red'; // Visualize the path
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    //     // definePath(ctx, start, mid, end)
+    //     // // ctx.strokeStyle = 'red'; // Visualize the path
+    //     // // ctx.lineWidth = 2;
+    //     // // ctx.stroke();
 
-        if (ctx.isPointInPath(x, y)) {
-            console.log("inside", x, y)
-            el.style.cursor = 'pointer';
-        } else {
-            el.style.cursor = 'pointer';
-        }
-        console.log(el.style)
+    //     // if (ctx.isPointInPath(x, y)) {
+    //     //     // console.log(`Cursor (${x}, ${y}) inside path: ${ctx.isPointInPath(x, y)}`)
+    //     //     el.style.cursor = 'pointer';
+    //     //     el.classList.add('pointer-cursor');
+    //     //     el.classList.remove('default-cursor');
+    //     // } else {
+    //     //     el.classList.add('default-cursor');
+    //     //     el.classList.remove('pointer-cursor');
+    //     //     el.style.cursor = 'default';
+    //     // }
 
-    })
+    //     el.style.cursor = 'pointer';
+
+    // })
 
     el.addEventListener('click', (e) => {
 
@@ -144,6 +149,7 @@ const redirectCube = (el, link, ctx, start, mid, end) => {
 
     })
 }
+
 
 const colorMode = (el, ctx, start, mid, end) => {
 

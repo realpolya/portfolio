@@ -1,16 +1,24 @@
+* {
+    pointer-events: auto;
+}
+
 body {
     background-color: #D0B8AC;
     font-family: "Montserrat", serif;
     font-weight: 400;
     font-style: normal;
     width: 100vw;
-    /* height: 100vh; */
     margin: 0;
+    cursor: zoom-in !important;
+}
+
+#bodyEl {
+    cursor: help;
 }
 
 canvas {
     pointer-events: auto;
-    cursor: pointer; /* TODO: fix */
+    cursor: zoom-in; 
 }
 
 footer {
@@ -20,6 +28,14 @@ footer {
     text-align: center;
     padding-bottom: 0.5rem;
     color: #baa398;
+}
+
+.pointer-cursor {
+    cursor: pointer !important;
+}
+
+.default-cursor {
+    cursor: default;
 }
 
 #centered {

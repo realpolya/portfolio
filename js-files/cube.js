@@ -53,6 +53,8 @@ const drawFillTop = (ctx, size, mid, colors,
     
     if (special) {
 
+        console.log("special is ", special)
+
         if (special.link != "mode") {
             redirectCube(special.el, special.link, ctx, start, mid, end)
         } else {
