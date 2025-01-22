@@ -20,7 +20,7 @@ export default {
 
     linehomid: "#E1EBE0",
     tophomid: "#042C23",
-    lefthomid: "#176E5A",
+    lefthomid: "#114F41",
     righthomid: "#20876F",
 
     /* savor the seasons */
@@ -31,8 +31,8 @@ export default {
 
     linesavod: "#F9FFCA",
     topsavod: "#31135A",
-    leftsavod: "#49237F",
-    rightsavod: "#5D3695",
+    leftsavod: "#3F2365",
+    rightsavod: "#514267",
 
     /* gourds and grocers */
     linegour: "#FF5F3B",
@@ -51,17 +51,32 @@ export default {
     leftbatt: "#778DA9",
     rightbatt: "#004d4d",
 
+    linebattd: "#E0E1DD",
+    topbattd: "#003939",
+    leftbattd: "#3C4A5B",
+    rightbattd: "#70849F",
+
     /* resume */
     lineresu: "#0D1B2A",
     topresu: "#EBF5EE",
     leftresu: "#BFD1E5",
     rightresu: "#AEA69F",
 
+    lineresud: "#AEA69F",
+    topresud: "#49443F",
+    leftresud: "#5F5954",
+    rightresud: "#697787",
+
     /* github */
     linegith: "#0D1B2A",
     topgith: "#D4E4BC",
     leftgith: "#96ACB7",
     rightgith: "#48233C",
+
+    linegithd: "#D4E4BC",
+    topgithd: "#331B2B",
+    leftgithd: "#4F6067",
+    rightgithd: "#6B755D",
 
     /* linked in */
     lineliin: "#581908",
