@@ -106,10 +106,10 @@ export default {
     leftphot: "#F6C28B",
     rightphot: "#A57548",
 
-    linephotd: "#AF9A8F",
-    topphotd: "#FCD7AD",
-    leftphotd: "#F6C28B",
-    rightphotd: "#A57548",
+    linephotd: "#FCD7AD",
+    topphotd: "#382009",
+    leftphotd: "#4B2F13",
+    rightphotd: "#6E4C2A",
 
     /* youtube */
     lineyout: "#3C493F",
@@ -117,15 +117,20 @@ export default {
     leftyout: "#A2E3C4",
     rightyout: "#7E8D85",
 
+    lineyoutd: "#F0F7F4",
+    topyoutd: "#2D3F36",
+    leftyoutd: "#374B41",
+    rightyoutd: "#496D5B",
+
     /* portfolio */
     lineport: "#0D1B2A",
     topport: "#ABDAE1",
     leftport: "#A3B9C9",
     rightport: "#87819D",
 
-}
+    lineportd: "#ABDAE1",
+    topportd: "#3C3849",
+    leftportd: "#4A4658",
+    rightportd: "#476F75",
 
-// line: "grey",
-// top: "#FCD7AD",
-// left: "#F6C28B",
-// right: "#A57548",
+}
