@@ -11,6 +11,10 @@ body {
     margin: 0;
 }
 
+h1 {
+    font-weight: 400;
+}
+
 #bodyEl {
     cursor: pointer; /* TODO: remove later when fixed */
 }
@@ -45,9 +49,9 @@ footer {
     height: 500px;
     background-color: white;
     padding: 2rem;
-    border-radius: 2rem;
+    /* border-radius: 2rem; */
     opacity: 95%;
-    display: none;
+    /* display: none; */
 }
 
 #button-close {
