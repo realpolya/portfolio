@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style.css">
+        <script src="./app.js" type="module" defer></script>
+
+        <!-- site favicon -->
+        <link rel="icon" type="image/x-icon" href="./assets/cube.ico">
+
+        <!--Google font below-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <!-- Preload the critical font files -->
+        <!-- <link rel="preload" as="font" href="https://fonts.gstatic.com/s/montserrat/v21/xyz.woff2" type="font/woff2" crossorigin="anonymous"> -->
+
+        <title>realpolya portfolio</title>
+
+    </head>
+    <body id="bodyEl">
+        <div id="newCanvases"></div>
+        <button id="button-main">About</button>
+        <!--TODO: make the div below a pop up window that can disappear so you can just see the cubes -->
+        <div id="centered">
+            <button id="button-close">x</button>
+            <h1>About Polina Stepanova</h1>
+            <p>Welcome to Polina's software engineering portfolio page.</p>
+            <p>Polina is an award-winning architectural designer, computational designer, 
+                and a software engineer.</p>
+            <p>The cubes will redirect you to her software engineering projects and social media channels.</p>
+            <p>To have some fun while you are here, it is recommended to try "Battleship" or to color the cubes. 
+                Fun fact surprise box won't leave you disappointed either!</p>
+            <!-- <h2>List of Projects</h2>
+            <ul>
+                <li>
+                    <a href="https://homi-realpolya.netlify.app/">Homi Rentals App</a>
+                </li>
+                <li>
+                    <a href="https://realpolya.github.io/battleship-game/index.html">Battleship Game</a>
+                </li>
+                <li>
+                    <a href="https://gourds-and-grocers-fc1e690d830c.herokuapp.com/">Gourds and Grocers Market</a>
+                </li>
+                <li>
+                    <a href="https://savor-the-seasons.netlify.app/">Savor the Seasons Recipes</a>
+                </li>
+            </ul> -->
+        </div>
+        <div id="div-funfact">
+            <button id="button-funfact">X</button>
+            <p>Polina has always loved chess and during COVID spent her free time being tutored in chess.</p>
+            <p>She also perfected a vegan gluten-free banana bread recipe.</p>
+        </div>
+        <footer id="footer-text">
+            created by real polya
+        </footer>
+    </body>
 </html>

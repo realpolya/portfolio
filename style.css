@@ -1,0 +1,134 @@
+* {
+    pointer-events: auto;
+}
+
+body {
+    background-color: #D0B8AC;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    width: 100vw;
+    margin: 0;
+}
+
+h1 {
+    font-weight: 400;
+}
+
+#bodyEl {
+    cursor: pointer; /* TODO: remove later when fixed */
+}
+
+canvas {
+    pointer-events: auto; 
+}
+
+footer {
+    width: 100%;
+    margin-bottom: .2rem;
+    /* margin-left: 40%;
+    margin-right: 40%; */
+    position: fixed;
+    bottom: 0%;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    color: #baa398;
+    /* background-color: white; */
+    opacity: 80%;
+    border-radius: .2rem;
+    font-size: .8rem;
+}
+
+.pointer-cursor {
+    cursor: pointer !important;
+}
+
+.default-cursor {
+    cursor: default;
+}
+
+#centered {
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    width: 300px;
+    height: 500px;
+    background-color: white;
+    padding: 2rem;
+    /* border-radius: 2rem; */
+    opacity: 95%;
+    display: none;
+}
+
+#div-funfact {
+    position: fixed;
+    bottom: 15%;
+    left: 45%;
+    width: 150px;
+    height: 250px;
+    background-color: white;
+    padding: 2rem;
+    /* border-radius: 2rem; */
+    opacity: 95%;
+    display: none;
+}
+
+#button-close, #button-funfact {
+    border: none;
+    background-color: white;
+    font-size: 1.2rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    /* width: 100%; */
+    margin-left: 280px;
+    text-align: right;
+
+    transition: transform 0.3s ease;
+}
+
+#button-funfact {
+    font-size: 1.1rem;
+    margin-left: 140px;
+}
+
+#button-close:hover, #button-funfact:hover {
+    transform: scale(1.3);
+    color: red;
+}
+
+#button-main {
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    margin: 0.5rem;
+    width: 5rem;
+    height: 5rem;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: .2rem;
+    border-radius: 50%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #BFD1E5;
+    border: solid 2px #508991;
+    color: #004346;
+
+    transition: transform 0.3s ease;
+
+}
+
+
+#button-main:hover {
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 500px) {
+    #centered {
+        left: 5%;
+    }
+    #div-funfact {
+        left: 5%;
+    }
+}

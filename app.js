@@ -1,0 +1,330 @@
+/*-------------------------------- Imports --------------------------------*/
+
+import { singleTile, halfTile } from './js-files/cube.js'
+import { closeEl, openEl } from './js-files/popup.js'
+
+import colors from './js-files/colors.js'
+import funfcolors from './js-files/animcolors.js'
+
+/*-------------------------------- Constants --------------------------------*/
+
+const CUBES = 60
+
+const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 48, 55]
+const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port"]
+const textOrders = ["dark/light", "homi", "savor the seasons", 
+    "gourds and grocers", "battleship", "resume", "github", "Linked In", 
+    "fun fact!", "", "RP channel", "Real Polya website"]
+const iconSrcs = ["./assets/cube.ico", "./assets/homi.png", "./assets/savor.png",
+    "./assets/gourds.png", "./assets/battleship.png", "./assets/rp.png", "./assets/git.png",
+    "./assets/linked.png", "./assets/funfact.png", "./assets/photo1.png",
+    "./assets/yt.png", "./assets/rp.png"
+]
+const linksToSites = ["mode", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
+    "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
+    "https://realpolya.com/", "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
+    "https://www.youtube.com/realpolya", "https://realpolya.com/"
+]
+
+// extra arrays for coloring cubes
+const belowLeft = [];
+const belowRight = [];
+
+// keep track of half cubes
+const halves = []
+
+/* 
+
+cubes:
+- homi
+- savor
+- gourds
+- battleship
+- points unknown ?
+
+- portfolio (realpolya) - 1 cube
+- linked in
+
+- fun fact cube
+- photo cube
+
+*/
+
+// TODO: introduce a game Color a Cube!
+
+const currentTheme = sessionStorage.getItem("theme")
+
+/*-------------------------------- Variables --------------------------------*/
+
+let tileSize = 200; // must correspond with css file
+
+let viewWidth = window.innerWidth;
+
+let tileCount = 5.5; // beginner count
+let cubeCount = 0
+let colorCubes = [] // order of colored cubes
+
+let linkCounter = 0;
+
+/*-------------------------------- Cached Elements --------------------------------*/
+
+
+const newCanvases = document.getElementById('newCanvases')
+const bodyEl = document.getElementById('bodyEl')
+
+const centeredEl = document.getElementById('centered')
+const funfactEl = document.getElementById('div-funfact')
+const closeButton = document.getElementById('button-close')
+const funCloseButton = document.getElementById('button-funfact')
+const aboutButton = document.getElementById('button-main')
+
+const footerEl = document.getElementById('footer-text')
+
+
+/*-------------------------------- Functions --------------------------------*/
+
+
+const getBelow = () => {
+
+    let specialBelow = false;
+
+    belowLeft.forEach(pair => {
+        if (pair.includes(Math.ceil(cubeCount))) {
+            specialBelow = ["left", pair[1]]
+        }
+    })
+
+    belowRight.forEach(pair => {
+        if (pair.includes(Math.ceil(cubeCount))) {
+            if (specialBelow) {
+                specialBelow.push("right", pair[1])
+            } else {
+                specialBelow = ["right", pair[1]]
+            }
+        }
+    })
+
+    return specialBelow;
+
+}
+
+
+const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
+    
+    let count = Math.ceil(cubeCount)
+    const canvas = document.createElement('canvas');
+
+    canvas.style.backgroundColor = 'thistle';
+    canvas.width = tileSize / 2;
+    canvas.height = tileSize;
+
+    parentEl.appendChild(canvas);
+
+    const context = canvas.getContext('2d')
+    let specialBelow = getBelow();
+
+    halfTile(context, tileSize, colors, alternate, count, specialBelow)
+
+}
+
+
+const createCanvas = (parentEl, tileSize) => {
+
+    let special = false;
+    let photo = false;
+    const canvas = document.createElement('canvas');
+
+    canvas.width = tileSize;
+    canvas.height = tileSize;
+
+    if (cubeCount + Math.ceil(tileCount) === colorCubes[8]) {
+        canvas.id = "above-funfact"
+    }
+
+    colorCubes.forEach(num => {
+        if (num === cubeCount) {
+
+            special = {
+                project: linkOrders[linkCounter],
+                order: num,
+                text: textOrders[linkCounter],
+                icon: iconSrcs[linkCounter],
+                link: linksToSites[linkCounter],
+                el: canvas
+            }
+
+            if (special.project === "phot") {
+                photo = true
+            }
+
+            belowLeft.push([num + Math.ceil(tileCount), special.project])
+            belowRight.push([num + Math.floor(tileCount), special.project])
+
+            linkCounter += 1
+
+        }
+    })
+
+    let specialBelow = getBelow()
+
+    parentEl.appendChild(canvas);
+    const context = canvas.getContext('2d')
+
+    singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo)
+
+}
+
+
+const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
+
+    if (alternate) {
+        cubeCount += 0.5
+        createHalfCanvas(parentEl, false, tileSize)
+    }
+    
+    for (let i = 0; i < Math.floor(tileCount); i++) {
+        // increment cube count
+        cubeCount += 1
+        createCanvas(parentEl, tileSize)
+    }
+    
+    if (!alternate) {
+        cubeCount += 0.5
+        createHalfCanvas(parentEl, true, tileSize)
+    }
+
+}
+
+
+const rowDiv = (parentEl) => {
+    const rowDivvy = document.createElement('div');
+
+    rowDivvy.width = viewWidth;
+    rowDivvy.height = tileSize;
+
+    parentEl.appendChild(rowDivvy);
+    return rowDivvy;
+}
+
+
+const updateTile = (width, tileCount) => Math.floor(width / tileCount);
+
+
+const numberOfTiles = (width) => {
+    let count;
+    if (width > 1000) {
+        count = 6.5
+    } else if (width > 700) {
+        count = 5.5
+    } else if (width > 500) {
+        count = 4.5
+    } else if (width > 400) {
+        count = 3.5
+    } else {
+        count = 2.5
+    }
+    return count
+}
+
+
+const calculateHalves = (tileCount, halfCubes) => {
+    let first = Math.floor(tileCount) + 1
+    for (let i = first; i < CUBES + halfCubes; i += ((tileCount * 2))) {
+        halves.push(i)
+    }
+}
+
+
+const pickColorCubes = () => {
+    const occupied = []
+    return startCubes.map(num => {
+        if (!halves.includes(num) && !occupied.includes(num)) {
+            occupied.push(num)
+            return num
+        }
+        occupied.push(num + 1)
+        return num + 1
+    })
+}
+
+
+const renderCubes = () => {
+
+    tileCount = numberOfTiles(viewWidth)
+    tileSize = updateTile(viewWidth, tileCount)
+
+    const rows = CUBES / Math.floor(tileCount)
+    const halfCubes = Math.floor(0.5 * rows)
+    calculateHalves(tileCount, halfCubes)
+    colorCubes = pickColorCubes()
+
+    let alter = false
+    for (let i = 0; i < rows; i++) {
+
+        const newRowDiv = rowDiv(newCanvases)
+
+        newRowDiv.style.height = `${tileSize}px`
+        createRow(newRowDiv, alter, tileSize, tileCount)
+
+        alter = !alter
+    }
+
+}
+
+const totalReset = () => {
+
+    viewWidth = window.innerWidth;
+
+    // reset
+    cubeCount = 0
+    belowLeft.length = 0
+    belowRight.length = 0
+    newCanvases.innerHTML = ""
+    halves.length = 0
+    linkCounter = 0
+
+    // re-render
+    renderCubes();
+
+}
+
+
+/*-------------------------------- Function Calls --------------------------------*/
+
+closeEl(closeButton, centeredEl)
+openEl(aboutButton, centeredEl)
+
+closeEl(funCloseButton, funfactEl)
+
+/*-------------------------------- Event Listeners --------------------------------*/
+
+window.addEventListener("load", () => {
+    
+    if (!currentTheme) {
+        sessionStorage.setItem("theme", "light")
+    }
+
+    if (currentTheme === "dark") {
+
+        bodyEl.style.backgroundColor = "#1A1F16"
+        centeredEl.style.backgroundColor = "#12170E"
+        funfactEl.style.backgroundColor = "#12170E"
+        closeButton.style.backgroundColor = "#12170E"
+        funCloseButton.style.backgroundColor = "#12170E"
+        centeredEl.style.color = "#92A086"
+        funfactEl.style.color = "#92A086"
+        closeButton.style.color = "#92A086"
+        funCloseButton.style.color = "#92A086"
+
+    } else {
+
+        footerEl.style.color = "#1A1F16"
+    }
+    
+    renderCubes();
+
+})
+
+
+window.addEventListener("resize", totalReset)
+funCloseButton.addEventListener("click", totalReset)
