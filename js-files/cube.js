@@ -6,9 +6,10 @@ import { textInCube, renderIcon, redirectCube, colorMode } from "./interact.js";
 
 /*-------------------------------- Functions --------------------------------*/
 
+
 const getColor = (special, colors, cubeSide) => {
 
-    let mode = sessionStorage.getItem("theme");
+    const mode = sessionStorage.getItem("theme");
     let color;
 
     if (special) {
@@ -34,12 +35,42 @@ const getColor = (special, colors, cubeSide) => {
 
 }
 
+const getBelowColor = (specialBelow, colors, cubeSide) => {
+
+    const mode = sessionStorage.getItem("theme");
+    let color;
+
+    if (specialBelow[0] === cubeSide) {
+        if (mode === "dark" && specialBelow[1] === "mode") {
+            color = colors[cubeSide];
+        } else if (mode === "dark") {
+            color = colors[`${cubeSide}${specialBelow[1]}d`];
+        } else {
+            color = colors[`${cubeSide}${specialBelow[1]}`];
+        }
+    } else if (specialBelow[2] === cubeSide) {
+        if (mode === "dark") {
+            color = colors[`${cubeSide}${specialBelow[3]}d`];
+        } else {
+            color = colors[`${cubeSide}${specialBelow[3]}`];
+        }
+    } else {
+        if (mode === "dark") {
+            color = colors[`${cubeSide}mode`];
+        } else {
+            color = colors[cubeSide];
+        }
+    }
+
+    return color;
+
+}
+
 
 const drawFillTop = (ctx, size, mid, colors, 
     special, count, photo=false, start=0) => {
 
     const end = start + size;
-    let mode = sessionStorage.getItem("theme");
 
     ctx.beginPath();
     ctx.moveTo(start, mid);
@@ -83,24 +114,6 @@ const drawFillTop = (ctx, size, mid, colors,
 
 const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) => {
 
-    let mode = sessionStorage.getItem("theme")
-
-    // if (special) {
-    //     if (special.project === "mode" && mode === "dark") {
-    //         ctx.fillStyle = colors.right;
-    //     } else if (mode === "dark") {
-    //         ctx.fillStyle = colors[`right${special.project}d`];
-    //     } else {
-    //         ctx.fillStyle = colors[`right${special.project}`];
-    //     }
-    // } else {
-    //     if (mode === "dark") {
-    //         ctx.fillStyle = colors.rightmode;
-    //     } else {
-    //         ctx.fillStyle = colors.right;
-    //     }
-    // }
-
     ctx.fillStyle = getColor(special, colors, "right")
 
     ctx.beginPath();
@@ -116,28 +129,9 @@ const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) =
 
 
 const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => {
-    
-    let mode = sessionStorage.getItem("theme")
 
-    if (specialBelow[0] === "right") {
-        if (mode === "dark") {
-            ctx.fillStyle = colors[`right${specialBelow[1]}d`];
-        } else {
-            ctx.fillStyle = colors[`right${specialBelow[1]}`];
-        }
-    } else if (specialBelow[2] === "right") {
-        if (mode === "dark") {
-            ctx.fillStyle = colors[`right${specialBelow[3]}d`];
-        } else {
-            ctx.fillStyle = colors[`right${specialBelow[3]}`];
-        }
-    } else {
-        if (mode === "dark") {
-            ctx.fillStyle = colors.rightmode;
-        } else {
-            ctx.fillStyle = colors.right;
-        }
-    }
+    ctx.fillStyle = getBelowColor(specialBelow, colors, "right")
+
     ctx.beginPath();
     ctx.moveTo(end, start);
     ctx.lineTo(mid, start);
@@ -152,23 +146,8 @@ const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => 
 
 const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
     
-    let mode = sessionStorage.getItem("theme")
+    ctx.fillStyle = getColor(special, colors, "left")
 
-    if (special) {
-        if (special.project === "mode" && mode === "dark") {
-            ctx.fillStyle = colors.left;
-        } else if (mode === "dark") {
-            ctx.fillStyle = colors[`left${special.project}d`];
-        } else {
-            ctx.fillStyle = colors[`left${special.project}`];
-        }
-    } else {
-        if (mode === "dark") {
-            ctx.fillStyle = colors.leftmode;
-        } else {
-            ctx.fillStyle = colors.left;
-        }
-    }
     ctx.beginPath();
     ctx.moveTo(end, end);
     ctx.lineTo(end, mid);
@@ -180,27 +159,9 @@ const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
 
 
 const fillTopLeft = (ctx, mid, colors, special, specialBelow, start=0) => {
-    
-    let mode = sessionStorage.getItem("theme")
 
-    if (specialBelow[0] === "left") {
-        if (mode === "dark" && specialBelow[1] === "mode") {
-            ctx.fillStyle = colors.left;
-        } else if (mode === "dark") {
-            ctx.fillStyle = colors[`left${specialBelow[1]}d`]
-        } else {
-            let concat = `left${specialBelow[1]}`
-            ctx.fillStyle = colors[concat];
-        }
+    ctx.fillStyle = getBelowColor(specialBelow, colors, "left")
 
-    } else {
-        if (mode === "dark") {
-            ctx.fillStyle = colors.leftmode;
-        } else {
-            ctx.fillStyle = colors.left;
-        }
-    }
-    
     ctx.beginPath();
     ctx.moveTo(start, start);
     ctx.lineTo(mid, start);
@@ -235,7 +196,6 @@ const fillRight = (ctx, size, mid, colors, special, specialBelow, start=0) => {
 const singleTile = (ctx, size, colors, special, specialBelow, count, photo=false, start=0) => {
 
     const mid = start + Math.floor(size / 2)
-    const end = start + size
 
     drawFillTop(ctx, size, mid, colors, special, count, photo)
 
