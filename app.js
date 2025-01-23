@@ -9,22 +9,22 @@ import colors from './js-files/colors.js'
 
 const CUBES = 60
 
-const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 48, 55]
+const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 45, 49, 58]
 
 // order of projects
-const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port"]
+const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port", "game"]
 const textOrders = ["dark/light", "homi", "savor the seasons", 
     "gourds and grocers", "battleship", "resume", "github", "Linked In", 
-    "fun fact!", "", "RP channel", "Real Polya website"]
+    "fun fact!", "", "RP channel", "Real Polya website", "coloring game"]
 const iconSrcs = ["./assets/cube.ico", "./assets/homi2.png", "./assets/savor.png",
     "./assets/gourds.png", "./assets/battleship.png", "./assets/resume.png", "./assets/git.png",
     "./assets/linked.png", "./assets/funfact.png", "./assets/photo1.png",
-    "./assets/yt.png", "./assets/rp.png"
+    "./assets/yt.png", "./assets/rp.png", "./assets/artist.png"
 ]
 const linksToSites = ["mode", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
     "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
     "https://realpolya.com/", "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
-    "https://www.youtube.com/realpolya", "https://realpolya.com/"
+    "https://www.youtube.com/realpolya", "https://realpolya.com/", ""
 ]
 
 // extra arrays for coloring cubes

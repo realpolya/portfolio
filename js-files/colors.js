@@ -138,4 +138,15 @@ export default {
     leftportd: "#4A4658",
     rightportd: "#476F75",
 
+    /* coloring game */
+    linegame: "#5A464C",
+    topgame: "#C3F2B7",
+    leftgame: "#A9CEF4",
+    rightgame: "#D7816A",
+
+    linegamed: "#C3F2B7",
+    topgamed: "#2B4A68",
+    leftgamed: "#793C2B",
+    rightgamed: "#5A7553",
+
 }
