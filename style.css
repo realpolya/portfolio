@@ -51,7 +51,7 @@ footer {
     padding: 2rem;
     /* border-radius: 2rem; */
     opacity: 95%;
-    /* display: none; */
+    display: none;
 }
 
 #button-close {

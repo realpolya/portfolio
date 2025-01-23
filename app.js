@@ -132,10 +132,13 @@ const createCanvas = (parentEl, tileSize) => {
     canvas.width = tileSize;
     canvas.height = tileSize;
 
+    if (cubeCount + Math.ceil(tileCount) === colorCubes[8]) {
+        canvas.id = "above-funfact"
+    }
+
     colorCubes.forEach(num => {
         if (num === cubeCount) {
 
-            // canvas.id = "homi-link" // TODO: create id to add event listener later
             special = {
                 project: linkOrders[linkCounter],
                 order: num,
@@ -149,11 +152,6 @@ const createCanvas = (parentEl, tileSize) => {
                 photo = true
             }
 
-            if (special.project === "funf") {
-                special.funf = funfcolors
-                special.funforder = ["funf", "funfa"]
-            }
-        
             belowLeft.push([num + Math.ceil(tileCount), special.project])
             belowRight.push([num + Math.floor(tileCount), special.project])
 

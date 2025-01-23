@@ -14,6 +14,8 @@ const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
 
 }
 
+
+
 const drawFillTop = (ctx, size, mid, colors, 
     special, count, photo=false, start=0, lineWidth=1) => {
 
@@ -27,7 +29,7 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.lineTo(mid, start);
     ctx.lineTo(start, mid);
     // ctx.strokeStyle = colors.line;
-    ctx.lineWidth = lineWidth;
+    // ctx.lineWidth = lineWidth;
     // ctx.stroke();
     ctx.closePath();
 
@@ -76,6 +78,8 @@ const drawFillTop = (ctx, size, mid, colors,
 
 }
 
+
+
 const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) => {
 
     let mode = sessionStorage.getItem("theme")
@@ -95,6 +99,7 @@ const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) =
             ctx.fillStyle = colors.right;
         }
     }
+
     ctx.beginPath();
     ctx.moveTo(start, mid);
     ctx.lineTo(mid, end);
@@ -104,6 +109,8 @@ const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) =
     ctx.fill();
 
 }
+
+
 
 const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => {
     
@@ -136,6 +143,8 @@ const fillTopRight = (ctx, mid, end, colors, special, specialBelow, start=0) => 
 
     ctx.fill();
 }
+
+
 
 
 const fillBottomRight = (ctx, mid, end, colors, special, specialBelow) => {
@@ -307,8 +316,6 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
             if (mode === "dark" && specialBelow[1] === "mode") {
                 ctx.fillStyle = colors.right;
             } else if (mode === "dark") {
-                console.log(`right${specialBelow[1]}d`)
-                console.log(colors[`right${specialBelow[1]}d`])
                 ctx.fillStyle = colors[`right${specialBelow[1]}d`];
             } 
             else {

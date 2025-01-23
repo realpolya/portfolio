@@ -16,12 +16,6 @@ const openEl = (el, windowEl) => {
 
     })
 
-    // el.addEventListener('mouseover', () => {
-
-    //     el.style.backgroundColor = "blue"
-
-    // })
-
 }
 
 export { closeEl, openEl }
