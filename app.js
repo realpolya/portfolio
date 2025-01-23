@@ -4,13 +4,14 @@ import { singleTile, halfTile } from './js-files/cube.js'
 import { closeEl, openEl } from './js-files/popup.js'
 
 import colors from './js-files/colors.js'
-import funfcolors from './js-files/animcolors.js'
 
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
 
 const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 48, 55]
+
+// order of projects
 const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port"]
 const textOrders = ["dark/light", "homi", "savor the seasons", 
     "gourds and grocers", "battleship", "resume", "github", "Linked In", 
@@ -33,34 +34,24 @@ const belowRight = [];
 // keep track of half cubes
 const halves = []
 
-/* 
-
-cubes:
-- homi
-- savor
-- gourds
-- battleship
-- points unknown ?
-
-- portfolio (realpolya) - 1 cube
-- linked in
-
-- fun fact cube
-- photo cube
-
-*/
-
 // TODO: introduce a game Color a Cube!
 
+// theme constants
 const currentTheme = sessionStorage.getItem("theme")
+const darkBackColor = "#1A1F16"
+const darkPopupColor = "#12170E"
+const darkPopupText = "#92A086"
+
 
 /*-------------------------------- Variables --------------------------------*/
 
-let tileSize = 200; // must correspond with css file
+let tileSize = 200; // starting point
 
 let viewWidth = window.innerWidth;
 
-let tileCount = 5.5; // beginner count
+// number of tiles in a row
+let tileRowCount = 5.5;
+// number of individual cubes
 let cubeCount = 0
 let colorCubes = [] // order of colored cubes
 
@@ -68,22 +59,23 @@ let linkCounter = 0;
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
-
+// all canvases
 const newCanvases = document.getElementById('newCanvases')
+
 const bodyEl = document.getElementById('bodyEl')
 
 const centeredEl = document.getElementById('centered')
 const funfactEl = document.getElementById('div-funfact')
+
 const closeButton = document.getElementById('button-close')
 const funCloseButton = document.getElementById('button-funfact')
 const aboutButton = document.getElementById('button-main')
 
 const footerEl = document.getElementById('footer-text')
 
-
 /*-------------------------------- Functions --------------------------------*/
 
-
+// get all of the cubes below the special cube
 const getBelow = () => {
 
     let specialBelow = false;
@@ -109,6 +101,7 @@ const getBelow = () => {
 }
 
 
+// create half canvas at the beginning or end of row
 const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     
     let count = Math.ceil(cubeCount)
@@ -128,6 +121,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 }
 
 
+// canvas element
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
@@ -137,7 +131,8 @@ const createCanvas = (parentEl, tileSize) => {
     canvas.width = tileSize;
     canvas.height = tileSize;
 
-    if (cubeCount + Math.ceil(tileCount) === colorCubes[8]) {
+    // to open a funfact box
+    if (cubeCount + Math.ceil(tileRowCount) === colorCubes[8]) {
         canvas.id = "above-funfact"
     }
 
@@ -157,8 +152,8 @@ const createCanvas = (parentEl, tileSize) => {
                 photo = true
             }
 
-            belowLeft.push([num + Math.ceil(tileCount), special.project])
-            belowRight.push([num + Math.floor(tileCount), special.project])
+            belowLeft.push([num + Math.ceil(tileRowCount), special.project])
+            belowRight.push([num + Math.floor(tileRowCount), special.project])
 
             linkCounter += 1
 
@@ -175,14 +170,15 @@ const createCanvas = (parentEl, tileSize) => {
 }
 
 
-const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
+// canvases and half-canvases for single row
+const createRow = (parentEl, alternate=false, tileSize, tileRowCount) => {
 
     if (alternate) {
         cubeCount += 0.5
         createHalfCanvas(parentEl, false, tileSize)
     }
     
-    for (let i = 0; i < Math.floor(tileCount); i++) {
+    for (let i = 0; i < Math.floor(tileRowCount); i++) {
         // increment cube count
         cubeCount += 1
         createCanvas(parentEl, tileSize)
@@ -195,7 +191,7 @@ const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
 
 }
 
-
+// append new row to the parent div
 const rowDiv = (parentEl) => {
     const rowDivvy = document.createElement('div');
 
@@ -207,9 +203,11 @@ const rowDiv = (parentEl) => {
 }
 
 
-const updateTile = (width, tileCount) => Math.floor(width / tileCount);
+// calculate tile size
+const updateTileSize = (width, tileRowCount) => Math.floor(width / tileRowCount);
 
 
+// number of tiles in a single row (dynamic)
 const numberOfTiles = (width) => {
     let count;
     if (width > 1000) {
@@ -227,14 +225,16 @@ const numberOfTiles = (width) => {
 }
 
 
-const calculateHalves = (tileCount, halfCubes) => {
-    let first = Math.floor(tileCount) + 1
-    for (let i = first; i < CUBES + halfCubes; i += ((tileCount * 2))) {
+// which cubes are becoming split into separate rows
+const calculateHalves = (tileRowCount, halfCubes) => {
+    let first = Math.floor(tileRowCount) + 1
+    for (let i = first; i < CUBES + halfCubes; i += ((tileRowCount * 2))) {
         halves.push(i)
     }
 }
 
 
+// recalibrate cube numbers based on occupied ones and halves
 const pickColorCubes = () => {
     const occupied = []
     return startCubes.map(num => {
@@ -248,14 +248,15 @@ const pickColorCubes = () => {
 }
 
 
+// main function to render all of the cubes
 const renderCubes = () => {
 
-    tileCount = numberOfTiles(viewWidth)
-    tileSize = updateTile(viewWidth, tileCount)
+    tileRowCount = numberOfTiles(viewWidth)
+    tileSize = updateTileSize(viewWidth, tileRowCount) // establish tile size dynamically
 
-    const rows = CUBES / Math.floor(tileCount)
+    const rows = CUBES / Math.floor(tileRowCount)
     const halfCubes = Math.floor(0.5 * rows)
-    calculateHalves(tileCount, halfCubes)
+    calculateHalves(tileRowCount, halfCubes)
     colorCubes = pickColorCubes()
 
     let alter = false
@@ -264,13 +265,15 @@ const renderCubes = () => {
         const newRowDiv = rowDiv(newCanvases)
 
         newRowDiv.style.height = `${tileSize}px`
-        createRow(newRowDiv, alter, tileSize, tileCount)
+        createRow(newRowDiv, alter, tileSize, tileRowCount)
 
         alter = !alter
     }
 
 }
 
+
+// reset everything before re-rendering
 const totalReset = () => {
 
     viewWidth = window.innerWidth;
@@ -289,6 +292,27 @@ const totalReset = () => {
 }
 
 
+const changeThemeColor = (theme) => {
+    if (theme === "dark") {
+
+        bodyEl.style.backgroundColor = darkBackColor
+        centeredEl.style.backgroundColor = darkPopupColor
+        funfactEl.style.backgroundColor = darkPopupColor
+        closeButton.style.backgroundColor = darkPopupColor
+        funCloseButton.style.backgroundColor = darkPopupColor
+        centeredEl.style.color = darkPopupText
+        funfactEl.style.color = darkPopupText
+        closeButton.style.color = darkPopupText
+        funCloseButton.style.color = darkPopupText
+
+    } else {
+
+        footerEl.style.color = darkBackColor
+
+    }
+}
+
+
 /*-------------------------------- Function Calls --------------------------------*/
 
 closeEl(closeButton, centeredEl)
@@ -304,27 +328,12 @@ window.addEventListener("load", () => {
         sessionStorage.setItem("theme", "light")
     }
 
-    if (currentTheme === "dark") {
-
-        bodyEl.style.backgroundColor = "#1A1F16"
-        centeredEl.style.backgroundColor = "#12170E"
-        funfactEl.style.backgroundColor = "#12170E"
-        closeButton.style.backgroundColor = "#12170E"
-        funCloseButton.style.backgroundColor = "#12170E"
-        centeredEl.style.color = "#92A086"
-        funfactEl.style.color = "#92A086"
-        closeButton.style.color = "#92A086"
-        funCloseButton.style.color = "#92A086"
-
-    } else {
-
-        footerEl.style.color = "#1A1F16"
-    }
-    
+    changeThemeColor(currentTheme);
     renderCubes();
 
 })
 
+/*-------------------------------- Reset --------------------------------*/
 
 window.addEventListener("resize", totalReset)
 funCloseButton.addEventListener("click", totalReset)
