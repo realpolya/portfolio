@@ -49,29 +49,10 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.lineTo(start, mid);
     ctx.closePath();
 
-    // if (special) {
-
-    //     if (special.project === "mode" && mode === "dark") {
-    //         ctx.fillStyle = colors.top;
-    //     } else if (mode === "dark") {
-    //         ctx.fillStyle = colors[`top${special.project}d`];
-    //     } else {
-    //         ctx.fillStyle = colors[`top${special.project}`];
-    //     }
-
-    // } else {
-        
-    //     if (mode === "dark") {
-    //         ctx.fillStyle = colors.topmode;
-    //     } else {
-    //         ctx.fillStyle = colors.top;
-    //     }
-    // }
-
     ctx.fillStyle = getColor(special, colors, "top")
-
     ctx.fill();
     
+    // interaction with cube
     if (special) {
 
         if (special.link != "mode") {
@@ -79,6 +60,7 @@ const drawFillTop = (ctx, size, mid, colors,
         } else {
             colorMode(special.el, ctx, start, mid, end)
         }
+
         if (special.icon) {
             if (photo) {
                 renderIcon(ctx, special.icon, size, photo)
@@ -88,7 +70,6 @@ const drawFillTop = (ctx, size, mid, colors,
         }
 
         textInCube(ctx, colors, mid, special.text, special)
-
 
     }
 
@@ -104,21 +85,23 @@ const fillBottomLeft = (ctx, mid, end, colors, special, specialBelow, start=0) =
 
     let mode = sessionStorage.getItem("theme")
 
-    if (special) {
-        if (special.project === "mode" && mode === "dark") {
-            ctx.fillStyle = colors.right;
-        } else if (mode === "dark") {
-            ctx.fillStyle = colors[`right${special.project}d`];
-        } else {
-            ctx.fillStyle = colors[`right${special.project}`];
-        }
-    } else {
-        if (mode === "dark") {
-            ctx.fillStyle = colors.rightmode;
-        } else {
-            ctx.fillStyle = colors.right;
-        }
-    }
+    // if (special) {
+    //     if (special.project === "mode" && mode === "dark") {
+    //         ctx.fillStyle = colors.right;
+    //     } else if (mode === "dark") {
+    //         ctx.fillStyle = colors[`right${special.project}d`];
+    //     } else {
+    //         ctx.fillStyle = colors[`right${special.project}`];
+    //     }
+    // } else {
+    //     if (mode === "dark") {
+    //         ctx.fillStyle = colors.rightmode;
+    //     } else {
+    //         ctx.fillStyle = colors.right;
+    //     }
+    // }
+
+    ctx.fillStyle = getColor(special, colors, "right")
 
     ctx.beginPath();
     ctx.moveTo(start, mid);
