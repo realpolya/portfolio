@@ -1,16 +1,13 @@
 /* cube interactions */
 
-const openCube = (ctx, start, mid, end, colors, special) => {
+const openCube = (ctx, start, mid, end, colors, special, idEl) => {
 
     const quarter = Math.floor(mid / 2)
     const mode = sessionStorage.getItem("theme")
 
     // cavity
-    if (mode === "dark") {
-        ctx.fillStyle = "black"
-    } else {
-        ctx.fillStyle = "#AB988E"
-    }
+    ctx.fillStyle = "#501138"
+
 
     ctx.beginPath();
     ctx.moveTo(start, mid);
@@ -24,7 +21,11 @@ const openCube = (ctx, start, mid, end, colors, special) => {
 
     // bottom half open
 
-    ctx.fillStyle = colors[`left${special.project}`];
+    if (mode === "dark") {
+        ctx.fillStyle = colors[`left${special.project}d`];
+    } else {
+        ctx.fillStyle = colors[`left${special.project}`];
+    }
 
     ctx.beginPath();
     ctx.moveTo(mid, end);
@@ -34,6 +35,22 @@ const openCube = (ctx, start, mid, end, colors, special) => {
     ctx.lineTo(mid, end);
     ctx.closePath();
     ctx.fill();
+
+    // corner
+    ctx.fillStyle = colors[`top${special.project}d`];
+
+    ctx.beginPath();
+    ctx.moveTo(start, start);
+    ctx.lineTo(start, mid);
+    ctx.lineTo(mid, start);
+    ctx.lineTo(start, start);
+    ctx.closePath();
+    ctx.fill();
+
+    let animCanvas = document.getElementById(idEl)
+    let animCtx = animCanvas.getContext('2d')
+    animCtx.fillStyle = colors[`top${special.project}d`];
+    animCtx.fill()
     
 }
 
@@ -135,6 +152,7 @@ const renderIcon = (ctx, source, size, photo=false) => {
 
 }
 
+
 const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
     const mode = sessionStorage.getItem("theme")
@@ -148,34 +166,6 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
         ctx.lineTo(start, mid);
         ctx.closePath();
     }
-
-    // special.el.addEventListener('mouseleave', (e) => {
-
-    //     const rect = special.el.getBoundingClientRect()
-    //     const x = e.clientX - rect.left
-    //     const y = e.clientY - rect.top
-
-    //     definePath(ctx, start, mid, end)
-
-    //     if (ctx.isPointInPath(x, y)) {
-            
-    //         special.el.style.cursor = 'pointer';
-    //         // openCube(ctx, start, mid, end, colors, special) // FIXME: open cube
-
-    //         ctx.fillStyle = "#AB988E"
-    //         ctx.fill()
-    //         if (special.icon) {
-    //             if (photo) {
-    //                 renderIcon(ctx, special.icon, size, photo)
-    //             } else {
-    //                 renderIcon(ctx, special.icon, size)
-    //             }
-    //         }
-    //         textInCube(ctx, colors, mid, special.text, special)
-            
-    //     }
-
-    // })
     
     special.el.addEventListener('mousemove', (e) => {
 
@@ -185,51 +175,50 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
         definePath(ctx, start, mid, end)
 
-        if (ctx.isPointInPath(x, y)) {
-            
-            special.el.style.cursor = 'pointer';
-            // openCube(ctx, start, mid, end, colors, special) // FIXME: open cube
-
-            if (mode === "dark") {
-                ctx.fillStyle = "black"
-            } else {
-                ctx.fillStyle = "#AB988E"
-            }
-
-            ctx.fill()
-            
-            if (special.icon) {
-                if (photo) {
-                    renderIcon(ctx, special.icon, size, photo)
+        if (special.project !== "funf") {
+            if (ctx.isPointInPath(x, y)) {
+                
+                special.el.style.cursor = 'pointer';
+    
+                if (mode === "dark") {
+                    ctx.fillStyle = "#1D3905"
                 } else {
-                    renderIcon(ctx, special.icon, size)
+                    ctx.fillStyle = "#AB988E"
                 }
-            }
-            textInCube(ctx, colors, mid, special.text, special)
-
-        } else {
-
-            if (mode === "dark") {
-                ctx.fillStyle = colors[`top${special.project}d`]
+    
+                ctx.fill()
+                
+                if (special.icon) {
+                    if (photo) {
+                        renderIcon(ctx, special.icon, size, photo)
+                    } else {
+                        renderIcon(ctx, special.icon, size)
+                    }
+                }
+                textInCube(ctx, colors, mid, special.text, special)
+    
             } else {
-                ctx.fillStyle = colors[`top${special.project}`]
-            }
-
-            ctx.fill()
-
-            if (special.icon) {
-                if (photo) {
-                    renderIcon(ctx, special.icon, size, photo)
+    
+                if (mode === "dark") {
+                    ctx.fillStyle = colors[`top${special.project}d`]
                 } else {
-                    renderIcon(ctx, special.icon, size)
+                    ctx.fillStyle = colors[`top${special.project}`]
                 }
+    
+                ctx.fill()
+    
+                if (special.icon) {
+                    if (photo) {
+                        renderIcon(ctx, special.icon, size, photo)
+                    } else {
+                        renderIcon(ctx, special.icon, size)
+                    }
+                }
+                textInCube(ctx, colors, mid, special.text, special)
+    
+                special.el.style.cursor = 'default';
             }
-            textInCube(ctx, colors, mid, special.text, special)
-
-            special.el.style.cursor = 'default';
         }
-
-        // el.style.cursor = 'pointer';
 
     })
 
@@ -242,7 +231,13 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
         definePath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
-            window.location.href = special.link;
+            if (special.project === "funf") {
+                openCube(ctx, start, mid, end, colors, special, "above-funfact") // FIXME: open cube
+                let funFactEl = document.getElementById('div-funfact')
+                funFactEl.style.display = "block"
+            } else {
+                window.location.href = special.link;
+            }
         }
 
     })

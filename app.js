@@ -68,12 +68,18 @@ let linkCounter = 0;
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
+
 const newCanvases = document.getElementById('newCanvases')
 const bodyEl = document.getElementById('bodyEl')
 
 const centeredEl = document.getElementById('centered')
+const funfactEl = document.getElementById('div-funfact')
 const closeButton = document.getElementById('button-close')
+const funCloseButton = document.getElementById('button-funfact')
 const aboutButton = document.getElementById('button-main')
+
+const footerEl = document.getElementById('footer-text')
+
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -122,7 +128,6 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 }
 
 
-// one canvas at a time
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
@@ -266,34 +271,7 @@ const renderCubes = () => {
 
 }
 
-
-/*-------------------------------- Function Calls --------------------------------*/
-
-closeEl(closeButton, centeredEl)
-openEl(aboutButton, centeredEl)
-
-/*-------------------------------- Event Listeners --------------------------------*/
-
-window.addEventListener("load", () => {
-    
-    if (!currentTheme) {
-        sessionStorage.setItem("theme", "light")
-    }
-
-    if (currentTheme === "dark") {
-        bodyEl.style.backgroundColor = "#1A1F16"
-        centeredEl.style.backgroundColor = "#12170E"
-        closeButton.style.backgroundColor = "#12170E"
-        centeredEl.style.color = "#92A086"
-        closeButton.style.color = "#92A086"
-    }
-    
-    renderCubes();
-
-})
-
-
-window.addEventListener("resize", () => {
+const totalReset = () => {
 
     viewWidth = window.innerWidth;
 
@@ -308,11 +286,45 @@ window.addEventListener("resize", () => {
     // re-render
     renderCubes();
 
-})
+}
 
 
-window.addEventListener("storage", (e) => {
-    if (e.storageArea === sessionStorage) {
-        console.log("change made")
+/*-------------------------------- Function Calls --------------------------------*/
+
+closeEl(closeButton, centeredEl)
+openEl(aboutButton, centeredEl)
+
+closeEl(funCloseButton, funfactEl)
+
+/*-------------------------------- Event Listeners --------------------------------*/
+
+window.addEventListener("load", () => {
+    
+    if (!currentTheme) {
+        sessionStorage.setItem("theme", "light")
     }
+
+    if (currentTheme === "dark") {
+
+        bodyEl.style.backgroundColor = "#1A1F16"
+        centeredEl.style.backgroundColor = "#12170E"
+        funfactEl.style.backgroundColor = "#12170E"
+        closeButton.style.backgroundColor = "#12170E"
+        funCloseButton.style.backgroundColor = "#12170E"
+        centeredEl.style.color = "#92A086"
+        funfactEl.style.color = "#92A086"
+        closeButton.style.color = "#92A086"
+        funCloseButton.style.color = "#92A086"
+
+    } else {
+
+        footerEl.style.color = "#1A1F16"
+    }
+    
+    renderCubes();
+
 })
+
+
+window.addEventListener("resize", totalReset)
+funCloseButton.addEventListener("click", totalReset)
