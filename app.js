@@ -15,7 +15,7 @@ const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "lii
 const textOrders = ["dark/light", "homi", "savor the seasons", 
     "gourds and grocers", "battleship", "resume", "github", "Linked In", 
     "fun fact!", "", "RP channel", "Real Polya website"]
-const iconSrcs = ["./assets/cube.ico", "./assets/homi.png", "./assets/savor.png",
+const iconSrcs = ["./assets/cube.ico", "./assets/homi2.png", "./assets/savor.png",
     "./assets/gourds.png", "./assets/battleship.png", "./assets/rp.png", "./assets/git.png",
     "./assets/linked.png", "./assets/funfact.png", "./assets/photo1.png",
     "./assets/yt.png", "./assets/rp.png"
