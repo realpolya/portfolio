@@ -47,6 +47,11 @@ footer {
     cursor: default;
 }
 
+.text-highlight {
+    color: green;
+    font-weight: 500;
+}
+
 #centered {
     position: fixed;
     top: 25%;
@@ -65,7 +70,7 @@ footer {
     bottom: 15%;
     left: 45%;
     width: 150px;
-    height: 250px;
+    height: 370px;
     background-color: white;
     padding: 2rem;
     /* border-radius: 2rem; */
@@ -111,9 +116,9 @@ footer {
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-style: normal;
-    background-color: #BFD1E5;
-    border: solid 2px #508991;
-    color: #004346;
+    background-color: #85AB81;
+    border: solid 2px #477542;
+    color: #465D43;
 
     transition: transform 0.3s ease;
 
@@ -126,7 +131,9 @@ footer {
 
 @media screen and (max-width: 500px) {
     #centered {
-        left: 5%;
+
+        top: 10%;
+        left: 2%;
     }
     #div-funfact {
         left: 5%;
