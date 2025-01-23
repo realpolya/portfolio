@@ -1,23 +1,42 @@
 /* contain cube geometry */
+
+/*-------------------------------- Imports --------------------------------*/
+
 import { textInCube, renderIcon, redirectCube, colorMode } from "./interact.js";
 
+/*-------------------------------- Functions --------------------------------*/
 
-const drawLine = (ctx, x1, y1, x2, y2, colors, lineWidth=1) => {
+const getColor = (special, colors, cubeSide) => {
 
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    // ctx.strokeStyle = colors.line;
-    ctx.lineWidth = lineWidth;
-    // ctx.stroke();
-    ctx.closePath();
+    let mode = sessionStorage.getItem("theme");
+    let color;
+
+    if (special) {
+
+        if (special.project === "mode" && mode === "dark") {
+            color = colors[cubeSide];
+        } else if (mode === "dark") {
+            color = colors[`${cubeSide}${special.project}d`];
+        } else {
+            color = colors[`${cubeSide}${special.project}`];
+        }
+
+    } else {
+        
+        if (mode === "dark") {
+            color = colors[`${cubeSide}mode`];
+        } else {
+            color = colors[cubeSide];
+        }
+    }
+
+    return color;
 
 }
 
 
-
 const drawFillTop = (ctx, size, mid, colors, 
-    special, count, photo=false, start=0, lineWidth=1) => {
+    special, count, photo=false, start=0) => {
 
     const end = start + size;
     let mode = sessionStorage.getItem("theme");
@@ -28,28 +47,28 @@ const drawFillTop = (ctx, size, mid, colors,
     ctx.lineTo(end, mid);
     ctx.lineTo(mid, start);
     ctx.lineTo(start, mid);
-    // ctx.strokeStyle = colors.line;
-    // ctx.lineWidth = lineWidth;
-    // ctx.stroke();
     ctx.closePath();
 
-    if (special) {
-        if (special.project === "mode" && mode === "dark") {
-            ctx.fillStyle = colors.top;
-        } else if (mode === "dark") {
-            ctx.fillStyle = colors[`top${special.project}d`];
-        } else {
-            ctx.fillStyle = colors[`top${special.project}`];
-        }
+    // if (special) {
 
-    } else {
+    //     if (special.project === "mode" && mode === "dark") {
+    //         ctx.fillStyle = colors.top;
+    //     } else if (mode === "dark") {
+    //         ctx.fillStyle = colors[`top${special.project}d`];
+    //     } else {
+    //         ctx.fillStyle = colors[`top${special.project}`];
+    //     }
+
+    // } else {
         
-        if (mode === "dark") {
-            ctx.fillStyle = colors.topmode;
-        } else {
-            ctx.fillStyle = colors.top;
-        }
-    }
+    //     if (mode === "dark") {
+    //         ctx.fillStyle = colors.topmode;
+    //     } else {
+    //         ctx.fillStyle = colors.top;
+    //     }
+    // }
+
+    ctx.fillStyle = getColor(special, colors, "top")
 
     ctx.fill();
     
@@ -72,6 +91,7 @@ const drawFillTop = (ctx, size, mid, colors,
 
 
     }
+
     // else if (count) {
     //     textInCube(ctx, colors, mid, count)
     // }
@@ -236,9 +256,6 @@ const singleTile = (ctx, size, colors, special, specialBelow, count, photo=false
 
     drawFillTop(ctx, size, mid, colors, special, count, photo)
 
-    drawLine(ctx, start, start, start, end, colors)
-    drawLine(ctx, end, start, end, end, colors)
-
     fillLeft(ctx, size, mid, colors, special, specialBelow)
     fillRight(ctx, size, mid, colors, special, specialBelow)
 
@@ -378,7 +395,7 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
 
 /*-------------------------------- Exports --------------------------------*/
 
-export { drawLine, drawFillTop, fillBottomLeft,
+export { drawFillTop, fillBottomLeft,
     fillTopRight, fillLeft, fillBottomRight, 
     fillTopLeft, fillRight, singleTile, halfTile
 }
