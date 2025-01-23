@@ -66,10 +66,14 @@ const bodyEl = document.getElementById('bodyEl')
 
 const centeredEl = document.getElementById('centered')
 const funfactEl = document.getElementById('div-funfact')
+const gameEl = document.getElementById('div-colorgame')
 
 const closeButton = document.getElementById('button-close')
 const funCloseButton = document.getElementById('button-funfact')
 const aboutButton = document.getElementById('button-main')
+const gameCloseButton = document.getElementById('button-colorgame')
+const gameHideButton = document.getElementById('button-hide-colorgame')
+const paletteButton = document.getElementById('button-palette')
 
 const footerEl = document.getElementById('footer-text')
 
@@ -298,14 +302,23 @@ const changeThemeColor = (theme) => {
     if (theme === "dark") {
 
         bodyEl.style.backgroundColor = darkBackColor
+
         centeredEl.style.backgroundColor = darkPopupColor
         funfactEl.style.backgroundColor = darkPopupColor
         closeButton.style.backgroundColor = darkPopupColor
         funCloseButton.style.backgroundColor = darkPopupColor
+        gameEl.style.backgroundColor = darkPopupColor
+        gameHideButton.style.backgroundColor = darkPopupColor
+        gameCloseButton.style.backgroundColor = darkPopupColor
+        
+
         centeredEl.style.color = darkPopupText
         funfactEl.style.color = darkPopupText
         closeButton.style.color = darkPopupText
         funCloseButton.style.color = darkPopupText
+        gameEl.style.color = darkPopupText
+        gameHideButton.style.color = darkPopupText
+        gameCloseButton.style.color = darkPopupText
 
     } else {
 
@@ -321,6 +334,11 @@ closeEl(closeButton, centeredEl)
 openEl(aboutButton, centeredEl)
 
 closeEl(funCloseButton, funfactEl)
+
+closeEl(gameHideButton, gameEl)
+closeEl(gameCloseButton, gameEl)
+closeEl(gameCloseButton, paletteButton)
+openEl(paletteButton, gameEl)
 
 /*-------------------------------- Event Listeners --------------------------------*/
 

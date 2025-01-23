@@ -210,8 +210,13 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
         if (ctx.isPointInPath(x, y)) {
             if (special.project === "funf") {
                 openCube(ctx, start, mid, end, colors, special)
-                let funFactEl = document.getElementById('div-funfact')
+                const funFactEl = document.getElementById('div-funfact')
                 funFactEl.style.display = "block"
+            } else if (special.project === "game") {
+                const gameEl = document.getElementById('div-colorgame')
+                const paletteButton = document.getElementById('button-palette')
+                gameEl.style.display = "block"
+                paletteButton.style.display = "block"
             } else {
                 window.location.href = special.link;
             }
