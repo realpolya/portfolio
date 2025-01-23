@@ -1,4 +1,4 @@
-/* contain color functions */
+/* contains color functions */
 
 
 const getColor = (special, colors, cubeSide) => {
@@ -60,5 +60,7 @@ const getBelowColor = (specialBelow, colors, cubeSide) => {
     return color;
 
 }
+
+/*-------------------------------- Exports --------------------------------*/
 
 export { getColor, getBelowColor }
