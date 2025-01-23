@@ -3,68 +3,10 @@
 /*-------------------------------- Imports --------------------------------*/
 
 import { textInCube, renderIcon, redirectCube, colorMode } from "./interact.js";
+import { getColor, getBelowColor } from "./getcolors.js";
 
 /*-------------------------------- Functions --------------------------------*/
 
-
-const getColor = (special, colors, cubeSide) => {
-
-    const mode = sessionStorage.getItem("theme");
-    let color;
-
-    if (special) {
-
-        if (special.project === "mode" && mode === "dark") {
-            color = colors[cubeSide];
-        } else if (mode === "dark") {
-            color = colors[`${cubeSide}${special.project}d`];
-        } else {
-            color = colors[`${cubeSide}${special.project}`];
-        }
-
-    } else {
-        
-        if (mode === "dark") {
-            color = colors[`${cubeSide}mode`];
-        } else {
-            color = colors[cubeSide];
-        }
-    }
-
-    return color;
-
-}
-
-const getBelowColor = (specialBelow, colors, cubeSide) => {
-
-    const mode = sessionStorage.getItem("theme");
-    let color;
-
-    if (specialBelow[0] === cubeSide) {
-        if (mode === "dark" && specialBelow[1] === "mode") {
-            color = colors[cubeSide];
-        } else if (mode === "dark") {
-            color = colors[`${cubeSide}${specialBelow[1]}d`];
-        } else {
-            color = colors[`${cubeSide}${specialBelow[1]}`];
-        }
-    } else if (specialBelow[2] === cubeSide) {
-        if (mode === "dark") {
-            color = colors[`${cubeSide}${specialBelow[3]}d`];
-        } else {
-            color = colors[`${cubeSide}${specialBelow[3]}`];
-        }
-    } else {
-        if (mode === "dark") {
-            color = colors[`${cubeSide}mode`];
-        } else {
-            color = colors[cubeSide];
-        }
-    }
-
-    return color;
-
-}
 
 
 const drawFillTop = (ctx, size, mid, colors, 
@@ -216,20 +158,7 @@ const halfTile = (ctx, size, colors, alternate=false, count, specialBelow, start
     // right half tile 
     if (alternate) {
 
-        // top
-        if (specialBelow[0] === "left") {
-            if (mode === "dark") {
-                ctx.fillStyle = colors[`left${specialBelow[1]}d`];
-            } else {
-                ctx.fillStyle = colors[`left${specialBelow[1]}`];
-            }
-        } else {
-            if (mode === "dark") {
-                ctx.fillStyle = colors.leftmode;
-            } else {
-                ctx.fillStyle = colors.left;
-            }
-        }
+        ctx.fillStyle = getBelowColor(specialBelow, colors, "left")
 
         ctx.beginPath();
         ctx.moveTo(start, start);
