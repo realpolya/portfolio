@@ -15,10 +15,6 @@ h1 {
     font-weight: 400;
 }
 
-#bodyEl {
-    cursor: pointer; /* TODO: remove later when fixed */
-}
-
 canvas {
     pointer-events: auto; 
 }
@@ -37,14 +33,6 @@ footer {
     opacity: 80%;
     border-radius: .2rem;
     font-size: .8rem;
-}
-
-.pointer-cursor {
-    cursor: pointer !important;
-}
-
-.default-cursor {
-    cursor: default;
 }
 
 .text-highlight {
@@ -127,6 +115,7 @@ footer {
 
 #button-main:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {

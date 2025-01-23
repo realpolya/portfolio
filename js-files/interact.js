@@ -1,13 +1,17 @@
 /* cube interactions */
+/*-------------------------------- Imports --------------------------------*/
 
-const openCube = (ctx, start, mid, end, colors, special, idEl) => {
+import { getColor, getBelowColor } from "./getcolors.js";
+
+/*-------------------------------- Functions --------------------------------*/
+
+const openCube = (ctx, start, mid, end, colors, special) => {
 
     const quarter = Math.floor(mid / 2)
     const mode = sessionStorage.getItem("theme")
 
     // cavity
-    ctx.fillStyle = "#501138"
-
+    ctx.fillStyle = colors[`cavity${special.project}`]
 
     ctx.beginPath();
     ctx.moveTo(start, mid);
@@ -20,12 +24,7 @@ const openCube = (ctx, start, mid, end, colors, special, idEl) => {
     ctx.fill();
 
     // bottom half open
-
-    if (mode === "dark") {
-        ctx.fillStyle = colors[`left${special.project}d`];
-    } else {
-        ctx.fillStyle = colors[`left${special.project}`];
-    }
+    ctx.fillStyle = getColor(special, colors, "left")
 
     ctx.beginPath();
     ctx.moveTo(mid, end);
@@ -47,8 +46,8 @@ const openCube = (ctx, start, mid, end, colors, special, idEl) => {
     ctx.closePath();
     ctx.fill();
 
-    let animCanvas = document.getElementById(idEl)
-    let animCtx = animCanvas.getContext('2d')
+    // corner of another canvas
+    let animCtx = document.getElementById(special.idEl).getContext('2d')
     animCtx.fillStyle = colors[`top${special.project}d`];
     animCtx.fill()
     
@@ -57,7 +56,6 @@ const openCube = (ctx, start, mid, end, colors, special, idEl) => {
 
 const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montserrat") => {
 
-    let mode = sessionStorage.getItem("theme");
     let extraXConst = 2.8
 
     if (mid < 80) {
@@ -97,20 +95,10 @@ const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montse
 
     }
 
-    if (special) {
-        if (special.project === "mode" && mode === "dark") {
-            ctx.fillStyle = colors.line;
-        } else if (mode === "dark") {
-            ctx.fillStyle = colors[`line${special.project}d`];
-        } else {
-            ctx.fillStyle = colors[`line${special.project}`];
-        }
-    } else {
-        ctx.fillStyle = colors.line;
-    }
-    
+    ctx.fillStyle = getColor(special, colors, "line")
     ctx.font = font;
 
+    // for custom x and y positioning
     if (x && y) {
         ctx.fillText(text, x, y)
     } else {
@@ -123,6 +111,7 @@ const textInCube = (ctx, colors, mid, text, special, x=0, y=0, font="11px Montse
     }
 
 }
+
 
 const renderIcon = (ctx, source, size, photo=false) => {
 
@@ -143,12 +132,26 @@ const renderIcon = (ctx, source, size, photo=false) => {
         }
 
         const x = (size - img.width) / 2
-        const y = (size - img.height) / yDivider // TODO: should this be an argument as well
+        const y = (size - img.height) / yDivider
 
         
         ctx.drawImage(img, x, y, img.width, img.height)
 
     }
+
+}
+
+
+const restoreCube = (special, ctx, mid, colors, photo, size) => {
+
+    if (special.icon) {
+        if (photo) {
+            renderIcon(ctx, special.icon, size, photo)
+        } else {
+            renderIcon(ctx, special.icon, size)
+        }
+    }
+    textInCube(ctx, colors, mid, special.text, special)
 
 }
 
@@ -179,45 +182,19 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
             if (ctx.isPointInPath(x, y)) {
                 
                 special.el.style.cursor = 'pointer';
-    
-                if (mode === "dark") {
-                    ctx.fillStyle = "#1D3905"
-                } else {
-                    ctx.fillStyle = "#AB988E"
-                }
-    
-                ctx.fill()
+                ctx.fillStyle = getColor(false, colors, "hover")
                 
-                if (special.icon) {
-                    if (photo) {
-                        renderIcon(ctx, special.icon, size, photo)
-                    } else {
-                        renderIcon(ctx, special.icon, size)
-                    }
-                }
-                textInCube(ctx, colors, mid, special.text, special)
     
             } else {
     
-                if (mode === "dark") {
-                    ctx.fillStyle = colors[`top${special.project}d`]
-                } else {
-                    ctx.fillStyle = colors[`top${special.project}`]
-                }
-    
-                ctx.fill()
-    
-                if (special.icon) {
-                    if (photo) {
-                        renderIcon(ctx, special.icon, size, photo)
-                    } else {
-                        renderIcon(ctx, special.icon, size)
-                    }
-                }
-                textInCube(ctx, colors, mid, special.text, special)
-    
                 special.el.style.cursor = 'default';
+                ctx.fillStyle = getColor(special, colors, "top")
+                
+    
             }
+
+            ctx.fill()
+            restoreCube(special, ctx, mid, colors, photo, size)
         }
 
     })
@@ -232,7 +209,7 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
         if (ctx.isPointInPath(x, y)) {
             if (special.project === "funf") {
-                openCube(ctx, start, mid, end, colors, special, "above-funfact") // FIXME: open cube
+                openCube(ctx, start, mid, end, colors, special)
                 let funFactEl = document.getElementById('div-funfact')
                 funFactEl.style.display = "block"
             } else {
@@ -246,6 +223,7 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
 const colorMode = (el, ctx, start, mid, end) => {
 
+
     const definePath = (ctx, start, mid, end) => {
         ctx.beginPath();
         ctx.moveTo(start, mid);
@@ -256,6 +234,7 @@ const colorMode = (el, ctx, start, mid, end) => {
         ctx.closePath();
     }
     
+
     el.addEventListener('mousemove', (e) => {
 
         const rect = el.getBoundingClientRect()
@@ -269,6 +248,7 @@ const colorMode = (el, ctx, start, mid, end) => {
         } 
 
     })
+
 
     el.addEventListener('click', (e) => {
 
@@ -290,5 +270,7 @@ const colorMode = (el, ctx, start, mid, end) => {
     })
 
 }
+
+/*-------------------------------- Exports --------------------------------*/
 
 export { textInCube, renderIcon, redirectCube, colorMode }

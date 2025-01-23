@@ -1,5 +1,6 @@
 /* contains color functions */
 
+/*-------------------------------- Functions --------------------------------*/
 
 const getColor = (special, colors, cubeSide) => {
 

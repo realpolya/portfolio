@@ -12,6 +12,9 @@ export default {
     leftmode: "#162F17",
     rightmode: "#345830",
 
+    hover: "#AB988E",
+    hovermode: "black",
+
     /* homi */
     linehomi: "#042C23",
     tophomi: "#E1EBE0",
@@ -99,6 +102,8 @@ export default {
     topfunfd: "#5D1E45",
     leftfunfd: "#6E3D5B",
     rightfunfd: "#8E5C7B",
+
+    cavityfunf: "#501138",
 
     /* photo */
     linephot: "#AF9A8F",

@@ -150,6 +150,8 @@ const createCanvas = (parentEl, tileSize) => {
 
             if (special.project === "phot") {
                 photo = true
+            } else if (special.project === "funf") {
+                special.idEl = "above-funfact"
             }
 
             belowLeft.push([num + Math.ceil(tileRowCount), special.project])
