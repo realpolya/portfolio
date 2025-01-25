@@ -63,7 +63,7 @@ const getBelowColor = (specialBelow, colors, cubeSide) => {
 }
 
 
-const colorCube = (el, ctx, start, mid, end, color) => {
+const colorCube = (el, ctx, start, mid, end, getUserColor) => {
 
     const defineTopPath = (ctx, start, mid, end) => {
         ctx.beginPath();
@@ -87,7 +87,8 @@ const colorCube = (el, ctx, start, mid, end, color) => {
         defineTopPath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
-            ctx.fillStyle = color
+            let userColor = getUserColor()
+            ctx.fillStyle = userColor
             ctx.fill()
         }
 

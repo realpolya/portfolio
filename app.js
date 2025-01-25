@@ -35,8 +35,6 @@ const belowRight = [];
 // keep track of half cubes
 const halves = []
 
-// TODO: introduce a game Color a Cube!
-
 // theme constants
 const currentTheme = sessionStorage.getItem("theme")
 const darkBackColor = "#1A1F16"
@@ -85,6 +83,10 @@ let userColor = colorPicker.value
 
 /*-------------------------------- Functions --------------------------------*/
 
+const getUserColor = () => {
+    return userColor
+}
+
 // get all of the cubes below the special cube
 const getBelow = () => {
 
@@ -125,6 +127,8 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
 
     const context = canvas.getContext('2d')
     let specialBelow = getBelow();
+
+    // TODO: write code for coloring half cubes
 
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
@@ -181,8 +185,9 @@ const createCanvas = (parentEl, tileSize) => {
     const mid = start + Math.floor(tileSize / 2)
     const end = start + tileSize;
     
+    // color game prep
     if (!special) {
-        colorCube(canvas, context, start, mid, end, userColor)
+        colorCube(canvas, context, start, mid, end, getUserColor)
     }
 
     singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo, 
@@ -373,6 +378,7 @@ window.addEventListener("load", () => {
 colorPicker.addEventListener("input", (e) => {
     userColor = e.target.value;
     console.log("user color is ", userColor)
+    renderCubes();
 })
 
 /*-------------------------------- Reset --------------------------------*/
