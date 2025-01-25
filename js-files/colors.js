@@ -12,6 +12,9 @@ export default {
     leftmode: "#162F17",
     rightmode: "#345830",
 
+    hover: "#AB988E",
+    hovermode: "black",
+
     /* homi */
     linehomi: "#042C23",
     tophomi: "#E1EBE0",
@@ -100,6 +103,8 @@ export default {
     leftfunfd: "#6E3D5B",
     rightfunfd: "#8E5C7B",
 
+    cavityfunf: "#501138",
+
     /* photo */
     linephot: "#AF9A8F",
     topphot: "#FCD7AD",
@@ -132,5 +137,16 @@ export default {
     topportd: "#3C3849",
     leftportd: "#4A4658",
     rightportd: "#476F75",
+
+    /* coloring game */
+    linegame: "#5A464C",
+    topgame: "#C3F2B7",
+    leftgame: "#A9CEF4",
+    rightgame: "#D7816A",
+
+    linegamed: "#C3F2B7",
+    topgamed: "#2B4A68",
+    leftgamed: "#793C2B",
+    rightgamed: "#5A7553",
 
 }

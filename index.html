@@ -24,7 +24,6 @@
     <body id="bodyEl">
         <div id="newCanvases"></div>
         <button id="button-main">About</button>
-        <!--TODO: make the div below a pop up window that can disappear so you can just see the cubes -->
         <div id="centered">
             <button id="button-close">x</button>
             <h1>About Polina Stepanova</h1>
@@ -55,6 +54,18 @@
             <p>Polina has always loved chess and during COVID spent her free time being tutored in chess.</p>
             <p>She then accidentally discovered coding during her Master of Architecture program and fell in love. Why?</p>
             <p>It felt like playing chess all day. ♟️</p>
+        </div>
+        <button id="button-palette">🎨</button>
+        <div id="div-colorgame">
+            <div id="buttons-game">
+                <button id="button-hide-colorgame">_</button>
+                <button id="button-colorgame">X</button>
+            </div>
+            <h3>Coloring Game</h3>
+            <p>Pick a color. Apply to an empty cube</p>
+            <label for="colorPicker">Color:</label>
+            <input type="color" id="colorPicker" value="#FFFFFF">
+            <button>Reset</button>
         </div>
         <footer id="footer-text">
             created by real polya

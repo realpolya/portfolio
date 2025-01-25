@@ -2,28 +2,30 @@
 
 import { singleTile, halfTile } from './js-files/cube.js'
 import { closeEl, openEl } from './js-files/popup.js'
+import { colorCube } from './js-files/getcolors.js'
 
 import colors from './js-files/colors.js'
-import funfcolors from './js-files/animcolors.js'
 
 /*-------------------------------- Constants --------------------------------*/
 
 const CUBES = 60
 
-const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 48, 55]
-const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port"]
+const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 45, 49, 58]
+
+// order of projects
+const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port", "game"]
 const textOrders = ["dark/light", "homi", "savor the seasons", 
     "gourds and grocers", "battleship", "resume", "github", "Linked In", 
-    "fun fact!", "", "RP channel", "Real Polya website"]
+    "fun fact!", "", "RP channel", "Real Polya website", "coloring game"]
 const iconSrcs = ["./assets/cube.ico", "./assets/homi2.png", "./assets/savor.png",
     "./assets/gourds.png", "./assets/battleship.png", "./assets/resume.png", "./assets/git.png",
     "./assets/linked.png", "./assets/funfact.png", "./assets/photo1.png",
-    "./assets/yt.png", "./assets/rp.png"
+    "./assets/yt.png", "./assets/rp.png", "./assets/artist.png"
 ]
 const linksToSites = ["mode", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
     "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
     "https://realpolya.com/", "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
-    "https://www.youtube.com/realpolya", "https://realpolya.com/"
+    "https://www.youtube.com/realpolya", "https://realpolya.com/", ""
 ]
 
 // extra arrays for coloring cubes
@@ -33,57 +35,59 @@ const belowRight = [];
 // keep track of half cubes
 const halves = []
 
-/* 
-
-cubes:
-- homi
-- savor
-- gourds
-- battleship
-- points unknown ?
-
-- portfolio (realpolya) - 1 cube
-- linked in
-
-- fun fact cube
-- photo cube
-
-*/
-
-// TODO: introduce a game Color a Cube!
-
+// theme constants
 const currentTheme = sessionStorage.getItem("theme")
+const darkBackColor = "#1A1F16"
+const darkPopupColor = "#12170E"
+const darkPopupText = "#92A086"
 
-/*-------------------------------- Variables --------------------------------*/
-
-let tileSize = 200; // must correspond with css file
-
-let viewWidth = window.innerWidth;
-
-let tileCount = 5.5; // beginner count
-let cubeCount = 0
-let colorCubes = [] // order of colored cubes
-
-let linkCounter = 0;
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
-
+// all canvases
 const newCanvases = document.getElementById('newCanvases')
+
 const bodyEl = document.getElementById('bodyEl')
 
 const centeredEl = document.getElementById('centered')
 const funfactEl = document.getElementById('div-funfact')
+const gameEl = document.getElementById('div-colorgame')
+
+const colorPicker = document.getElementById('colorPicker')
+
 const closeButton = document.getElementById('button-close')
 const funCloseButton = document.getElementById('button-funfact')
 const aboutButton = document.getElementById('button-main')
+const gameCloseButton = document.getElementById('button-colorgame')
+const gameHideButton = document.getElementById('button-hide-colorgame')
+const paletteButton = document.getElementById('button-palette')
 
 const footerEl = document.getElementById('footer-text')
 
 
+/*-------------------------------- Variables --------------------------------*/
+
+let tileSize = 200; // starting point
+
+let viewWidth = window.innerWidth;
+
+// number of tiles in a row
+let tileRowCount = 5.5;
+
+// number of individual cubes
+let cubeCount = 0
+let colorCubes = [] // order of colored cubes
+
+let linkCounter = 0;
+let userColor = colorPicker.value
+
 /*-------------------------------- Functions --------------------------------*/
 
+const getUserColor = () => {
+    return userColor
+}
 
+// get all of the cubes below the special cube
 const getBelow = () => {
 
     let specialBelow = false;
@@ -109,6 +113,7 @@ const getBelow = () => {
 }
 
 
+// create half canvas at the beginning or end of row
 const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     
     let count = Math.ceil(cubeCount)
@@ -123,11 +128,14 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     const context = canvas.getContext('2d')
     let specialBelow = getBelow();
 
+    // TODO: write code for coloring half cubes
+
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
 }
 
 
+// canvas element
 const createCanvas = (parentEl, tileSize) => {
 
     let special = false;
@@ -137,7 +145,8 @@ const createCanvas = (parentEl, tileSize) => {
     canvas.width = tileSize;
     canvas.height = tileSize;
 
-    if (cubeCount + Math.ceil(tileCount) === colorCubes[8]) {
+    // to open a funfact box
+    if (cubeCount + Math.ceil(tileRowCount) === colorCubes[8]) {
         canvas.id = "above-funfact"
     }
 
@@ -155,34 +164,47 @@ const createCanvas = (parentEl, tileSize) => {
 
             if (special.project === "phot") {
                 photo = true
+            } else if (special.project === "funf") {
+                special.idEl = "above-funfact"
             }
 
-            belowLeft.push([num + Math.ceil(tileCount), special.project])
-            belowRight.push([num + Math.floor(tileCount), special.project])
+            belowLeft.push([num + Math.ceil(tileRowCount), special.project])
+            belowRight.push([num + Math.floor(tileRowCount), special.project])
 
             linkCounter += 1
 
         }
     })
 
+    
     let specialBelow = getBelow()
-
+    
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')
+    const start = 0
+    const mid = start + Math.floor(tileSize / 2)
+    const end = start + tileSize;
+    
+    // color game prep
+    if (!special) {
+        colorCube(canvas, context, start, mid, end, getUserColor)
+    }
 
-    singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo)
+    singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo, 
+    start, mid, end)
 
 }
 
 
-const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
+// canvases and half-canvases for single row
+const createRow = (parentEl, alternate=false, tileSize, tileRowCount) => {
 
     if (alternate) {
         cubeCount += 0.5
         createHalfCanvas(parentEl, false, tileSize)
     }
     
-    for (let i = 0; i < Math.floor(tileCount); i++) {
+    for (let i = 0; i < Math.floor(tileRowCount); i++) {
         // increment cube count
         cubeCount += 1
         createCanvas(parentEl, tileSize)
@@ -195,7 +217,7 @@ const createRow = (parentEl, alternate=false, tileSize, tileCount) => {
 
 }
 
-
+// append new row to the parent div
 const rowDiv = (parentEl) => {
     const rowDivvy = document.createElement('div');
 
@@ -207,10 +229,13 @@ const rowDiv = (parentEl) => {
 }
 
 
-const updateTile = (width, tileCount) => Math.floor(width / tileCount);
+// calculate tile size
+const updateTileSize = (width, tileRowCount) => Math.floor(width / tileRowCount);
 
 
+// number of tiles in a single row (dynamic)
 const numberOfTiles = (width) => {
+
     let count;
     if (width > 1000) {
         count = 6.5
@@ -224,17 +249,20 @@ const numberOfTiles = (width) => {
         count = 2.5
     }
     return count
+
 }
 
 
-const calculateHalves = (tileCount, halfCubes) => {
-    let first = Math.floor(tileCount) + 1
-    for (let i = first; i < CUBES + halfCubes; i += ((tileCount * 2))) {
+// which cubes are becoming split into separate rows
+const calculateHalves = (tileRowCount, halfCubes) => {
+    let first = Math.floor(tileRowCount) + 1
+    for (let i = first; i < CUBES + halfCubes; i += ((tileRowCount * 2))) {
         halves.push(i)
     }
 }
 
 
+// recalibrate cube numbers based on occupied ones and halves
 const pickColorCubes = () => {
     const occupied = []
     return startCubes.map(num => {
@@ -248,14 +276,15 @@ const pickColorCubes = () => {
 }
 
 
+// main function to render all of the cubes
 const renderCubes = () => {
 
-    tileCount = numberOfTiles(viewWidth)
-    tileSize = updateTile(viewWidth, tileCount)
+    tileRowCount = numberOfTiles(viewWidth)
+    tileSize = updateTileSize(viewWidth, tileRowCount) // establish tile size dynamically
 
-    const rows = CUBES / Math.floor(tileCount)
+    const rows = CUBES / Math.floor(tileRowCount)
     const halfCubes = Math.floor(0.5 * rows)
-    calculateHalves(tileCount, halfCubes)
+    calculateHalves(tileRowCount, halfCubes)
     colorCubes = pickColorCubes()
 
     let alter = false
@@ -264,13 +293,15 @@ const renderCubes = () => {
         const newRowDiv = rowDiv(newCanvases)
 
         newRowDiv.style.height = `${tileSize}px`
-        createRow(newRowDiv, alter, tileSize, tileCount)
+        createRow(newRowDiv, alter, tileSize, tileRowCount)
 
         alter = !alter
     }
 
 }
 
+
+// reset everything before re-rendering
 const totalReset = () => {
 
     viewWidth = window.innerWidth;
@@ -289,12 +320,47 @@ const totalReset = () => {
 }
 
 
+const changeThemeColor = (theme) => {
+    if (theme === "dark") {
+
+        bodyEl.style.backgroundColor = darkBackColor
+
+        centeredEl.style.backgroundColor = darkPopupColor
+        funfactEl.style.backgroundColor = darkPopupColor
+        closeButton.style.backgroundColor = darkPopupColor
+        funCloseButton.style.backgroundColor = darkPopupColor
+        gameEl.style.backgroundColor = darkPopupColor
+        gameHideButton.style.backgroundColor = darkPopupColor
+        gameCloseButton.style.backgroundColor = darkPopupColor
+        
+
+        centeredEl.style.color = darkPopupText
+        funfactEl.style.color = darkPopupText
+        closeButton.style.color = darkPopupText
+        funCloseButton.style.color = darkPopupText
+        gameEl.style.color = darkPopupText
+        gameHideButton.style.color = darkPopupText
+        gameCloseButton.style.color = darkPopupText
+
+    } else {
+
+        footerEl.style.color = darkBackColor
+
+    }
+}
+
+
 /*-------------------------------- Function Calls --------------------------------*/
 
 closeEl(closeButton, centeredEl)
 openEl(aboutButton, centeredEl)
 
 closeEl(funCloseButton, funfactEl)
+
+closeEl(gameHideButton, gameEl)
+closeEl(gameCloseButton, gameEl)
+closeEl(gameCloseButton, paletteButton)
+openEl(paletteButton, gameEl)
 
 /*-------------------------------- Event Listeners --------------------------------*/
 
@@ -304,27 +370,18 @@ window.addEventListener("load", () => {
         sessionStorage.setItem("theme", "light")
     }
 
-    if (currentTheme === "dark") {
-
-        bodyEl.style.backgroundColor = "#1A1F16"
-        centeredEl.style.backgroundColor = "#12170E"
-        funfactEl.style.backgroundColor = "#12170E"
-        closeButton.style.backgroundColor = "#12170E"
-        funCloseButton.style.backgroundColor = "#12170E"
-        centeredEl.style.color = "#92A086"
-        funfactEl.style.color = "#92A086"
-        closeButton.style.color = "#92A086"
-        funCloseButton.style.color = "#92A086"
-
-    } else {
-
-        footerEl.style.color = "#1A1F16"
-    }
-    
+    changeThemeColor(currentTheme);
     renderCubes();
 
 })
 
+colorPicker.addEventListener("input", (e) => {
+    userColor = e.target.value;
+    console.log("user color is ", userColor)
+    renderCubes();
+})
+
+/*-------------------------------- Reset --------------------------------*/
 
 window.addEventListener("resize", totalReset)
 funCloseButton.addEventListener("click", totalReset)
