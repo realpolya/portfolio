@@ -2,6 +2,7 @@
 
 import { singleTile, halfTile } from './js-files/cube.js'
 import { closeEl, openEl } from './js-files/popup.js'
+import { colorCube } from './js-files/getcolors.js'
 
 import colors from './js-files/colors.js'
 
@@ -43,20 +44,6 @@ const darkPopupColor = "#12170E"
 const darkPopupText = "#92A086"
 
 
-/*-------------------------------- Variables --------------------------------*/
-
-let tileSize = 200; // starting point
-
-let viewWidth = window.innerWidth;
-
-// number of tiles in a row
-let tileRowCount = 5.5;
-// number of individual cubes
-let cubeCount = 0
-let colorCubes = [] // order of colored cubes
-
-let linkCounter = 0;
-
 /*-------------------------------- Cached Elements --------------------------------*/
 
 // all canvases
@@ -68,6 +55,8 @@ const centeredEl = document.getElementById('centered')
 const funfactEl = document.getElementById('div-funfact')
 const gameEl = document.getElementById('div-colorgame')
 
+const colorPicker = document.getElementById('colorPicker')
+
 const closeButton = document.getElementById('button-close')
 const funCloseButton = document.getElementById('button-funfact')
 const aboutButton = document.getElementById('button-main')
@@ -76,6 +65,23 @@ const gameHideButton = document.getElementById('button-hide-colorgame')
 const paletteButton = document.getElementById('button-palette')
 
 const footerEl = document.getElementById('footer-text')
+
+
+/*-------------------------------- Variables --------------------------------*/
+
+let tileSize = 200; // starting point
+
+let viewWidth = window.innerWidth;
+
+// number of tiles in a row
+let tileRowCount = 5.5;
+
+// number of individual cubes
+let cubeCount = 0
+let colorCubes = [] // order of colored cubes
+
+let linkCounter = 0;
+let userColor = colorPicker.value
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -166,12 +172,21 @@ const createCanvas = (parentEl, tileSize) => {
         }
     })
 
+    
     let specialBelow = getBelow()
-
+    
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')
+    const start = 0
+    const mid = start + Math.floor(tileSize / 2)
+    const end = start + tileSize;
+    
+    if (!special) {
+        colorCube(canvas, context, start, mid, end, userColor)
+    }
 
-    singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo)
+    singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo, 
+    start, mid, end)
 
 }
 
@@ -215,6 +230,7 @@ const updateTileSize = (width, tileRowCount) => Math.floor(width / tileRowCount)
 
 // number of tiles in a single row (dynamic)
 const numberOfTiles = (width) => {
+
     let count;
     if (width > 1000) {
         count = 6.5
@@ -228,6 +244,7 @@ const numberOfTiles = (width) => {
         count = 2.5
     }
     return count
+
 }
 
 
@@ -351,6 +368,11 @@ window.addEventListener("load", () => {
     changeThemeColor(currentTheme);
     renderCubes();
 
+})
+
+colorPicker.addEventListener("input", (e) => {
+    userColor = e.target.value;
+    console.log("user color is ", userColor)
 })
 
 /*-------------------------------- Reset --------------------------------*/

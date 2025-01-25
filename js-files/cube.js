@@ -3,7 +3,7 @@
 /*-------------------------------- Imports --------------------------------*/
 
 import { textInCube, renderIcon, redirectCube, colorMode } from "./interact.js";
-import { getColor, getBelowColor } from "./getcolors.js";
+import { getColor, getBelowColor, colorCube } from "./getcolors.js";
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -113,9 +113,7 @@ const fillTopLeft = (ctx, mid, colors, special, specialBelow, start=0) => {
 }
 
 
-const fillLeft = (ctx, size, mid, colors, special, specialBelow, start=0) => {
-
-    const end = start + size;
+const fillLeft = (ctx, mid, colors, special, specialBelow, start=0, end) => {
 
     fillBottomLeft(ctx, mid, end, colors, special, specialBelow);
     fillTopRight(ctx, mid, end, colors, special, specialBelow);
@@ -123,9 +121,8 @@ const fillLeft = (ctx, size, mid, colors, special, specialBelow, start=0) => {
 }
 
 
-const fillRight = (ctx, size, mid, colors, special, specialBelow, start=0) => {
+const fillRight = (ctx, mid, colors, special, specialBelow, start=0, end) => {
 
-    const end = start + size;
 
     fillTopLeft(ctx, mid, colors, special, specialBelow)
     fillBottomRight(ctx, mid, end, colors, special, specialBelow)
@@ -134,14 +131,12 @@ const fillRight = (ctx, size, mid, colors, special, specialBelow, start=0) => {
 
 /*-------------------------------- Tile Functions --------------------------------*/
 
-const singleTile = (ctx, size, colors, special, specialBelow, count, photo=false, start=0) => {
-
-    const mid = start + Math.floor(size / 2)
+const singleTile = (ctx, size, colors, special, specialBelow, count, photo=false, start=0, mid, end) => {
 
     drawFillTop(ctx, size, mid, colors, special, count, photo)
 
-    fillLeft(ctx, size, mid, colors, special, specialBelow)
-    fillRight(ctx, size, mid, colors, special, specialBelow)
+    fillLeft(ctx, mid, colors, special, specialBelow, start, end)
+    fillRight(ctx, mid, colors, special, specialBelow, start, end)
 
 }
 

@@ -62,6 +62,40 @@ const getBelowColor = (specialBelow, colors, cubeSide) => {
 
 }
 
+
+const colorCube = (el, ctx, start, mid, end, color) => {
+
+    const defineTopPath = (ctx, start, mid, end) => {
+        ctx.beginPath();
+        ctx.moveTo(start, mid);
+        ctx.lineTo(mid, end);
+        ctx.lineTo(end, mid);
+        ctx.lineTo(mid, start);
+        ctx.lineTo(start, mid);
+        ctx.closePath();
+    }
+
+    // TODO: if any other part of the canvas is clicked on except the top,
+    // another canvas needs to be activated as well
+
+    el.addEventListener('click', (e) => {
+
+        const rect = el.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+
+        defineTopPath(ctx, start, mid, end)
+
+        if (ctx.isPointInPath(x, y)) {
+            ctx.fillStyle = color
+            ctx.fill()
+        }
+
+    })
+
+}
+
+
 /*-------------------------------- Exports --------------------------------*/
 
-export { getColor, getBelowColor }
+export { getColor, getBelowColor, colorCube }
