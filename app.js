@@ -37,9 +37,11 @@ const halves = []
 
 // theme constants
 const currentTheme = sessionStorage.getItem("theme")
+const colorPickerInitial = "#FFFFFF"
 const darkBackColor = "#1A1F16"
 const darkPopupColor = "#12170E"
 const darkPopupText = "#92A086"
+const darkResetButton = "#162F17"
 
 
 /*-------------------------------- Cached Elements --------------------------------*/
@@ -61,6 +63,7 @@ const aboutButton = document.getElementById('button-main')
 const gameCloseButton = document.getElementById('button-colorgame')
 const gameHideButton = document.getElementById('button-hide-colorgame')
 const paletteButton = document.getElementById('button-palette')
+const resetColorButton = document.getElementById('button-reset-color')
 
 const footerEl = document.getElementById('footer-text')
 
@@ -332,6 +335,7 @@ const changeThemeColor = (theme) => {
         gameEl.style.backgroundColor = darkPopupColor
         gameHideButton.style.backgroundColor = darkPopupColor
         gameCloseButton.style.backgroundColor = darkPopupColor
+        resetColorButton.style.backgroundColor = darkResetButton
         
 
         centeredEl.style.color = darkPopupText
@@ -341,6 +345,7 @@ const changeThemeColor = (theme) => {
         gameEl.style.color = darkPopupText
         gameHideButton.style.color = darkPopupText
         gameCloseButton.style.color = darkPopupText
+        resetColorButton.style.color = darkPopupText
 
     } else {
 
@@ -364,6 +369,7 @@ openEl(paletteButton, gameEl)
 
 /*-------------------------------- Event Listeners --------------------------------*/
 
+
 window.addEventListener("load", () => {
     
     if (!currentTheme) {
@@ -375,10 +381,19 @@ window.addEventListener("load", () => {
 
 })
 
+
 colorPicker.addEventListener("input", (e) => {
     userColor = e.target.value;
     console.log("user color is ", userColor)
-    renderCubes();
+    // renderCubes();
+})
+
+
+resetColorButton.addEventListener("click", () => {
+
+    userColor = colorPickerInitial
+    location.reload()
+
 })
 
 /*-------------------------------- Reset --------------------------------*/
