@@ -204,10 +204,10 @@ footer {
         left: 5%;
     }
     #div-colorgame {
-        left: 10%;
-        width: 250px;
+        left: 20%;
+        width: 200px;
     }
     #button-hide-colorgame {
-        margin-left: 200px;
+        margin-left: 150px;
     }
 }
