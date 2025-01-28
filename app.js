@@ -55,7 +55,7 @@ const centeredEl = document.getElementById('centered')
 const funfactEl = document.getElementById('div-funfact')
 const gameEl = document.getElementById('div-colorgame')
 
-const colorPicker = document.getElementById('colorPicker')
+const colorPicker = document.getElementById('color-input')
 
 const closeButton = document.getElementById('button-close')
 const funCloseButton = document.getElementById('button-funfact')
@@ -188,7 +188,7 @@ const createCanvas = (parentEl, tileSize) => {
     const mid = start + Math.floor(tileSize / 2)
     const end = start + tileSize;
     
-    // color game prep
+    // color game prep TODO: color picker only works if coloring popup is open
     if (!special) {
         colorCube(canvas, context, start, mid, end, getUserColor)
     }
@@ -335,6 +335,8 @@ const changeThemeColor = (theme) => {
         gameEl.style.backgroundColor = darkPopupColor
         gameHideButton.style.backgroundColor = darkPopupColor
         gameCloseButton.style.backgroundColor = darkPopupColor
+
+        colorPicker.style.backgroundColor = darkResetButton
         resetColorButton.style.backgroundColor = darkResetButton
         
 
@@ -376,6 +378,14 @@ window.addEventListener("load", () => {
         sessionStorage.setItem("theme", "light")
     }
 
+    // reload the game popup after resetting the canvases
+    if (localStorage.getItem("showGameEl") === "true") {
+
+        gameEl.style.display = "block";
+        paletteButton.style.display = "block";
+        localStorage.removeItem("showGameEl");
+    }
+
     changeThemeColor(currentTheme);
     renderCubes();
 
@@ -391,8 +401,11 @@ colorPicker.addEventListener("input", (e) => {
 
 resetColorButton.addEventListener("click", () => {
 
-    userColor = colorPickerInitial
-    location.reload()
+    localStorage.setItem("showGameEl", "true");
+
+    userColor = colorPickerInitial;
+    location.reload();
+    gameEl.style.display = "block";
 
 })
 

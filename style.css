@@ -77,7 +77,7 @@ footer {
     padding: 15px;
     /* border-radius: 2rem; */
     opacity: 95%;
-    display: block;
+    display: none;
 }
 
 #h3-color {
@@ -94,6 +94,12 @@ footer {
 #color-label-input {
     display: flex;
     justify-content: space-between;
+}
+
+#color-input {
+    background-color: white;
+    border-radius: .5rem;
+    border: 1px solid black;
 }
 
 #buttons-game {
