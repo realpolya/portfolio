@@ -67,6 +67,9 @@ const getBelowColor = (specialBelow, colors, cubeSide) => {
 
 
 const defineTopPath = (ctx, start, mid, end) => {
+
+    console.log("top path is firing")
+
     ctx.beginPath();
     ctx.moveTo(start, mid);
     ctx.lineTo(mid, end);
@@ -83,6 +86,8 @@ const defineTopPathHalf = (ctx, start, size, alternate) => {
     const xEnd = start + xSize
     const yMid = Math.floor(size / 2)
     const yEnd = start + size
+
+    console.log("half path firing")
 
     // right half tile
     if (alternate) {
@@ -111,20 +116,26 @@ const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false) => 
 
     el.addEventListener('click', (e) => {
 
+        console.log("clicking alternate is ", half)
+
         const rect = el.getBoundingClientRect()
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        if (!half) {
-            defineTopPath(ctx, start, mid, end)
-        } else {
+        if (half) {
+            console.log("alternate is ", half)
             defineTopPathHalf(ctx, start, size, half.alternate)
+        } else {
+            defineTopPath(ctx, start, mid, end)
         }
 
         if (ctx.isPointInPath(x, y)) {
+
+            console.log("alternate is ", half.alternate)
             let userColor = getUserColor()
             ctx.fillStyle = userColor
             ctx.fill()
+
         }
 
     })

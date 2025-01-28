@@ -135,9 +135,11 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     const start = 0
     const mid = start + Math.floor(tileSize / 2)
     const end = start + tileSize;
+    const half = { alternate: alternate }
+    // console.log("alternate in app.js is ", half)
 
-    colorCube(canvas, context, start, mid, end, getUserColor, {alternate: alternate})
-    
+    colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half)
+
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
 }
