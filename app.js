@@ -135,7 +135,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     const start = 0
     const mid = start + Math.floor(tileSize / 2)
     const end = start + tileSize;
-    const half = { alternate: alternate }
+    const half = { alternate }
     // console.log("alternate in app.js is ", half)
 
     colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half)
@@ -403,8 +403,6 @@ window.addEventListener("load", () => {
 
 colorPicker.addEventListener("input", (e) => {
     userColor = e.target.value;
-    console.log("user color is ", userColor)
-    // renderCubes();
 })
 
 
