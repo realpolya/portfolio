@@ -63,17 +63,50 @@ const getBelowColor = (specialBelow, colors, cubeSide) => {
 }
 
 
-const colorCube = (el, ctx, start, mid, end, getUserColor) => {
+/*-------------------------------- Color Game Functions --------------------------------*/
 
-    const defineTopPath = (ctx, start, mid, end) => {
+
+const defineTopPath = (ctx, start, mid, end) => {
+
+    ctx.beginPath();
+    ctx.moveTo(start, mid);
+    ctx.lineTo(mid, end);
+    ctx.lineTo(end, mid);
+    ctx.lineTo(mid, start);
+    ctx.lineTo(start, mid);
+    ctx.closePath();
+    
+}
+
+
+const defineTopPathHalf = (ctx, start, size, alternate) => {
+
+    const xSize = Math.floor(size / 2)
+    const xEnd = start + xSize
+    const yMid = Math.floor(size / 2)
+    const yEnd = start + size
+
+    // right half tile
+    if (alternate) {
         ctx.beginPath();
-        ctx.moveTo(start, mid);
-        ctx.lineTo(mid, end);
-        ctx.lineTo(end, mid);
-        ctx.lineTo(mid, start);
-        ctx.lineTo(start, mid);
+        ctx.moveTo(start, yMid);
+        ctx.lineTo(xEnd, start);
+        ctx.lineTo(xEnd, yEnd);
+        ctx.closePath();
+    } // left half tile
+    else {
+        ctx.beginPath();
+        ctx.moveTo(start, start);
+        ctx.lineTo(xEnd, yMid);
+        ctx.lineTo(start, yEnd);
         ctx.closePath();
     }
+
+}
+
+
+const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false) => {
+
 
     // TODO: if any other part of the canvas is clicked on except the top,
     // another canvas needs to be activated as well
@@ -84,12 +117,18 @@ const colorCube = (el, ctx, start, mid, end, getUserColor) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        defineTopPath(ctx, start, mid, end)
+        if (half) {
+            defineTopPathHalf(ctx, start, size, half.alternate)
+        } else {
+            defineTopPath(ctx, start, mid, end)
+        }
 
         if (ctx.isPointInPath(x, y)) {
+
             let userColor = getUserColor()
             ctx.fillStyle = userColor
             ctx.fill()
+
         }
 
     })

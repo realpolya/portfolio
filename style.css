@@ -69,15 +69,37 @@ footer {
 
 #div-colorgame {
     position: fixed;
-    bottom: 15%;
-    left: 40%;
-    width: 180px;
-    height: 370px;
+    bottom: 5%;
+    left: 20%;
+    width: 330px;
+    height: 100px;
     background-color: white;
-    padding: 2rem;
+    padding: 15px;
     /* border-radius: 2rem; */
     opacity: 95%;
     display: none;
+}
+
+#h3-color {
+    margin: 0;
+}
+
+#color-h3-reset {
+    display: flex;
+    justify-content: space-between;
+    /* height: 2rem; */
+    margin: 10px 0;
+}
+
+#color-label-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+#color-input {
+    background-color: white;
+    border-radius: .5rem;
+    border: 1px solid black;
 }
 
 #buttons-game {
@@ -117,11 +139,19 @@ footer {
 
 #button-hide-colorgame {
     font-size: 1.1rem;
-    margin-left: 140px;
+    margin-left: 280px;
 }
 
 #button-colorgame {
     margin-left: 10px;
+}
+
+#button-reset-color {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    background-color: #EFE5DC;
+    border: .5px solid black;
+    border-radius: .5rem;
 }
 
 #button-close:hover, #button-funfact:hover,
@@ -130,6 +160,12 @@ footer {
 #button-hide-colorgame:hover {
     transform: scale(1.3);
     color: red;
+}
+
+#button-reset-color:hover {
+    transform: scale(1.1);
+    background-color: #EFE5DC;
+    background-color: #D0B8AC;
 }
 
 #button-main {
@@ -160,16 +196,24 @@ footer {
     cursor: pointer;
 }
 
+
 @media screen and (max-width: 500px) {
     #centered {
-
+        width: 270px; 
         top: 10%;
-        left: 2%;
+        left: 10%;
+    }
+    #button-close {
+        margin-left: 250px;
     }
     #div-funfact {
         left: 5%;
     }
     #div-colorgame {
-        left: 10%;
+        left: 20%;
+        width: 200px;
+    }
+    #button-hide-colorgame {
+        margin-left: 150px;
     }
 }

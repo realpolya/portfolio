@@ -37,9 +37,11 @@ const halves = []
 
 // theme constants
 const currentTheme = sessionStorage.getItem("theme")
+const colorPickerInitial = "#FFFFFF"
 const darkBackColor = "#1A1F16"
 const darkPopupColor = "#12170E"
 const darkPopupText = "#92A086"
+const darkResetButton = "#162F17"
 
 
 /*-------------------------------- Cached Elements --------------------------------*/
@@ -53,7 +55,7 @@ const centeredEl = document.getElementById('centered')
 const funfactEl = document.getElementById('div-funfact')
 const gameEl = document.getElementById('div-colorgame')
 
-const colorPicker = document.getElementById('colorPicker')
+const colorPicker = document.getElementById('color-input')
 
 const closeButton = document.getElementById('button-close')
 const funCloseButton = document.getElementById('button-funfact')
@@ -61,6 +63,7 @@ const aboutButton = document.getElementById('button-main')
 const gameCloseButton = document.getElementById('button-colorgame')
 const gameHideButton = document.getElementById('button-hide-colorgame')
 const paletteButton = document.getElementById('button-palette')
+const resetColorButton = document.getElementById('button-reset-color')
 
 const footerEl = document.getElementById('footer-text')
 
@@ -129,11 +132,19 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     let specialBelow = getBelow();
 
     // TODO: write code for coloring half cubes
+    const start = 0
+    const mid = start + Math.floor(tileSize / 2)
+    const end = start + tileSize;
+    const half = { alternate }
+    // console.log("alternate in app.js is ", half)
+
+    colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half)
 
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
 }
 
+// TODO: write code that colors two canvases with one click
 
 // canvas element
 const createCanvas = (parentEl, tileSize) => {
@@ -185,7 +196,8 @@ const createCanvas = (parentEl, tileSize) => {
     const mid = start + Math.floor(tileSize / 2)
     const end = start + tileSize;
     
-    // color game prep
+    // color game prep - cube still needs to be available for the corner!
+    // TODO: color picker only works if coloring popup is open
     if (!special) {
         colorCube(canvas, context, start, mid, end, getUserColor)
     }
@@ -332,6 +344,9 @@ const changeThemeColor = (theme) => {
         gameEl.style.backgroundColor = darkPopupColor
         gameHideButton.style.backgroundColor = darkPopupColor
         gameCloseButton.style.backgroundColor = darkPopupColor
+
+        colorPicker.style.backgroundColor = darkResetButton
+        resetColorButton.style.backgroundColor = darkResetButton
         
 
         centeredEl.style.color = darkPopupText
@@ -341,6 +356,7 @@ const changeThemeColor = (theme) => {
         gameEl.style.color = darkPopupText
         gameHideButton.style.color = darkPopupText
         gameCloseButton.style.color = darkPopupText
+        resetColorButton.style.color = darkPopupText
 
     } else {
 
@@ -364,10 +380,19 @@ openEl(paletteButton, gameEl)
 
 /*-------------------------------- Event Listeners --------------------------------*/
 
+
 window.addEventListener("load", () => {
     
     if (!currentTheme) {
         sessionStorage.setItem("theme", "light")
+    }
+
+    // reload the game popup after resetting the canvases
+    if (localStorage.getItem("showGameEl") === "true") {
+
+        gameEl.style.display = "block";
+        paletteButton.style.display = "block";
+        localStorage.removeItem("showGameEl");
     }
 
     changeThemeColor(currentTheme);
@@ -375,10 +400,20 @@ window.addEventListener("load", () => {
 
 })
 
+
 colorPicker.addEventListener("input", (e) => {
     userColor = e.target.value;
-    console.log("user color is ", userColor)
-    renderCubes();
+})
+
+
+resetColorButton.addEventListener("click", () => {
+
+    localStorage.setItem("showGameEl", "true");
+
+    userColor = colorPickerInitial;
+    location.reload();
+    gameEl.style.display = "block";
+
 })
 
 /*-------------------------------- Reset --------------------------------*/
