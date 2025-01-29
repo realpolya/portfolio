@@ -193,6 +193,7 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
     })
 
+
     special.el.addEventListener('click', (e) => {
 
         const rect = special.el.getBoundingClientRect()
@@ -207,16 +208,25 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
                 const funFactEl = document.getElementById('div-funfact')
                 funFactEl.style.display = "block"
             } else if (special.project === "game") {
+
                 const gameEl = document.getElementById('div-colorgame')
                 const paletteButton = document.getElementById('button-palette')
+                const bodyEl = document.getElementById('bodyEl')
                 gameEl.style.display = "block"
                 paletteButton.style.display = "block"
+
+                bodyEl.style.cursor = "crosshair"
+
+                sessionStorage.setItem("game", "open");
+                sessionStorage.setItem("showGameEl", "true");
+
+                
+
             } else {
 
                 e.preventDefault();
                 window.open(special.link, "_blank");
 
-                // window.location.href = special.link;
             }
         }
 

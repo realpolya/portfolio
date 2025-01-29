@@ -8,6 +8,8 @@ import colors from './js-files/colors.js'
 
 /*-------------------------------- Constants --------------------------------*/
 
+// TODO: attach resume
+
 const CUBES = 60
 
 const startCubes = [1, 3, 5, 9, 15, 18, 22, 30, 32, 40, 45, 49, 58]
@@ -83,11 +85,17 @@ let colorCubes = [] // order of colored cubes
 
 let linkCounter = 0;
 let userColor = colorPicker.value
+let gameStatus = "closed"
+sessionStorage.setItem("game", "closed")
 
 /*-------------------------------- Functions --------------------------------*/
 
 const getUserColor = () => {
     return userColor
+}
+
+const getGameStatus = () => {
+    return sessionStorage.getItem("game")
 }
 
 // get all of the cubes below the special cube
@@ -182,6 +190,16 @@ const createCanvas = (parentEl, tileSize) => {
 
         }
     })
+
+    if (special) {
+        canvas.addEventListener("click", () => {
+            gameStatus = getGameStatus()
+            console.log("status is ", gameStatus)
+            if (gameStatus === "open") {
+                bodyEl.style.cursor = "crosshair"
+            }
+        })
+    }
 
     
     let specialBelow = getBelow()
@@ -368,7 +386,7 @@ openEl(aboutButton, centeredEl)
 closeEl(funCloseButton, funfactEl)
 
 closeEl(gameHideButton, gameEl)
-closeEl(gameCloseButton, gameEl)
+closeEl(gameCloseButton, gameEl, bodyEl)
 closeEl(gameCloseButton, paletteButton)
 openEl(paletteButton, gameEl)
 
@@ -382,11 +400,12 @@ window.addEventListener("load", () => {
     }
 
     // reload the game popup after resetting the canvases
-    if (localStorage.getItem("showGameEl") === "true") {
+    if (sessionStorage.getItem("showGameEl") === "true") {
 
         gameEl.style.display = "block";
         paletteButton.style.display = "block";
-        localStorage.removeItem("showGameEl");
+        sessionStorage.removeItem("showGameEl");
+        
     }
 
     changeThemeColor(currentTheme);
@@ -402,7 +421,7 @@ colorPicker.addEventListener("input", (e) => {
 
 resetColorButton.addEventListener("click", () => {
 
-    localStorage.setItem("showGameEl", "true");
+    sessionStorage.setItem("showGameEl", "true");
 
     userColor = colorPickerInitial;
     location.reload();
