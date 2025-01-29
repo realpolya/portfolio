@@ -85,8 +85,6 @@ let colorCubes = [] // order of colored cubes
 
 let linkCounter = 0;
 let userColor = colorPicker.value
-let gameStatus = "closed"
-sessionStorage.setItem("game", "closed")
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -144,7 +142,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     const end = start + tileSize;
     const half = { alternate }
 
-    colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half, false, specialBelow)
+    if (getGameStatus() === "open") colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half, false, specialBelow)
 
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
@@ -191,17 +189,6 @@ const createCanvas = (parentEl, tileSize) => {
         }
     })
 
-    if (special) {
-        canvas.addEventListener("click", () => {
-            gameStatus = getGameStatus()
-            console.log("status is ", gameStatus)
-            if (gameStatus === "open") {
-                bodyEl.style.cursor = "crosshair"
-            }
-        })
-    }
-
-    
     let specialBelow = getBelow()
     
     parentEl.appendChild(canvas);
@@ -209,10 +196,8 @@ const createCanvas = (parentEl, tileSize) => {
     const start = 0
     const mid = start + Math.floor(tileSize / 2)
     const end = start + tileSize;
-    
-    // color game prep - cube still needs to be available for the corner!
-    // TODO: color picker only works if coloring popup is open
-    colorCube(canvas, context, start, mid, end, getUserColor, tileSize, false, special, specialBelow)
+
+    if (getGameStatus() === "open") colorCube(canvas, context, start, mid, end, getUserColor, tileSize, false, special, specialBelow)
 
     singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo, 
     start, mid, end)
@@ -386,7 +371,7 @@ openEl(aboutButton, centeredEl)
 closeEl(funCloseButton, funfactEl)
 
 closeEl(gameHideButton, gameEl)
-closeEl(gameCloseButton, gameEl, bodyEl)
+closeEl(gameCloseButton, gameEl, true)
 closeEl(gameCloseButton, paletteButton)
 openEl(paletteButton, gameEl)
 
@@ -395,17 +380,22 @@ openEl(paletteButton, gameEl)
 
 window.addEventListener("load", () => {
     
-    if (!currentTheme) {
-        sessionStorage.setItem("theme", "light")
-    }
+    if (!currentTheme) sessionStorage.setItem("theme", "light")
+    if (!getGameStatus()) sessionStorage.setItem("closed")
+
 
     // reload the game popup after resetting the canvases
     if (sessionStorage.getItem("showGameEl") === "true") {
 
         gameEl.style.display = "block";
         paletteButton.style.display = "block";
+        bodyEl.style.cursor = "crosshair";
         sessionStorage.removeItem("showGameEl");
-        
+
+    } else {
+
+        bodyEl.style.cursor = "default"
+
     }
 
     changeThemeColor(currentTheme);

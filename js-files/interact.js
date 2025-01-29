@@ -204,23 +204,27 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
         if (ctx.isPointInPath(x, y)) {
             if (special.project === "funf") {
+
                 openCube(ctx, start, mid, end, colors, special)
                 const funFactEl = document.getElementById('div-funfact')
                 funFactEl.style.display = "block"
+                
             } else if (special.project === "game") {
 
-                const gameEl = document.getElementById('div-colorgame')
-                const paletteButton = document.getElementById('button-palette')
-                const bodyEl = document.getElementById('bodyEl')
-                gameEl.style.display = "block"
-                paletteButton.style.display = "block"
+                // const gameEl = document.getElementById('div-colorgame')
+                // const paletteButton = document.getElementById('button-palette')
+                // const bodyEl = document.getElementById('bodyEl')
+                // gameEl.style.display = "block"
+                // paletteButton.style.display = "block"
 
-                bodyEl.style.cursor = "crosshair"
+                // bodyEl.style.cursor = "crosshair"
 
                 sessionStorage.setItem("game", "open");
                 sessionStorage.setItem("showGameEl", "true");
 
-                
+                location.reload();
+
+
 
             } else {
 
