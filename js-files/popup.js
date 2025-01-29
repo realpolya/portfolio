@@ -1,8 +1,12 @@
-const closeEl = (el, windowEl) => {
+const closeEl = (el, windowEl, game=false) => {
 
     el.addEventListener('click', () => {
 
         windowEl.style.display = "none"
+        if (game) {
+            sessionStorage.setItem("game", "closed")
+            location.reload()
+        }
 
     })
 

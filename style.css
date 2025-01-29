@@ -102,6 +102,35 @@ footer {
     border: 1px solid black;
 }
 
+#button-main {
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    margin: 0.5rem;
+    width: 5rem;
+    height: 5rem;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: .2rem;
+    border-radius: 50%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    /* background-color: #BDA89D; */
+    background-color: #674F43;
+    border: solid 2px #84685A;
+    color: #EFE5DC;
+
+    transition: transform 0.3s ease;
+
+}
+
+
+#button-main:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
 #buttons-game {
     display: flex;
     width: 100%;
@@ -168,33 +197,7 @@ footer {
     background-color: #D0B8AC;
 }
 
-#button-main {
-    position: fixed;
-    top: 0%;
-    right: 0%;
-    margin: 0.5rem;
-    width: 5rem;
-    height: 5rem;
-    font-size: 1.1rem;
-    text-align: center;
-    padding: .2rem;
-    border-radius: 50%;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    background-color: #85AB81;
-    border: solid 2px #477542;
-    color: #465D43;
 
-    transition: transform 0.3s ease;
-
-}
-
-
-#button-main:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-}
 
 
 @media screen and (max-width: 500px) {

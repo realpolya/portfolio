@@ -10,7 +10,7 @@ import colors from './js-files/colors.js'
 
 const CUBES = 60
 
-const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 45, 49, 58]
+const startCubes = [1, 3, 5, 9, 15, 18, 22, 30, 32, 40, 45, 49, 58]
 
 // order of projects
 const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port", "game"]
@@ -24,7 +24,7 @@ const iconSrcs = ["./assets/cube.ico", "./assets/homi2.png", "./assets/savor.png
 ]
 const linksToSites = ["mode", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
     "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
-    "https://realpolya.com/", "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
+    "./assets/resume.pdf", "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
     "https://www.youtube.com/realpolya", "https://realpolya.com/", ""
 ]
 
@@ -42,6 +42,11 @@ const darkBackColor = "#1A1F16"
 const darkPopupColor = "#12170E"
 const darkPopupText = "#92A086"
 const darkResetButton = "#162F17"
+
+// about button dark version
+const aboutButtonBack = "#85AB81"
+const aboutButtonBorder = "solid 2px #477542"
+const aboutButtonText = "#465D43"
 
 
 /*-------------------------------- Cached Elements --------------------------------*/
@@ -90,6 +95,10 @@ const getUserColor = () => {
     return userColor
 }
 
+const getGameStatus = () => {
+    return sessionStorage.getItem("game")
+}
+
 // get all of the cubes below the special cube
 const getBelow = () => {
 
@@ -131,20 +140,16 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     const context = canvas.getContext('2d')
     let specialBelow = getBelow();
 
-    // TODO: write code for coloring half cubes
     const start = 0
     const mid = start + Math.floor(tileSize / 2)
     const end = start + tileSize;
     const half = { alternate }
-    // console.log("alternate in app.js is ", half)
 
-    colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half)
+    if (getGameStatus() === "open") colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half, false, specialBelow)
 
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
 }
-
-// TODO: write code that colors two canvases with one click
 
 // canvas element
 const createCanvas = (parentEl, tileSize) => {
@@ -187,7 +192,6 @@ const createCanvas = (parentEl, tileSize) => {
         }
     })
 
-    
     let specialBelow = getBelow()
     
     parentEl.appendChild(canvas);
@@ -195,12 +199,8 @@ const createCanvas = (parentEl, tileSize) => {
     const start = 0
     const mid = start + Math.floor(tileSize / 2)
     const end = start + tileSize;
-    
-    // color game prep - cube still needs to be available for the corner!
-    // TODO: color picker only works if coloring popup is open
-    if (!special) {
-        colorCube(canvas, context, start, mid, end, getUserColor)
-    }
+
+    if (getGameStatus() === "open") colorCube(canvas, context, start, mid, end, getUserColor, tileSize, false, special, specialBelow)
 
     singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo, 
     start, mid, end)
@@ -358,6 +358,11 @@ const changeThemeColor = (theme) => {
         gameCloseButton.style.color = darkPopupText
         resetColorButton.style.color = darkPopupText
 
+        aboutButton.style.backgroundColor = aboutButtonBack
+        aboutButton.style.border = aboutButtonBorder
+        aboutButton.style.color = aboutButtonText
+
+
     } else {
 
         footerEl.style.color = darkBackColor
@@ -374,7 +379,7 @@ openEl(aboutButton, centeredEl)
 closeEl(funCloseButton, funfactEl)
 
 closeEl(gameHideButton, gameEl)
-closeEl(gameCloseButton, gameEl)
+closeEl(gameCloseButton, gameEl, true)
 closeEl(gameCloseButton, paletteButton)
 openEl(paletteButton, gameEl)
 
@@ -383,16 +388,21 @@ openEl(paletteButton, gameEl)
 
 window.addEventListener("load", () => {
     
-    if (!currentTheme) {
-        sessionStorage.setItem("theme", "light")
-    }
+    if (!currentTheme) sessionStorage.setItem("theme", "light")
+    if (!getGameStatus()) sessionStorage.setItem("closed")
 
     // reload the game popup after resetting the canvases
-    if (localStorage.getItem("showGameEl") === "true") {
+    if (sessionStorage.getItem("showGameEl") === "true") {
 
         gameEl.style.display = "block";
         paletteButton.style.display = "block";
-        localStorage.removeItem("showGameEl");
+        bodyEl.style.cursor = "crosshair";
+        sessionStorage.removeItem("showGameEl");
+
+    } else {
+
+        bodyEl.style.cursor = "default"
+
     }
 
     changeThemeColor(currentTheme);
@@ -408,7 +418,7 @@ colorPicker.addEventListener("input", (e) => {
 
 resetColorButton.addEventListener("click", () => {
 
-    localStorage.setItem("showGameEl", "true");
+    sessionStorage.setItem("showGameEl", "true");
 
     userColor = colorPickerInitial;
     location.reload();
