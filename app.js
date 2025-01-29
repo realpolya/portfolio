@@ -8,8 +8,6 @@ import colors from './js-files/colors.js'
 
 /*-------------------------------- Constants --------------------------------*/
 
-// TODO: attach resume
-
 const CUBES = 60
 
 const startCubes = [1, 3, 5, 9, 15, 18, 22, 30, 32, 40, 45, 49, 58]
@@ -26,7 +24,7 @@ const iconSrcs = ["./assets/cube.ico", "./assets/homi2.png", "./assets/savor.png
 ]
 const linksToSites = ["mode", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
     "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
-    "https://realpolya.com/", "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
+    "./assets/resume.pdf", "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
     "https://www.youtube.com/realpolya", "https://realpolya.com/", ""
 ]
 
@@ -392,7 +390,6 @@ window.addEventListener("load", () => {
     
     if (!currentTheme) sessionStorage.setItem("theme", "light")
     if (!getGameStatus()) sessionStorage.setItem("closed")
-
 
     // reload the game popup after resetting the canvases
     if (sessionStorage.getItem("showGameEl") === "true") {
