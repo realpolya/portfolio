@@ -98,7 +98,7 @@ const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false) => 
         else {
             // define.topPath(ctx, start, mid, end)
     
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 5; i++) {
                 defineArr[i](ctx, start, mid, end)
                 if (ctx.isPointInPath(x, y)) {
     
@@ -109,6 +109,7 @@ const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false) => 
         
                 }
             }
+            
         }
 
     })
