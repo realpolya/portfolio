@@ -2,7 +2,7 @@
 
 /*-------------------------------- Imports --------------------------------*/
 
-import { defineTopPath, defineTopPathHalf } from "./definepaths.js";
+import define from "./definepaths.js";
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -83,9 +83,9 @@ const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false) => 
         const y = e.clientY - rect.top
 
         if (half) {
-            defineTopPathHalf(ctx, start, size, half.alternate)
+            define.topPathHalf(ctx, start, size, half.alternate)
         } else {
-            defineTopPath(ctx, start, mid, end)
+            define.topPath(ctx, start, mid, end)
         }
 
         if (ctx.isPointInPath(x, y)) {

@@ -1,6 +1,7 @@
 /* define paths for clicking and coloring */
 
-const defineTopPath = (ctx, start, mid, end) => {
+
+const topPath = (ctx, start, mid, end) => {
 
     ctx.beginPath();
     ctx.moveTo(start, mid);
@@ -12,9 +13,21 @@ const defineTopPath = (ctx, start, mid, end) => {
     
 }
 
+
+const topRight = (ctx, start, mid, end) => {
+
+    ctx.beginPath();
+    ctx.moveTo(end, start);
+    ctx.lineTo(mid, start);
+    ctx.lineTo(end, mid);
+    ctx.closePath();
+
+}
+
+
 /* HALF TILES */
 
-const defineTopPathHalf = (ctx, start, size, alternate) => {
+const topPathHalf = (ctx, start, size, alternate) => {
 
     const xSize = Math.floor(size / 2)
     const xEnd = start + xSize
@@ -39,4 +52,10 @@ const defineTopPathHalf = (ctx, start, size, alternate) => {
 
 }
 
-export { defineTopPath, defineTopPathHalf }
+/*-------------------------------- Exports --------------------------------*/
+
+export default {
+    topPath,
+    topRight,
+    topPathHalf
+}

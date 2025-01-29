@@ -2,7 +2,7 @@
 /*-------------------------------- Imports --------------------------------*/
 
 import { getColor } from "./getcolors.js";
-import { defineTopPath } from "./definepaths.js";
+import define from "./definepaths.js";
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -164,7 +164,7 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        defineTopPath(ctx, start, mid, end)
+        define.topPath(ctx, start, mid, end)
 
         if (special.project !== "funf" && special.project !== "phot") {
             if (ctx.isPointInPath(x, y)) {
@@ -199,7 +199,7 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        defineTopPath(ctx, start, mid, end)
+        define.topPath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
             if (special.project === "funf") {
@@ -232,7 +232,7 @@ const colorMode = (el, ctx, start, mid, end) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        defineTopPath(ctx, start, mid, end)
+        define.topPath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
             el.style.cursor = 'pointer';
@@ -247,7 +247,7 @@ const colorMode = (el, ctx, start, mid, end) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        defineTopPath(ctx, start, mid, end)
+        define.topPath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
             if (sessionStorage.getItem("theme") === "light") {
