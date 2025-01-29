@@ -178,7 +178,7 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
         definePath(ctx, start, mid, end)
 
-        if (special.project !== "funf") {
+        if (special.project !== "funf" && special.project !== "phot") {
             if (ctx.isPointInPath(x, y)) {
                 
                 special.el.style.cursor = 'pointer';
@@ -195,6 +195,12 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
             ctx.fill()
             restoreCube(special, ctx, mid, colors, photo, size)
+        } else if (special.project === "funf") {
+            if (ctx.isPointInPath(x, y)) {
+                
+                special.el.style.cursor = 'pointer';                
+    
+            }
         }
 
     })
