@@ -6,6 +6,10 @@ import define from "./definepaths.js";
 
 /*-------------------------------- Functions --------------------------------*/
 
+const defineArr = Object.values(define)
+
+/*-------------------------------- Functions --------------------------------*/
+
 const getColor = (special, colors, cubeSide) => {
 
     const mode = sessionStorage.getItem("theme");
@@ -84,16 +88,27 @@ const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false) => 
 
         if (half) {
             define.topPathHalf(ctx, start, size, half.alternate)
-        } else {
-            define.topPath(ctx, start, mid, end)
-        }
-
-        if (ctx.isPointInPath(x, y)) {
-
-            let userColor = getUserColor()
-            ctx.fillStyle = userColor
-            ctx.fill()
-
+            if (ctx.isPointInPath(x, y)) {
+        
+                ctx.fillStyle = getUserColor()
+                ctx.fill()
+    
+            }
+        } 
+        else {
+            // define.topPath(ctx, start, mid, end)
+    
+            for (let i = 0; i < 2; i++) {
+                defineArr[i](ctx, start, mid, end)
+                if (ctx.isPointInPath(x, y)) {
+    
+                    console.log(defineArr)
+        
+                    ctx.fillStyle = getUserColor()
+                    ctx.fill()
+        
+                }
+            }
         }
 
     })
