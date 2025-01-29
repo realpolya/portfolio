@@ -10,7 +10,7 @@ import colors from './js-files/colors.js'
 
 const CUBES = 60
 
-const startCubes = [1, 3, 5, 8, 15, 18, 22, 30, 32, 40, 45, 49, 58]
+const startCubes = [1, 3, 5, 9, 15, 18, 22, 30, 32, 40, 45, 49, 58]
 
 // order of projects
 const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port", "game"]
@@ -136,7 +136,7 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     const end = start + tileSize;
     const half = { alternate }
 
-    colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half)
+    colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half, false, specialBelow)
 
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
@@ -185,7 +185,6 @@ const createCanvas = (parentEl, tileSize) => {
 
     
     let specialBelow = getBelow()
-    console.log(specialBelow)
     
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')

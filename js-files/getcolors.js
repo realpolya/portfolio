@@ -85,7 +85,9 @@ const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false,
 
 
         const clickFnHalf = (i) => {
-            defineArr[i](ctx, start, size, half.alternate)
+            let side = false
+            if (specialBelow) side = specialBelow[0]
+            defineArr[i](ctx, start, size, half.alternate, side)
             if (ctx.isPointInPath(x, y)) {
         
                 ctx.fillStyle = getUserColor()
@@ -105,11 +107,19 @@ const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false,
         }
 
         // conditions
-        if (half) {
+        if (half && specialBelow) {
+
+            if (specialBelow.includes("left") && specialBelow.includes("right")) {
+                clickFnHalf(5);
+                clickFnHalf(7);
+            } else {
+                for (let i = 5; i < 8; i++) clickFnHalf(i);
+            }
+        } else if (half) {
 
             for (let i = 5; i < 8; i++) clickFnHalf(i);
-
-        } 
+            
+        }
         else if (special) {
 
             for (let i = 1; i < 3; i++) clickFn(i);

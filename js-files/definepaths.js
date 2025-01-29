@@ -61,7 +61,7 @@ const bottomLeft = (ctx, start, mid, end) => {
 /* HALF TILES */
 
 
-const centerHalf = (ctx, start, size, alternate) => {
+const centerHalf = (ctx, start, size, alternate, side=false) => {
 
     const xSize = Math.floor(size / 2)
     const xEnd = start + xSize
@@ -87,21 +87,22 @@ const centerHalf = (ctx, start, size, alternate) => {
 }
 
 
-const topHalf = (ctx, start, size, alternate) => {
+const topHalf = (ctx, start, size, alternate, side) => {
 
     const xSize = Math.floor(size / 2)
     const xEnd = start + xSize
     const yMid = Math.floor(size / 2)
     const yEnd = start + size
 
-    if (alternate) {
+
+    if (alternate && side !== "left") {
         ctx.beginPath();
         ctx.moveTo(start, start);
         ctx.lineTo(xEnd, start);
         ctx.lineTo(start, yMid);
         ctx.closePath();
     }
-    else {
+    else if (!alternate && side !== "right") {
         ctx.beginPath();
         ctx.moveTo(start, start);
         ctx.lineTo(xEnd, yMid);
@@ -112,7 +113,7 @@ const topHalf = (ctx, start, size, alternate) => {
 }
 
 
-const bottomHalf = (ctx, start, size, alternate) => {
+const bottomHalf = (ctx, start, size, alternate, side=false) => {
 
     const xSize = Math.floor(size / 2)
     const xEnd = start + xSize
