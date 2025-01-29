@@ -74,11 +74,8 @@ const getBelowColor = (specialBelow, colors, cubeSide) => {
 /*-------------------------------- Color Game Functions --------------------------------*/
 
 
-const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false) => {
-
-
-    // TODO: if any other part of the canvas is clicked on except the top,
-    // another canvas needs to be activated as well
+const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false, 
+    special=false, specialBelow=false) => {
 
     el.addEventListener('click', (e) => {
 
@@ -86,30 +83,61 @@ const colorCube = (el, ctx, start, mid, end, getUserColor, size, half=false) => 
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        if (half) {
-            define.topPathHalf(ctx, start, size, half.alternate)
+
+        const clickFnHalf = (i) => {
+            defineArr[i](ctx, start, size, half.alternate)
             if (ctx.isPointInPath(x, y)) {
         
                 ctx.fillStyle = getUserColor()
                 ctx.fill()
     
             }
-        } 
-        else {
-            // define.topPath(ctx, start, mid, end)
-    
-            for (let i = 0; i < 5; i++) {
-                defineArr[i](ctx, start, mid, end)
-                if (ctx.isPointInPath(x, y)) {
-    
-                    console.log(defineArr)
+        }
+
+        const clickFn = (i) => {
+            defineArr[i](ctx, start, mid, end)
+            if (ctx.isPointInPath(x, y)) {
         
-                    ctx.fillStyle = getUserColor()
-                    ctx.fill()
-        
-                }
+                ctx.fillStyle = getUserColor()
+                ctx.fill()
+    
             }
-            
+        }
+
+        // conditions
+        if (half) {
+
+            for (let i = 5; i < 8; i++) clickFnHalf(i);
+
+        } 
+        else if (special) {
+
+            for (let i = 1; i < 3; i++) clickFn(i);
+
+        } 
+        else if (specialBelow) {
+
+            if (specialBelow.includes("left") && specialBelow.includes("right")) {
+                
+                clickFn(0);
+                for (let i = 3; i < 5; i++) clickFn(i);
+
+            } else if (specialBelow.includes("left")) {
+                
+                for (let i = 0; i < 2; i++) clickFn(i);
+                for (let i = 3; i < 5; i++) clickFn(i);
+
+            } else if (specialBelow.includes("right")) {
+
+                clickFn(0);
+                for (let i = 2; i < 5; i++) clickFn(i);
+                
+            }
+        }
+        else {
+    
+            for (let i = 0; i < 5; i++) clickFn(i);
+
         }
 
     })

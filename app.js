@@ -131,20 +131,16 @@ const createHalfCanvas = (parentEl, alternate=false, tileSize) => {
     const context = canvas.getContext('2d')
     let specialBelow = getBelow();
 
-    // TODO: write code for coloring half cubes
     const start = 0
     const mid = start + Math.floor(tileSize / 2)
     const end = start + tileSize;
     const half = { alternate }
-    // console.log("alternate in app.js is ", half)
 
     colorCube(canvas, context, start, mid, end, getUserColor, tileSize, half)
 
     halfTile(context, tileSize, colors, alternate, count, specialBelow)
 
 }
-
-// TODO: write code that colors two canvases with one click
 
 // canvas element
 const createCanvas = (parentEl, tileSize) => {
@@ -189,6 +185,7 @@ const createCanvas = (parentEl, tileSize) => {
 
     
     let specialBelow = getBelow()
+    console.log(specialBelow)
     
     parentEl.appendChild(canvas);
     const context = canvas.getContext('2d')
@@ -198,9 +195,7 @@ const createCanvas = (parentEl, tileSize) => {
     
     // color game prep - cube still needs to be available for the corner!
     // TODO: color picker only works if coloring popup is open
-    if (!special) {
-        colorCube(canvas, context, start, mid, end, getUserColor)
-    }
+    colorCube(canvas, context, start, mid, end, getUserColor, tileSize, false, special, specialBelow)
 
     singleTile(context, tileSize, colors, special, specialBelow, cubeCount, photo, 
     start, mid, end)
