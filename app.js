@@ -45,6 +45,11 @@ const darkPopupColor = "#12170E"
 const darkPopupText = "#92A086"
 const darkResetButton = "#162F17"
 
+// about button dark version
+const aboutButtonBack = "#85AB81"
+const aboutButtonBorder = "solid 2px #477542"
+const aboutButtonText = "#465D43"
+
 
 /*-------------------------------- Cached Elements --------------------------------*/
 
@@ -354,6 +359,11 @@ const changeThemeColor = (theme) => {
         gameHideButton.style.color = darkPopupText
         gameCloseButton.style.color = darkPopupText
         resetColorButton.style.color = darkPopupText
+
+        aboutButton.style.backgroundColor = aboutButtonBack
+        aboutButton.style.border = aboutButtonBorder
+        aboutButton.style.color = aboutButtonText
+
 
     } else {
 
