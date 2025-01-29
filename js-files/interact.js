@@ -1,14 +1,14 @@
 /* cube interactions */
 /*-------------------------------- Imports --------------------------------*/
 
-import { getColor, getBelowColor } from "./getcolors.js";
+import { getColor } from "./getcolors.js";
+import define from "./definepaths.js";
 
 /*-------------------------------- Functions --------------------------------*/
 
 const openCube = (ctx, start, mid, end, colors, special) => {
 
     const quarter = Math.floor(mid / 2)
-    const mode = sessionStorage.getItem("theme")
 
     // cavity
     ctx.fillStyle = colors[`cavity${special.project}`]
@@ -157,18 +157,6 @@ const restoreCube = (special, ctx, mid, colors, photo, size) => {
 
 
 const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
-
-    const mode = sessionStorage.getItem("theme")
-
-    const definePath = (ctx, start, mid, end) => {
-        ctx.beginPath();
-        ctx.moveTo(start, mid);
-        ctx.lineTo(mid, end);
-        ctx.lineTo(end, mid);
-        ctx.lineTo(mid, start);
-        ctx.lineTo(start, mid);
-        ctx.closePath();
-    }
     
     special.el.addEventListener('mousemove', (e) => {
 
@@ -176,9 +164,9 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        definePath(ctx, start, mid, end)
+        define.topPath(ctx, start, mid, end)
 
-        if (special.project !== "funf") {
+        if (special.project !== "funf" && special.project !== "phot") {
             if (ctx.isPointInPath(x, y)) {
                 
                 special.el.style.cursor = 'pointer';
@@ -195,6 +183,12 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
             ctx.fill()
             restoreCube(special, ctx, mid, colors, photo, size)
+        } else if (special.project === "funf") {
+            if (ctx.isPointInPath(x, y)) {
+                
+                special.el.style.cursor = 'pointer';                
+    
+            }
         }
 
     })
@@ -205,7 +199,7 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        definePath(ctx, start, mid, end)
+        define.topPath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
             if (special.project === "funf") {
@@ -218,7 +212,11 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
                 gameEl.style.display = "block"
                 paletteButton.style.display = "block"
             } else {
-                window.location.href = special.link;
+
+                e.preventDefault();
+                window.open(special.link, "_blank");
+
+                // window.location.href = special.link;
             }
         }
 
@@ -228,25 +226,13 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
 
 const colorMode = (el, ctx, start, mid, end) => {
 
-
-    const definePath = (ctx, start, mid, end) => {
-        ctx.beginPath();
-        ctx.moveTo(start, mid);
-        ctx.lineTo(mid, end);
-        ctx.lineTo(end, mid);
-        ctx.lineTo(mid, start);
-        ctx.lineTo(start, mid);
-        ctx.closePath();
-    }
-    
-
     el.addEventListener('mousemove', (e) => {
 
         const rect = el.getBoundingClientRect()
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        definePath(ctx, start, mid, end)
+        define.topPath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
             el.style.cursor = 'pointer';
@@ -261,7 +247,7 @@ const colorMode = (el, ctx, start, mid, end) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
 
-        definePath(ctx, start, mid, end)
+        define.topPath(ctx, start, mid, end)
 
         if (ctx.isPointInPath(x, y)) {
             if (sessionStorage.getItem("theme") === "light") {
