@@ -25,6 +25,39 @@ const topRight = (ctx, start, mid, end) => {
 }
 
 
+const topLeft = (ctx, start, mid, end) => {
+
+    ctx.beginPath();
+    ctx.moveTo(start, start);
+    ctx.lineTo(mid, start);
+    ctx.lineTo(start, mid);
+    ctx.closePath();
+
+}
+
+
+const bottomRight = (ctx, start, mid, end) => {
+    
+    ctx.beginPath();
+    ctx.moveTo(end, end);
+    ctx.lineTo(end, mid);
+    ctx.lineTo(mid, end);
+    ctx.closePath();
+    
+}
+
+
+const bottomLeft = (ctx, start, mid, end) => {
+
+    ctx.beginPath();
+    ctx.moveTo(start, mid);
+    ctx.lineTo(mid, end);
+    ctx.lineTo(start, end);
+    ctx.closePath();
+
+}
+
+
 /* HALF TILES */
 
 const topPathHalf = (ctx, start, size, alternate) => {
@@ -57,5 +90,8 @@ const topPathHalf = (ctx, start, size, alternate) => {
 export default {
     topPath,
     topRight,
+    topLeft,
+    bottomRight,
+    bottomLeft,
     topPathHalf
 }
