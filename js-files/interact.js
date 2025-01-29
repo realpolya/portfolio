@@ -218,7 +218,11 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
                 gameEl.style.display = "block"
                 paletteButton.style.display = "block"
             } else {
-                window.location.href = special.link;
+
+                e.preventDefault();
+                window.open(special.link, "_blank");
+
+                // window.location.href = special.link;
             }
         }
 
