@@ -389,7 +389,7 @@ openEl(paletteButton, gameEl)
 window.addEventListener("load", () => {
     
     if (!currentTheme) sessionStorage.setItem("theme", "light")
-    if (!getGameStatus()) sessionStorage.setItem("closed")
+    if (!getGameStatus()) sessionStorage.setItem("game", "closed")
 
     // reload the game popup after resetting the canvases
     if (sessionStorage.getItem("showGameEl") === "true") {
