@@ -13,18 +13,18 @@ const CUBES = 60
 const startCubes = [1, 3, 5, 9, 15, 18, 22, 30, 32, 40, 45, 49, 58]
 
 // order of projects
-const linkOrders = ["mode", "homi", "savo", "gour", "batt", "resu", "gith", "liin", "funf", "phot", "yout", "port", "game"]
-const textOrders = ["dark/light", "homi", "savor the seasons", 
-    "gourds and grocers", "battleship", "resume", "github", "Linked In", 
+const linkOrders = ["mode", "resu", "homi", "savo", "gour", "batt", "gith", "liin", "funf", "phot", "yout", "port", "game"]
+const textOrders = ["dark/light", "resume", "homi", "savor the seasons", 
+    "gourds and grocers", "battleship", "github", "Linked In", 
     "fun fact!", "", "RP channel", "Real Polya website", "coloring game"]
-const iconSrcs = ["./assets/cube.ico", "./assets/homi2.png", "./assets/savor.png",
-    "./assets/gourds.png", "./assets/battleship.png", "./assets/resume.png", "./assets/git.png",
+const iconSrcs = ["./assets/cube.ico", "./assets/resume.png", "./assets/homi2.png", "./assets/savor.png",
+    "./assets/gourds.png", "./assets/battleship.png", "./assets/git.png",
     "./assets/linked.png", "./assets/funfact.png", "./assets/photo1.png",
     "./assets/yt.png", "./assets/rp.png", "./assets/artist.png"
 ]
-const linksToSites = ["mode", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
+const linksToSites = ["mode", "./assets/resume.pdf", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
     "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
-    "./assets/resume.pdf", "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
+    "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
     "https://www.youtube.com/realpolya", "https://realpolya.com/", ""
 ]
 
@@ -97,6 +97,10 @@ const getUserColor = () => {
 
 const getGameStatus = () => {
     return sessionStorage.getItem("game")
+}
+
+const getFunfStatus = () => {
+    return sessionStorage.getItem("funf")
 }
 
 // get all of the cubes below the special cube
@@ -376,7 +380,7 @@ const changeThemeColor = (theme) => {
 closeEl(closeButton, centeredEl)
 openEl(aboutButton, centeredEl)
 
-closeEl(funCloseButton, funfactEl)
+closeEl(funCloseButton, funfactEl, false, true)
 
 closeEl(gameHideButton, gameEl)
 closeEl(gameCloseButton, gameEl, true)
@@ -385,6 +389,19 @@ openEl(paletteButton, gameEl)
 
 /*-------------------------------- Event Listeners --------------------------------*/
 
+newCanvases.addEventListener("click", () => {
+
+    centeredEl.style.display = "none"
+    if (getFunfStatus() === "open") {
+        funfactEl.style.display = "none"
+        sessionStorage.removeItem("funf")
+        location.reload();
+    }
+    else if (getFunfStatus() === "just-opened") {
+        sessionStorage.setItem("funf", "open");
+    }
+
+})
 
 window.addEventListener("load", () => {
     

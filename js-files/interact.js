@@ -208,6 +208,7 @@ const redirectCube = (special, ctx, start, mid, end, colors, photo, size) => {
                 openCube(ctx, start, mid, end, colors, special)
                 const funFactEl = document.getElementById('div-funfact')
                 funFactEl.style.display = "block"
+                sessionStorage.setItem("funf", "just-opened");
 
             } else if (special.project === "game") {
 
