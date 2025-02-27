@@ -99,6 +99,10 @@ const getGameStatus = () => {
     return sessionStorage.getItem("game")
 }
 
+const getFunfStatus = () => {
+    return sessionStorage.getItem("funf")
+}
+
 // get all of the cubes below the special cube
 const getBelow = () => {
 
@@ -376,7 +380,7 @@ const changeThemeColor = (theme) => {
 closeEl(closeButton, centeredEl)
 openEl(aboutButton, centeredEl)
 
-closeEl(funCloseButton, funfactEl)
+closeEl(funCloseButton, funfactEl, false, true)
 
 closeEl(gameHideButton, gameEl)
 closeEl(gameCloseButton, gameEl, true)
@@ -385,6 +389,19 @@ openEl(paletteButton, gameEl)
 
 /*-------------------------------- Event Listeners --------------------------------*/
 
+newCanvases.addEventListener("click", () => {
+
+    centeredEl.style.display = "none"
+    if (getFunfStatus() === "open") {
+        funfactEl.style.display = "none"
+        sessionStorage.removeItem("funf")
+        location.reload();
+    }
+    else if (getFunfStatus() === "just-opened") {
+        sessionStorage.setItem("funf", "open");
+    }
+
+})
 
 window.addEventListener("load", () => {
     
@@ -423,13 +440,6 @@ resetColorButton.addEventListener("click", () => {
     userColor = colorPickerInitial;
     location.reload();
     gameEl.style.display = "block";
-
-})
-
-
-newCanvases.addEventListener("click", () => {
-
-    centeredEl.style.display = "none"
 
 })
 
