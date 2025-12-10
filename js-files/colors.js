@@ -15,6 +15,17 @@ export default {
     hover: "#AB988E",
     hovermode: "black",
 
+    /* mapstep */
+    linemaps: "#042C23",
+    topmaps: "#E1EBE0",
+    leftmaps: "#65B6A3",
+    rightmaps: "#176E5A",
+
+    linemapsd: "#E1EBE0",
+    topmapsd: "#042C23",
+    leftmapsd: "#114F41",
+    rightmapsd: "#20876F",
+
     /* homi */
     linehomi: "#042C23",
     tophomi: "#E1EBE0",

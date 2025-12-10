@@ -10,19 +10,19 @@ import colors from './js-files/colors.js'
 
 const CUBES = 60
 
-const startCubes = [1, 3, 5, 9, 15, 18, 22, 30, 32, 40, 45, 49, 58]
+const startCubes = [1, 3, 5, 9, 15, 18, 22, 30, 32, 35, 40, 45, 49, 58]
 
 // order of projects
-const linkOrders = ["mode", "resu", "homi", "savo", "gour", "batt", "gith", "liin", "funf", "phot", "yout", "port", "game"]
-const textOrders = ["dark/light", "resume", "homi", "savor the seasons", 
+const linkOrders = ["mode", "resu", "maps", "homi", "savo", "gour", "batt", "gith", "liin", "funf", "phot", "yout", "port", "game"]
+const textOrders = ["dark/light", "resume", "mapstep", "homi", "savor the seasons", 
     "gourds and grocers", "battleship", "github", "Linked In", 
     "fun fact!", "", "RP channel", "Real Polya website", "coloring game"]
-const iconSrcs = ["./assets/cube.ico", "./assets/resume.png", "./assets/homi2.png", "./assets/savor.png",
+const iconSrcs = ["./assets/cube.ico", "./assets/resume.png", "./assets/mapstep.png", "./assets/homi2.png", "./assets/savor.png",
     "./assets/gourds.png", "./assets/battleship.png", "./assets/git.png",
     "./assets/linked.png", "./assets/funfact.png", "./assets/photo1.png",
     "./assets/yt.png", "./assets/rp.png", "./assets/artist.png"
 ]
-const linksToSites = ["mode", "./assets/resume.pdf", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
+const linksToSites = ["mode", "./assets/resume.pdf", "https://mapstep.io/", "https://homi-realpolya.netlify.app/", "https://savor-the-seasons.netlify.app/",
     "https://gourds-and-grocers-fc1e690d830c.herokuapp.com/", "https://realpolya.github.io/battleship-game/index.html",
     "https://github.com/realpolya", "https://www.linkedin.com/in/realpolya/", "", "", 
     "https://www.youtube.com/realpolya", "https://realpolya.com/", ""
