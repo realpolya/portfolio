@@ -15,6 +15,17 @@ export default {
     hover: "#AB988E",
     hovermode: "black",
 
+    /* mapstep */
+    linemaps: "#BB4141",
+    topmaps: "#F3F0F0",
+    leftmaps: "#BFCCD8",
+    rightmaps: "#759CC2",
+
+    linemapsd: "#BFCCD8",
+    topmapsd: "#2D3142",
+    leftmapsd: "#9B3434",
+    rightmapsd: "#6385A7",
+
     /* homi */
     linehomi: "#042C23",
     tophomi: "#E1EBE0",
@@ -62,7 +73,8 @@ export default {
     /* resume */
     lineresu: "#0D1B2A",
     topresu: "#EBF5EE",
-    leftresu: "#BFD1E5",
+    // leftresu: "#BFD1E5",
+    leftresu: "#DBE6DE",
     rightresu: "#AEA69F",
 
     lineresud: "#AEA69F",
