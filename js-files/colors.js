@@ -16,15 +16,15 @@ export default {
     hovermode: "black",
 
     /* mapstep */
-    linemaps: "#042C23",
+    linemaps: "#BB4141",
     topmaps: "#F3F0F0",
     leftmaps: "#BFCCD8",
     rightmaps: "#759CC2",
 
-    linemapsd: "#E1EBE0",
-    topmapsd: "#042C23",
-    leftmapsd: "#114F41",
-    rightmapsd: "#20876F",
+    linemapsd: "#BFCCD8",
+    topmapsd: "#2D3142",
+    leftmapsd: "#9B3434",
+    rightmapsd: "#6385A7",
 
     /* homi */
     linehomi: "#042C23",
