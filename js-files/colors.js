@@ -17,9 +17,9 @@ export default {
 
     /* mapstep */
     linemaps: "#042C23",
-    topmaps: "#E1EBE0",
-    leftmaps: "#65B6A3",
-    rightmaps: "#176E5A",
+    topmaps: "#F3F0F0",
+    leftmaps: "#BFCCD8",
+    rightmaps: "#759CC2",
 
     linemapsd: "#E1EBE0",
     topmapsd: "#042C23",
@@ -73,7 +73,8 @@ export default {
     /* resume */
     lineresu: "#0D1B2A",
     topresu: "#EBF5EE",
-    leftresu: "#BFD1E5",
+    // leftresu: "#BFD1E5",
+    leftresu: "#DBE6DE",
     rightresu: "#AEA69F",
 
     lineresud: "#AEA69F",
