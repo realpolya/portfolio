@@ -10,6 +10,27 @@ import colors from './js-files/colors.js'
 
 const CUBES = 60
 
+/* 
+
+Order of cubes:
+
+1 - dark/light mode
+3 - resume
+5 - mapstep
+9 - homi
+15 - savour the seasons
+18 - gourds and grocers
+22 - battleship
+30 - github
+32 - linkedin
+35 - funfact
+40 - photograph
+45 - youtube
+49 - portfolio
+58 - coloring game
+
+*/
+
 const startCubes = [1, 3, 5, 9, 15, 18, 22, 30, 32, 35, 40, 45, 49, 58]
 
 // order of projects
