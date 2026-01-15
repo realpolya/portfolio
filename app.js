@@ -5,6 +5,7 @@ import { closeEl, openEl } from './js-files/popup.js'
 import { colorCube } from './js-files/getcolors.js'
 
 import {
+    CUBES,
     startCubes,
     linkOrders,
     textOrders,
@@ -16,7 +17,7 @@ import colors from './js-files/colors.js'
 
 /*-------------------------------- Constants --------------------------------*/
 
-const CUBES = 60
+// const CUBES = 60
 
 /* 
 
